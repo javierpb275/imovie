@@ -3,7 +3,7 @@ import SignInView from '../views/SignInView.vue';
 
 const routes: RouteRecordRaw[] = [
     {
-        path: '/',
+        path: '/signin',
         name: 'SignIn',
         component: SignInView
     }
