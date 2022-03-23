@@ -2,7 +2,8 @@
 </script>
 
 <template>
-  <h1>Hello World</h1>
+  <router-link to="/">Sign In</router-link>
+  <router-view></router-view>
 </template>
 
 <style>
