@@ -2,7 +2,6 @@
 </script>
 
 <template>
-  <!-- <router-link to="/signin">Sign In</router-link> -->
   <router-view></router-view>
 </template>
 
