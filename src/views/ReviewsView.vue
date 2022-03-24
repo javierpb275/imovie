@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import SearchMovieInput from '../components/SearchMovieInput.vue';
 import ButtonGroupUsersFollowees from '../components/ButtonGroupUsersFollowees.vue';
-
 </script>
 
 <template>
