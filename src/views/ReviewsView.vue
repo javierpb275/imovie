@@ -6,7 +6,7 @@ import ButtonGroupUsersFollowees from '../components/ButtonGroupUsersFollowees.v
 <template>
   <div>
     <SearchMovieInput />
-    <h1 class="mt-4 mb-4">Latest Reviews</h1>
+    <h1 class="mt-4 mb-4">Latest Opinions</h1>
     <ButtonGroupUsersFollowees />
   </div>
 </template>
