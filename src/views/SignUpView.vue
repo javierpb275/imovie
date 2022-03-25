@@ -2,7 +2,7 @@
 <div>
     <!-- <div class="text-3xl text-red-700 font-semibold mt-20 mb-10">IMOvie</div> -->
     <form class="px-8 pt-6 pb-8 mb-4">
-        <img src="../img/IMOvie_logo.png" alt="imovie-icon" class="w-50 h-20 mb-12 ml-8">
+        <img src="../../public/img/IMOvie_logo_white.png" alt="imovie-icon" class="w-50 h-20 mb-12 ml-8">
         
         <div class="mb-4">
         <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
