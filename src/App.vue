@@ -8,6 +8,6 @@
 <style>
 #app {
   text-align: center;
-  margin-top: 40px;
+  height: 100vh;
 }
 </style>

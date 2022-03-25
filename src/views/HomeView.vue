@@ -1,13 +1,15 @@
 <template>
-    <div>
-        <h1 class="text-red-700 text-3xl font-bold mb-40 mt-20">IMOvie</h1>
+    <div class="bg-cover bg-center h-full" style="background-image: url('../../public/img/cinema.jpg')">
+        <img src="../../public/img/IMOvie_logo_black_top.png" alt="imovie-icon" class="object-contain w-60 h-30 mb-40 ml-16">
         <router-link to="/signin">
         <button
-            class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-4 rounded mb-4"
+            class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-10 rounded mt-80 mb-4"
         >Sign In</button>
         </router-link>
         <router-link to="/signup">
-        <p class="mb-4 text-red-700">Don't have an account yet? Sign up!</p>
+        <p class="text-white hover:text-red-700 font-bold">Don't have an account yet? Sign up!</p>
         </router-link>
     </div>
 </template>
+
+
