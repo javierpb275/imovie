@@ -1,3 +1,4 @@
+
 <script setup lang="ts">
 import Navbar from '../components/Navbar.vue';
 </script>
@@ -6,7 +7,7 @@ import Navbar from '../components/Navbar.vue';
 <div>
   <Navbar/>
   <form class="px-8 pt-6 pb-8 mb-4">
-    <img src="../../public/img/IMOvie_logo_white.png" alt="imovie-icon" class="w-50 h-20 mb-12 ml-8">
+    <img src="../../public/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12">
     <div class="mb-4">
       <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
     </div>
