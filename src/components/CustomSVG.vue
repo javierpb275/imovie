@@ -17,7 +17,9 @@ const svgName = computed(() => props.svgName) as ComputedRef<string>;
 const svgNames: string[] = [
     'search',
     'down-arrow',
-    'up-arrow'
+    'up-arrow',
+    'plus-icon',
+    'hamburger'
 ];
 
 </script>
@@ -70,8 +72,71 @@ const svgNames: string[] = [
             stroke-linecap="round"
             stroke-linejoin="round"
         >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <path d="M18 15l-6-6l-6 6h12" />
+            <path 
+            stroke="none" 
+            d="M0 0h24v24H0z" 
+            />
+
+            <path 
+            d="M18 15l-6-6l-6 6h12" 
+            />
         </svg>
+
+        <svg
+            v-if="svgName == 'hamburger'"
+            :class="class"
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-6 h-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+        >
+            <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+            />
+        </svg>
+
+        <svg 
+            v-if="svgName == 'plus-icon'"
+            :class="class"  
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            stroke-width="2" 
+            stroke="currentColor" 
+            fill="none" 
+            stroke-linecap="round" 
+            stroke-linejoin="round">  
+            
+            <path 
+            stroke="none" 
+            d="M0 0h24v24H0z"
+            />  
+            
+            <circle 
+            cx="12" 
+            cy="12" 
+            r="9" 
+            />  
+            
+            <line 
+            x1="9" 
+            y1="12" 
+            x2="15" 
+            y2="12" 
+            />  
+            
+            <line 
+            x1="12" 
+            y1="9" 
+            x2="12" 
+            y2="15" 
+            
+            /></svg>
+
+
     </div>
 </template>

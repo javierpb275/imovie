@@ -1,11 +1,5 @@
-
-<script setup lang="ts">
-import Navbar from '../components/Navbar.vue';
-</script>
-
 <template>
 <div>
-  <Navbar/>
   <form class="px-8 pt-6 pb-8 mb-4">
     <img src="../../public/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12">
     <div class="mb-4">
