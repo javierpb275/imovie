@@ -18,7 +18,7 @@
     </div>
 
     <div>
-      <img src="../../public/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-24" />
+      <img src="img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-24" />
     </div>
 
     <div>

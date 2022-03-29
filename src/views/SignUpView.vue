@@ -3,7 +3,7 @@
         <!-- <div class="text-3xl text-red-700 font-semibold mt-20 mb-10">IMOvie</div> -->
         <form class="px-8 pt-6 pb-8 mb-4">
             <img
-                src="../../public/img/IMOvie_logo_wobg.png"
+                src="img/IMOvie_logo_wobg.png"
                 alt="imovie-icon"
                 class="w-48 mb-20 mt-8 ml-12"
             />
