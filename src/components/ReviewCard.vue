@@ -17,7 +17,7 @@ const props = defineProps({
         <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
             <CustomAvatar
                 :avatar-url="'https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png'"
-                :size="12"
+                :size="14"
             />
             <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{ props.movieTitle }}</h5>
             <p class="text-gray-700 text-base mb-4">{{ props.text }}</p>
