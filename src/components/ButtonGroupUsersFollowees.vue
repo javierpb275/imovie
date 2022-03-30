@@ -27,7 +27,7 @@ const showOrderButtonGroup = () => {
             <CustomSVG
                 :svgName="upDownArrow"
                 :class="'h-8 w-8 text-gray-900'"
-                @click="showOrderButtonGroup()"
+                @click="showOrderButtonGroup"
             />
         </div>
         <div v-if="upDownArrow === 'up-arrow'">
