@@ -1,23 +1,20 @@
 <script setup lang="ts">
 import CustomSVG from './CustomSVG.vue';
 import VerticalMenu from './VerticalMenu.vue';
-
 import { ref } from 'vue';
 
 const verticalMenu = ref<boolean>(false);
 
 const showVerticalMenu = () => {
-    verticalMenu.value = verticalMenu.value === false ?
-        true : false;
-
-    console.log(verticalMenu.value);
+  verticalMenu.value = verticalMenu.value === false ?
+    true : false;
 }
 </script>
 
 <template>
   <nav class="sticky top-0 z-50 container flex justify-between px-4 py-4 mb-4 mx-auto bg-white">
     <div class="flex lg:hidden">
-      <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu()" />
+      <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
     </div>
 
     <div>
@@ -33,7 +30,7 @@ const showVerticalMenu = () => {
     </router-link>
   </nav>
 
-    <div v-if="verticalMenu === true">
-        <VerticalMenu />
-    </div>
+  <div v-if="verticalMenu === true">
+    <VerticalMenu />
+  </div>
 </template>
