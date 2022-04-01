@@ -5,7 +5,7 @@ import CustomSVG from './CustomSVG.vue';
 <template>
     <div class="pt-2 relative mx-auto text-gray-600">
         <input
-            class="border-2 hover:border-gray-900 bg-white h-10 px-5 rounded-lg text-sm focus:outline-none"
+            class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none"
             type="search"
             name="search"
             placeholder="Search movie..."

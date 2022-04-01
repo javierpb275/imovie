@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Navbar from '../components/Navbar.vue';
+import SelectMovieFilter from '../components/SelectMovieFilter.vue';
 import SearchMovieInput from '../components/SearchMovieInput.vue';
 import ButtonGroupUsersFollowees from '../components/ButtonGroupUsersFollowees.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
@@ -8,8 +9,9 @@ import ReviewCardList from '../components/ReviewCardList.vue';
 <template>
   <div>
     <Navbar />
+    <SelectMovieFilter/>
     <SearchMovieInput />
-    <h1 class="mt-4 mb-4">Latest Opinions</h1>
+    <p class="mt-4 mb-4 text-s">Latest Opinions</p>
     <ButtonGroupUsersFollowees />
     <ReviewCardList />
   </div>
