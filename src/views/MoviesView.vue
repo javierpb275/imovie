@@ -11,6 +11,6 @@ import MovieCardList from '../components/MovieCardList.vue';
         <SelectMovieFilter />
         <SearchMovieInput />
         <p class="mt-4 mb-4 text-s">Movies</p>
-        <MovieCardList/>
+        <MovieCardList />
     </div>
 </template>

@@ -29,39 +29,38 @@ const changeVisualMode = () => {
                     href="#"
                     class="block py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'movie-ticket'" :class="'text-white w-6 h-6 inline'"/>
-                New releases</a>
+                    <CustomSVG :svgName="'movie-ticket'" :class="'text-white w-6 h-6 inline'" />New releases
+                </a>
                 <a
                     href="#"
                     class="block py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'"/>
-                All movies</a>
+                    <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
+                </a>
                 <a
                     href="#"
                     class="block py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'"/>
-                My followed users</a>
+                    <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
+                </a>
                 <a
                     href="#"
                     class="block py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'"/>
-                Favorite opinions</a>
+                    <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
+                </a>
                 <a
                     href="#"
                     class="block py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'options'" :class="'text-white w-6 h-6 inline'"/>
-                Profile settings</a>
+                    <CustomSVG :svgName="'options'" :class="'text-white w-6 h-6 inline'" />Profile settings
+                </a>
 
-
-            <!--Pendiente qarreglar menú vertical. Esto se sale fuera:-->
+                <!--Pendiente qarreglar menú vertical. Esto se sale fuera:-->
                 <CustomSVG
-                :svgName="darkLightMode"
-                :class="'h-8 w-8 text-black bg-slate-600'"
-                @click="changeVisualMode"
+                    :svgName="darkLightMode"
+                    :class="'h-8 w-8 text-black bg-slate-600'"
+                    @click="changeVisualMode"
                 />
             </nav>
         </div>
