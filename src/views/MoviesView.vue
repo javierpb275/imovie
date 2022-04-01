@@ -2,6 +2,7 @@
 import Navbar from '../components/Navbar.vue';
 import SelectMovieFilter from '../components/SelectMovieFilter.vue';
 import SearchMovieInput from '../components/SearchMovieInput.vue';
+import MovieCardList from '../components/MovieCardList.vue';
 </script>
 
 <template>
@@ -10,5 +11,6 @@ import SearchMovieInput from '../components/SearchMovieInput.vue';
         <SelectMovieFilter />
         <SearchMovieInput />
         <p class="mt-4 mb-4 text-s">Movies</p>
+        <MovieCardList/>
     </div>
 </template>
