@@ -5,6 +5,7 @@ import SignUpView from "../views/SignUpView.vue";
 import ReviewsView from "../views/ReviewsView.vue";
 import NewReviewView from "../views/NewReviewView.vue";
 import MoviesView from "../views/MoviesView.vue";
+import MovieView from "../views/MovieView.vue";
 
 const routes: RouteRecordRaw[] = [
   {
@@ -36,6 +37,11 @@ const routes: RouteRecordRaw[] = [
     path: "/movies",
     name: "Movies",
     component: MoviesView,
+  },
+  {
+    path: "/movie/:id",
+    name: "Movie",
+    component: MovieView,
   },
 ];
 
