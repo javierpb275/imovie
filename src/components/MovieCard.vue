@@ -44,7 +44,7 @@ const props = defineProps({
       </div>
 
       <div id="text-container" class="float-left mt-0 mb-1" v-if="upDownArrow === 'up-arrow'">
-        <p class="text-gray-700 text-sm mb-0 text-left">{{props.plot}}</p>
+        <p class="text-gray-700 text-sm mb-0 text-left">{{ props.plot }}</p>
       </div>
     </div>
   </div>

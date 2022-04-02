@@ -29,47 +29,40 @@ const changeVisualMode = () => {
                     href="#"
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'movie-ticket'" :class="'text-white w-6 h-6 inline'"/>
-                New releases</a>
+                    <CustomSVG :svgName="'movie-ticket'" :class="'text-white w-6 h-6 inline'" />New releases
+                </a>
                 <a
                     href="#"
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'"/>
-                All movies</a>
+                    <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
+                </a>
                 <a
                     href="#"
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'"/>
-                My followed users</a>
+                    <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
+                </a>
                 <a
                     href="#"
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'"/>
-                Favorite opinions</a>
+                    <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
+                </a>
                 <a
                     href="#"
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
-                <CustomSVG :svgName="'settings'" :class="'text-white w-6 h-6 inline'"/>
-                Profile settings</a>
-
+                    <CustomSVG :svgName="'settings'" :class="'text-white w-6 h-6 inline'" />Profile settings
+                </a>
 
                 <a
                     href="#"
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                     @click="changeVisualMode"
                 >
-                <CustomSVG
-                :svgName="darkLightMode"
-                :class="'h-6 w-6 text-white inline'"
-                />
-                Change visual mode</a>
-
-                
-
+                    <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
+                </a>
             </nav>
         </div>
     </div>

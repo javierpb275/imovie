@@ -39,7 +39,7 @@ const routes: RouteRecordRaw[] = [
     component: MoviesView,
   },
   {
-    path: "/movie/:id",
+    path: "/movie",
     name: "Movie",
     component: MovieView,
   },
