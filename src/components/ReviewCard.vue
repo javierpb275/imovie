@@ -58,7 +58,7 @@ const props = defineProps({
 
 <template>
     <div class="flex justify-center">
-        <div class="block p-6 rounded-lg shadow-lg bg-white w-72">
+        <div class="block p-3 rounded-lg shadow-lg bg-white w-72">
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="inline-block float-left">
                     <CustomAvatar
@@ -99,7 +99,7 @@ const props = defineProps({
                 />
             </div>
             <div id="text-container" class="float-left mt-0 mb-1" v-if="upDownArrow === 'up-arrow'">
-                <p class="text-gray-700 text-base mb-0">{{ props.text }}</p>
+                <p class="text-gray-700 text-sm mb-0 mt-1">{{ props.text }}</p>
             </div>
         </div>
     </div>
