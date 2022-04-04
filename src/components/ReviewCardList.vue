@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ReviewCard from './ReviewCard.vue';
+import ReviewCard from "./ReviewCard.vue";
 
 const reviews = [
     {
@@ -11,7 +11,7 @@ const reviews = [
         points: 7,
         likes: 100,
         dislikes: 30,
-        favorites: true
+        favorites: true,
     },
     {
         id: 2,
@@ -22,7 +22,7 @@ const reviews = [
         points: 5,
         likes: 120,
         dislikes: 70,
-        favorites: false
+        favorites: false,
     },
     {
         id: 3,
@@ -33,7 +33,7 @@ const reviews = [
         points: 9,
         likes: 300,
         dislikes: 10,
-        favorites: true
+        favorites: true,
     },
     {
         id: 4,
@@ -44,7 +44,7 @@ const reviews = [
         points: 7,
         likes: 100,
         dislikes: 30,
-        favorites: true
+        favorites: true,
     },
     {
         id: 5,
@@ -55,7 +55,7 @@ const reviews = [
         points: 5,
         likes: 120,
         dislikes: 70,
-        favorites: false
+        favorites: false,
     },
     {
         id: 6,
@@ -66,10 +66,9 @@ const reviews = [
         points: 9,
         likes: 300,
         dislikes: 10,
-        favorites: true
+        favorites: true,
     },
-]
-
+];
 </script>
 
 <template>

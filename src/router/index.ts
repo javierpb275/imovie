@@ -11,7 +11,6 @@ import ProfileSettingsView from "../views/ProfileSettingsView.vue";
 import FollowingView from "../views/FollowingView.vue";
 import NewReleasesView from "../views/NewReleasesView.vue";
 
-
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
@@ -44,7 +43,7 @@ const routes: RouteRecordRaw[] = [
     component: MoviesView,
   },
   {
-    path: "/movie",
+    path: "/movie/:title",
     name: "Movie",
     component: MovieView,
   },

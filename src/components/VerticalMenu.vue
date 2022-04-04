@@ -12,7 +12,7 @@ const changeVisualMode = () => {
         "switch-dark-mode" : "switch-light-mode";
 }
 
-const openedVerticalMenu = computed(()=>
+const openedVerticalMenu = computed(() =>
     props.openedVerticalMenu
 ) as ComputedRef<Function>
 
