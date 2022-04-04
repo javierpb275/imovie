@@ -12,25 +12,31 @@ const showVerticalMenu = () => {
 </script>
 
 <template>
-  <nav class="sticky top-0 z-50 container flex justify-between px-4 py-4 mb-4 mx-auto bg-white">
-    <div class="flex lg:hidden">
-      <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
+  <div>
+
+    <nav class="sticky top-0 z-50 flex justify-between px-4 py-4 mb-4 bg-white">
+      <div class="flex lg:hidden">
+        <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
+      </div>
+
+      <router-link
+        to="/"
+        href="#"
+      >
+        <img src="../assets/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-36" />
+      </router-link>
+
+      <router-link
+        to="/new-review"
+        href="#"
+      >
+        <CustomSVG :svgName="'plus-icon'" :class="'text-gray-800'" />
+      </router-link>
+    </nav>
+
+    <div v-if="verticalMenu === true">
+      <VerticalMenu :openedVerticalMenu="showVerticalMenu" />
     </div>
 
-    <div>
-      <img src="img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-24" />
-    </div>
-
-    <router-link
-      to="/new-review"
-      class="align-baseline font-bold text-sm text-red-700 hover:text-red-800"
-      href="#"
-    >
-      <CustomSVG :svgName="'plus-icon'" :class="'text-gray-800'" />
-    </router-link>
-  </nav>
-
-  <div v-if="verticalMenu === true">
-    <VerticalMenu />
   </div>
 </template>
