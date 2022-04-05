@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import RatingStars from './RatingStars.vue';
+
+</script>
+
 <template>
     <div style="background-color:rgba(0, 0, 0, 0)">
         <div class="container px-5 py-5 mx-auto" style="cursor: auto;">
@@ -13,6 +18,7 @@
                         class="text-gray-900 text-3xl title-font font-medium mb-1"
                         style="cursor: auto;"
                     >Movie title</h1>
+                    <RatingStars :class="'flex justify-center'" :size="10" :points="3" :isFor="'movie'"/>
                     <p
                         class="leading-relaxed"
                     >Dui urna vehicula tincidunt pretium consequat luctus mi, platea fermentum conubia tempus ac orci. Pellentesque dictum malesuada cubilia faucibus dignissim mi nascetur senectus, augue ad libero efficitur dolor duis lobortis, non etiam sociosqu maximus enim mus natoque.</p>

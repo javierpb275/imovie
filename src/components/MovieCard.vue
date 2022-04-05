@@ -31,7 +31,7 @@ const props = defineProps({
 
 <template>
   <div class="flex justify-center">
-    <div class="block p-3 rounded-lg shadow-lg bg-white w-56">
+    <div class="block p-3 my-3 rounded-lg shadow-lg bg-white w-56">
       <img class="w-full" :src="props.posterUrl" :alt="props.title" />
       <div class="px-2 py-1">
         <div class="font-bold text-xl mb-2">{{ props.title }}</div>
