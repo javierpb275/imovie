@@ -2,6 +2,7 @@
 import CustomAvatar from './CustomAvatar.vue';
 import CustomSVG from './CustomSVG.vue';
 import { ref } from 'vue'
+import RatingStars from './RatingStars.vue';
 
 const upDownArrow = ref<string>('down-arrow');
 const filledEmptyHeart = ref<string>('empty-heart');
@@ -58,7 +59,7 @@ const props = defineProps({
 
 <template>
     <div class="flex justify-center">
-        <div class="block p-3 rounded-lg shadow-lg bg-white w-72">
+        <div class="block p-3 my-3 rounded-lg shadow-lg bg-white w-72">
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="inline-block float-left">
                     <CustomAvatar
@@ -71,7 +72,7 @@ const props = defineProps({
                     <h6
                         class="text-gray-900 text-xl leading-tight font-medium mb-1"
                     >{{ props.movieTitle }}</h6>
-                    <p>{{ props.points }}</p>
+                    <RatingStars :class="'flex justify-center'" :size="6" :points="5" :isFor="'review'"/>
                 </div>
             </div>
             <div id="fav-like-button-container" class="mb-0 mt-3">
