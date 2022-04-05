@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CustomSVG from "./CustomSVG.vue";
 import VerticalMenu from "./VerticalMenu.vue";
+import VerticalMenuFullscreen from "./VerticalMenuFullscreen.vue";
 import { ref } from "vue";
 
 const verticalMenu = ref<boolean>(false);
@@ -12,7 +13,7 @@ const showVerticalMenu = () => {
 
 <template>
   <div>
-    <nav class="sticky top-0 z-50 flex justify-between px-4 py-4 mb-4 bg-white">
+    <nav class="sticky top-0 z-50 flex justify-between px-4 pt-4 mb-4 bg-white">
       <div class="flex lg:hidden">
         <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
       </div>
@@ -28,6 +29,10 @@ const showVerticalMenu = () => {
 
     <div v-if="verticalMenu === true">
       <VerticalMenu :openedVerticalMenu="showVerticalMenu" />
+    </div>
+
+    <div class="hidden lg:block">
+      <VerticalMenuFullscreen />
     </div>
   </div>
 </template>

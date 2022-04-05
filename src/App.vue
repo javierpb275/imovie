@@ -3,7 +3,11 @@ import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <Navbar />
+<!-- v-if para que no salga ni en signUp ni en signIn, ni en home. Lo mismo pasa en el menú vertical, aunque van de la mano -->
+  <div>
+    <Navbar />
+  </div>
+
   <router-view></router-view>
 </template>
 
