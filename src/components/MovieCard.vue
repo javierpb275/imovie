@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import CustomSVG from './CustomSVG.vue';
 import { ref } from 'vue'
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+const goToMovie = (title: string) => {
+    router.push({ path: `/movie/${title}` })
+}
 
 const upDownArrow = ref<string>('down-arrow');
 
@@ -32,9 +39,9 @@ const props = defineProps({
 <template>
   <div class="flex justify-center">
     <div class="block p-3 my-3 rounded-lg shadow-lg bg-white w-56">
-      <img class="w-full" :src="props.posterUrl" :alt="props.title" />
+      <img class="w-full" :src="props.posterUrl" :alt="props.title" @click="goToMovie(props.title)"/>
       <div class="px-2 py-1">
-        <div class="font-bold text-xl mb-2">{{ props.title }}</div>
+        <div class="font-bold text-xl mb-2" @click="goToMovie(props.title)">{{ props.title }}</div>
         <p class="text-gray-700 text-base float-left ml-16">{{ props.year }}</p>
         <CustomSVG
           :svgName="upDownArrow"

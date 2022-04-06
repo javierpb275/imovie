@@ -1,5 +1,16 @@
 <script setup lang="ts">
 import RatingStars from './RatingStars.vue';
+import {computed} from 'vue';
+import {movies} from '../assets/movies';
+
+const props = defineProps({
+  movieTitle: { 
+      type: String, 
+      required: true 
+    },
+});
+
+const movie = computed(() => movies.find(movie => movie.title === props.movieTitle));
 
 </script>
 
@@ -17,7 +28,7 @@ import RatingStars from './RatingStars.vue';
                     <h1
                         class="text-gray-900 text-3xl title-font font-medium mb-1"
                         style="cursor: auto;"
-                    >Movie title</h1>
+                    >{{movie?.title}}</h1>
                     <RatingStars
                         :class="'flex justify-center'"
                         :size="10"
@@ -26,25 +37,25 @@ import RatingStars from './RatingStars.vue';
                     />
                     <div id="info-movie">
                         <p>
-                            <strong>Original title:</strong> the title of the movie
+                            <strong>Original title:</strong> {{movie?.title}}
                         </p>
                         <p>
-                            <strong>Year:</strong> 2022
+                            <strong>Year:</strong> {{movie?.year}}
                         </p>
                         <p>
-                            <strong>Running time:</strong> 120 m
+                            <strong>Running time:</strong> {{movie?.runtime}}
                         </p>
                         <p>
-                            <strong>Director:</strong> Martin Scorsese
+                            <strong>Director:</strong> {{movie?.director}}
                         </p>
                         <p>
-                            <strong>Cast:</strong> Robert DeNiro, Al Pacino, Leonardo Dicaprio
+                            <strong>Cast:</strong> {{movie?.actors}}
                         </p>
                         <p>
-                            <strong>Genre:</strong> Horror, Comedy, Drama
+                            <strong>Genre: </strong><span v-for="genre in movie?.genres">{{genre}}, </span>
                         </p>
                         <p>
-                            <strong>Synopsis:</strong> Dui urna vehicula tincidunt pretium consequat luctus mi, platea fermentum conubia tempus ac orci. Pellentesque dictum malesuada cubilia faucibus dignissim mi nascetur senectus, augue ad libero efficitur dolor duis lobortis, non etiam sociosqu maximus enim mus natoque.
+                            <strong>Synopsis:</strong> {{movie?.plot}}
                         </p>
                     </div>
                 </div>
