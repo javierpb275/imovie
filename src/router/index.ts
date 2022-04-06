@@ -10,6 +10,7 @@ import FavoriteOpinionsView from "../views/FavoriteOpinionsView.vue";
 import ProfileSettingsView from "../views/ProfileSettingsView.vue";
 import FollowingView from "../views/FollowingView.vue";
 import NewReleasesView from "../views/NewReleasesView.vue";
+import { movies } from '../assets/movies';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -46,6 +47,15 @@ const routes: RouteRecordRaw[] = [
     path: "/movie/:title",
     name: "Movie",
     component: MovieView,
+    beforeEnter: (to, _, next) => {
+      const { title } = to.params
+      const foundMovie = movies.find(movie => movie.title === title);
+      if (!foundMovie) {
+        next({ path: '/error' })
+        return
+      }
+      next()
+    }
   },
   {
     path: "/favorite-opinions",
@@ -67,6 +77,11 @@ const routes: RouteRecordRaw[] = [
     name: "NewReleases",
     component: NewReleasesView,
   },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFoundView',
+    component: () => import('../views/NotFoundView.vue')
+  }
 ];
 
 const router = createRouter({
