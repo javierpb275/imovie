@@ -12,34 +12,38 @@ const changeVisualMode = () => {
         "switch-dark-mode" : "switch-light-mode";
 }
 
+let hovered = ref<boolean>(false);
+
 </script>
 
 <template>
     <div class="absolute h-screen z-40">
         <!-- sidebar -->
         <div
-            class="sidebar bg-red-800 text-white w-64 space-y-6 py-7 px-3 absolute left-0 transition duration-200 ease-in-out"
+            class="sidebar bg-red-800 text-white w-64 space-y-6 pt-2 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out"
         >
+            <router-link
+                    to="/my-profile"
+                    href="#"
+                    class="px-4 py-3 mx-2 rounded transition duration-200"
+                    @mouseover="hovered = true"
+                    @mouseleave="hovered = false"
+            >
+            
             <CustomAvatar
                 :avatar-url="'https://img.freepik.com/free-vector/cute-popcorn-cartoon-icon-illustration-food-icon-concept-isolated-flat-cartoon-style_138676-1435.jpg?size=150&ext=jpg'"
-                :size="10"
+                :size="24"
                 class="m-auto"
             />
 
-            <div>
-                @Username
-                <p class="text-sm">545 Following || 78 Followers</p>
-            </div>
+            <CustomSVG v-show="hovered" :svgName="'settings'" :class="'text-white w-10 h-10 px-2  inline '" />
+            <div>@Username</div>
+            <div class="text-sm">545 Following || 78 Followers</div>
+            </router-link>
+
 
             <!-- nav -->
             <nav>
-                <router-link
-                    to="/new-releases"
-                    href="#"
-                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
-                >
-                    <CustomSVG :svgName="'movie-ticket'" :class="'text-white w-6 h-6 inline'" />New releases
-                </router-link>
                 <router-link
                     to="/movies"
                     href="#"
@@ -60,13 +64,6 @@ const changeVisualMode = () => {
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                 >
                     <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
-                </router-link>
-                <router-link
-                    to="/profile-settings"
-                    href="#"
-                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
-                >
-                    <CustomSVG :svgName="'settings'" :class="'text-white w-6 h-6 inline'" />Profile settings
                 </router-link>
 
                 <a

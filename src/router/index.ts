@@ -7,9 +7,10 @@ import NewReviewView from "../views/NewReviewView.vue";
 import MoviesView from "../views/MoviesView.vue";
 import MovieView from "../views/MovieView.vue";
 import FavoriteOpinionsView from "../views/FavoriteOpinionsView.vue";
-import ProfileSettingsView from "../views/ProfileSettingsView.vue";
+import MyProfileSettingsView from "../views/MyProfileSettingsView.vue";
 import FollowingView from "../views/FollowingView.vue";
 import NewReleasesView from "../views/NewReleasesView.vue";
+import MyProfileView from "../views/MyProfileView.vue";
 import { movies } from '../assets/movies';
 
 const routes: RouteRecordRaw[] = [
@@ -63,9 +64,14 @@ const routes: RouteRecordRaw[] = [
     component: FavoriteOpinionsView,
   },
   {
-    path: "/profile-settings",
-    name: "ProfileSettings",
-    component: ProfileSettingsView,
+    path: "/my-profile",
+    name: "MyProfileView",
+    component: MyProfileView,
+  },
+  {
+    path: "/my-profile-settings",
+    name: "MyProfileSettings",
+    component: MyProfileSettingsView,
   },
   {
     path: "/following",
