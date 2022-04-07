@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MovieCard from './MovieCard.vue';
-import { movies } from '../assets/movies'
+const props = defineProps(['movies'])
 </script>
 
 <template>
