@@ -47,11 +47,11 @@ const props = defineProps({
         required: true
     },
     likes: {
-        type: Number,
+        type: Array,
         required: true
     },
     dislikes: {
-        type: Number,
+        type: Array,
         required: true
     },
 });
@@ -81,13 +81,13 @@ const props = defineProps({
                     :class="'h-5 w-5 text-red-700 float-left'"
                     @click="checkIfFavorite"
                 />
-                <span class="float-left ml-10">{{ props.dislikes }}</span>
+                <span class="float-left ml-10">{{ props.dislikes.length }}</span>
                 <CustomSVG
                     :svgName="filledEmptyThumbDown"
                     :class="'h-5 w-5 text-blue-700 float-left'"
                     @click="checkIfDislike"
                 />
-                <span class="float-left ml-10">{{ props.likes }}</span>
+                <span class="float-left ml-10">{{ props.likes.length }}</span>
                 <CustomSVG
                     :svgName="filledEmptyThumbUp"
                     :class="'h-5 w-5 text-blue-700 float-left'"
