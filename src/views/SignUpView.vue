@@ -3,6 +3,8 @@ import { reactive } from "vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
+const errorMessage = ref<string>("");
+
 const router = useRouter();
 
 const user = reactive({
@@ -16,7 +18,7 @@ const repeatedPassword = ref<string>("");
 
 const submit = async () => {
     if (user.password !== repeatedPassword.value) {
-        console.log("passwords are not equal");
+        errorMessage.value = "Passwords are not equal";
         return;
     }
     try {
@@ -29,7 +31,7 @@ const submit = async () => {
         });
         const data = await response.json();
         if (data.error) {
-            console.log(data.error);
+            errorMessage.value = data.error;
             return;
         }
         console.log(data);
@@ -61,7 +63,7 @@ const submit = async () => {
                     v-model="user.email"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                     id="email"
-                    type="text"
+                    type="email"
                     placeholder="Email"
                     required
                 />
@@ -86,8 +88,13 @@ const submit = async () => {
                     placeholder="Repeat password"
                     required
                 />
+                <p
+                    class="align-baseline font-bold text-sm text-red-700 mt-4"
+                    v-if="errorMessage.length"
+                >{{ errorMessage }}</p>
                 <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
             </div>
+
             <div class="mb-10">
                 <button
                     class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline"
