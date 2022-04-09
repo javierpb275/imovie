@@ -2,36 +2,48 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
+import { AuthService } from "../services/authService";
+import { FetchService } from "../services/fetchService";
+import { API_URL } from "../config/constants";
+import IUser from "../interfaces/user.interface";
 
 const router = useRouter();
 
 const errorMessage = ref<string>("");
 
-const user = reactive({
+const user = reactive<IUser>({
   email: "",
   password: "",
 });
 
 const submit = async () => {
-  try {
-    const response = await fetch("http://localhost:3001/api/users/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    const data = await response.json();
-    if (data.error) {
-      errorMessage.value = data.error;
-      return;
-    }
-    console.log(data);
-    await router.push("/reviews");
-    return data;
-  } catch (err) {
-    console.log(err);
+  /*
+    Call protected api example
+
+    const header = await AuthService.getAndValidateHeaderToken()
+    const response = await FetchService.callApi('/getprofile', 'GET', undefined, header)
+    const responseJson = await response.json()
+  */
+
+  const response = await AuthService.signIn(user);
+
+  if (response.error) {
+    errorMessage.value = response.value;
+    return;
   }
+
+  const authHeader = await AuthService.getAndValidateHeaderToken();
+  const response2 = await FetchService.callApi(
+    API_URL.USERS.PROFILE.GET_PROFILE.URL,
+    API_URL.USERS.PROFILE.GET_PROFILE.METHOD,
+    undefined,
+    authHeader
+  );
+  const responseJson = await response2.json();
+
+  console.log(responseJson);
+
+  //await router.push("/reviews");
 };
 </script>
 
@@ -46,7 +58,6 @@ const submit = async () => {
           id="email"
           type="email"
           placeholder="Email"
-          required
         />
       </div>
       <div class="mb-6">
@@ -56,7 +67,6 @@ const submit = async () => {
           id="password"
           type="password"
           placeholder="Password"
-          required
         />
         <p
           class="align-baseline font-bold text-sm text-red-700 mt-4"

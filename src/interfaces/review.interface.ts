@@ -16,13 +16,13 @@ export enum Points {
 }
 
 interface IReview {
-  _id: string;
-  text: string;
-  points: Points;
-  likes: IUser[];
-  dislikes: IUser[];
-  movie: IMovie;
-  user: IUser;
+  _id?: string;
+  text?: string;
+  points?: Points;
+  likes?: IUser[];
+  dislikes?: IUser[];
+  movie?: IMovie;
+  user?: IUser;
 }
 
 export default IReview;

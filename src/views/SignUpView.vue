@@ -55,7 +55,6 @@ const submit = async () => {
                     id="username"
                     type="text"
                     placeholder="Username"
-                    required
                 />
             </div>
             <div class="mb-4">
@@ -65,7 +64,6 @@ const submit = async () => {
                     id="email"
                     type="email"
                     placeholder="Email"
-                    required
                 />
             </div>
             <div class="mb-4">
@@ -75,7 +73,6 @@ const submit = async () => {
                     id="password"
                     type="password"
                     placeholder="Password"
-                    required
                 />
                 <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
             </div>
@@ -86,7 +83,6 @@ const submit = async () => {
                     id="repeated-password"
                     type="password"
                     placeholder="Repeat password"
-                    required
                 />
                 <p
                     class="align-baseline font-bold text-sm text-red-700 mt-4"

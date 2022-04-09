@@ -6,16 +6,16 @@ export enum Role {
 }
 
 interface IUser {
-  _id: string;
-  role: Role;
-  email: string;
-  password: string;
-  username: string;
-  avatar: string;
-  createdReviews: IReview[];
-  favoriteReviews: IReview[];
-  followers: IUser[];
-  followees: IUser[];
+  _id?: string;
+  role?: Role;
+  email?: string;
+  password?: string;
+  username?: string;
+  avatar?: string;
+  createdReviews?: IReview[];
+  favoriteReviews?: IReview[];
+  followers?: IUser[];
+  followees?: IUser[];
 }
 
 export default IUser;
