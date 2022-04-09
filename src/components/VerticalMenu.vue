@@ -41,8 +41,8 @@ const props = defineProps({
             >
             
             <CustomAvatar
-                :avatar-url="'https://img.freepik.com/free-vector/cute-popcorn-cartoon-icon-illustration-food-icon-concept-isolated-flat-cartoon-style_138676-1435.jpg?size=150&ext=jpg'"
-                :size="24"
+                :avatar-url="'../../public/img/avatars/default-avatar.PNG'"
+                :size="12"
                 class="m-auto"
             />
 
