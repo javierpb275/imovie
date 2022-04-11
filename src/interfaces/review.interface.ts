@@ -21,7 +21,7 @@ interface IReview {
   points?: Points;
   likes?: IUser[];
   dislikes?: IUser[];
-  movie?: IMovie;
+  movie: IMovie;
   user?: IUser;
 }
 

@@ -43,7 +43,7 @@ const props = defineProps({
             <CustomAvatar
                 :avatar-url="'../../public/img/avatars/default-avatar.PNG'"
                 :size="12"
-                class="m-auto"
+                class="m-auto drop-shadow-2xl"
             />
 
             <CustomSVG :svgName="'settings'" :class="'text-white w-10 h-10 px-2 inline '" />

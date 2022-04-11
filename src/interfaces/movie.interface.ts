@@ -26,7 +26,7 @@ export enum Genre {
 
 interface IMovie {
   _id?: string;
-  title?: string;
+  title: string;
   year?: string;
   runtime?: string;
   genres?: Genre[];

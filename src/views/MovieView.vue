@@ -11,9 +11,9 @@ const movieReviews = computed(() => reviews.filter(review => review.movie.title 
 </script>
 
 <template>
-    <div>
+    <div class="lg:ml-36">
         <Movie :movieTitle="movieTitle"/>
-        <h1 class="text-3xl">Opinions:</h1>
+        <h1 class="mt-9 lg:mt-14 text-3xl">Opinions:</h1>
         <ReviewCardList :reviews="movieReviews"/>
     </div>
 </template>

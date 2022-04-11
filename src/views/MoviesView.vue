@@ -6,10 +6,10 @@ import {movies} from '../assets/movies';
 </script>
 
 <template>
-    <div>
+    <div class="lg:ml-64">
         <SelectMovieFilter />
         <SearchMovieInput />
-        <p class="mt-4 mb-4 text-s">Movies</p>
+        <p class="mt-9 lg:mt-14 text-3xl">Movies</p>
         <MovieCardList :movies="movies"/>
     </div>
 </template>

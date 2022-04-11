@@ -20,7 +20,7 @@ const movie = computed(() => movies.find(movie => movie.title === props.movieTit
             <div class="lg:w-auto lg:ml-64 mx-auto flex flex-wrap">
                 <img
                     alt="ecommerce"
-                    class="lg:w-1/4 w-full lg:h-auto h-80 object-contain object-center rounded"
+                    class="lg:w-1/3 w-full lg:h-auto h-80 object-contain object-center rounded"
                     src="https://m.media-amazon.com/images/I/71BPuv+iRbL._AC_SY741_.jpg"
                     style="cursor: auto;"
                 />
