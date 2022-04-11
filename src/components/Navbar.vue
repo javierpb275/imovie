@@ -19,7 +19,7 @@ const showVerticalMenu = () => {
       </div>
 
       <router-link to="/" href="#">
-        <img src="../assets/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-36" />
+        <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-36" />
       </router-link>
 
       <router-link to="/new-review" href="#">

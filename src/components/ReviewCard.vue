@@ -72,7 +72,12 @@ const props = defineProps({
                     <h6
                         class="text-gray-900 text-xl leading-tight font-medium mb-1"
                     >{{ props.movieTitle }}</h6>
-                    <RatingStars :class="'flex justify-center'" :size="6" :points="props.points" :isFor="'review'"/>
+                    <RatingStars
+                        :class="'flex justify-center'"
+                        :size="6"
+                        :points="props.points"
+                        :isFor="'review'"
+                    />
                 </div>
             </div>
             <div id="fav-like-button-container" class="mb-0 mt-3">

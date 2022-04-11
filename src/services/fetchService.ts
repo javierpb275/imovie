@@ -1,7 +1,5 @@
 import { API_BASE_URL } from "../config/constants";
-
-type BodyType = string | Object;
-type HeadersType = string[][] | Record<string, string> | Headers;
+import { BodyType, HeadersType } from "./serviceTypes";
 
 export class FetchService {
   static async callApi(
@@ -25,7 +23,6 @@ export class FetchService {
       return response;
     } catch (error) {
       console.error(error);
-
       throw error;
     }
   }

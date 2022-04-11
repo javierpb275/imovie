@@ -1,7 +1,7 @@
 <template>
-    <div class="bg-cover bg-center h-full" style="background-image: url('img/cinema.jpg')">
+    <div class="bg-cover bg-center h-full" style="background-image: url('/img/cinema.jpg')">
         <img
-            src="img/IMOvie_logo_wobg.png"
+            src="/img/IMOvie_logo_wobg.png"
             alt="imovie-icon"
             class="object-contain w-60 h-30 mb-40 ml-14 pt-10"
         />

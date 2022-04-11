@@ -2,7 +2,7 @@
 import SelectMovieFilter from '../components/SelectMovieFilter.vue';
 import SearchMovieInput from '../components/SearchMovieInput.vue';
 import MovieCardList from '../components/MovieCardList.vue';
-import {movies} from '../assets/movies';
+import { movies } from '../assets/movies';
 </script>
 
 <template>
@@ -10,6 +10,6 @@ import {movies} from '../assets/movies';
         <SelectMovieFilter />
         <SearchMovieInput />
         <p class="mt-9 lg:mt-14 text-3xl">Movies</p>
-        <MovieCardList :movies="movies"/>
+        <MovieCardList :movies="movies" />
     </div>
 </template>

@@ -5,11 +5,7 @@ const props = defineProps(['movies'])
 
 <template>
     <div class="overflow-y-auto max-h-screen">
-        <li
-            v-for="movie in movies"
-            :key="movie._id"
-            class="list-none mt-2 mb-2"
-        >
+        <li v-for="movie in movies" :key="movie._id" class="list-none mt-2 mb-2">
             <MovieCard
                 :id="movie._id"
                 :posterUrl="movie.posterUrl"

@@ -2,12 +2,13 @@
 import { reactive } from "vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { IUserSignUp } from "../services/serviceTypes";
 
 const errorMessage = ref<string>("");
 
 const router = useRouter();
 
-const user = reactive({
+const user = reactive<IUserSignUp>({
     username: "",
     email: "",
     password: "",
@@ -47,7 +48,7 @@ const submit = async () => {
     <div>
         <!-- <div class="text-3xl text-red-700 font-semibold mt-20 mb-10">IMOvie</div> -->
         <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
-            <img src="img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12" />
+            <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12" />
             <div class="mb-4">
                 <input
                     v-model="user.username"

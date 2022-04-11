@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 const goToMovie = (title: string) => {
-    router.push({ path: `/movie/${title}` })
+  router.push({ path: `/movie/${title}` })
 }
 
 const upDownArrow = ref<string>('down-arrow');
@@ -38,8 +38,15 @@ const props = defineProps({
 
 <template>
   <div class="flex justify-center">
-    <div class="block p-3 my-3 rounded-lg shadow-lg bg-white w-56 hover:scale-105 transition duration-700">
-      <img class="w-full cursor-pointer" :src="props.posterUrl" :alt="props.title" @click="goToMovie(props.title)"/>
+    <div
+      class="block p-3 my-3 rounded-lg shadow-lg bg-white w-56 hover:scale-105 transition duration-700"
+    >
+      <img
+        class="w-full cursor-pointer"
+        :src="props.posterUrl"
+        :alt="props.title"
+        @click="goToMovie(props.title)"
+      />
       <div class="px-2 py-1">
         <div class="font-bold text-xl mb-2" @click="goToMovie(props.title)">{{ props.title }}</div>
         <p class="text-gray-700 text-base float-left ml-16">{{ props.year }}</p>

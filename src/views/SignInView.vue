@@ -5,13 +5,13 @@ import { ref } from "vue";
 import { AuthService } from "../services/authService";
 import { FetchService } from "../services/fetchService";
 import { API_URL } from "../config/constants";
-import IUser from "../interfaces/user.interface";
+import { IUserSignIn } from "../services/serviceTypes";
 
 const router = useRouter();
 
 const errorMessage = ref<string>("");
 
-const user = reactive<IUser>({
+const user = reactive<IUserSignIn>({
   email: "",
   password: "",
 });
@@ -50,7 +50,7 @@ const submit = async () => {
 <template>
   <div>
     <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
-      <img src="img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12" />
+      <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12" />
       <div class="mb-4">
         <input
           v-model="user.email"

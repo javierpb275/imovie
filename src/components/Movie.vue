@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import RatingStars from './RatingStars.vue';
-import {computed} from 'vue';
-import {movies} from '../assets/movies';
+import { computed } from 'vue';
+import { movies } from '../assets/movies';
 
 const props = defineProps({
-  movieTitle: { 
-      type: String, 
-      required: true 
+    movieTitle: {
+        type: String,
+        required: true
     },
 });
 
@@ -28,7 +28,7 @@ const movie = computed(() => movies.find(movie => movie.title === props.movieTit
                     <h1
                         class="text-gray-900 text-3xl title-font font-medium mb-1"
                         style="cursor: auto;"
-                    >{{movie?.title}}</h1>
+                    >{{ movie?.title }}</h1>
                     <RatingStars
                         :class="'flex justify-center'"
                         :size="10"
@@ -37,25 +37,32 @@ const movie = computed(() => movies.find(movie => movie.title === props.movieTit
                     />
                     <div id="info-movie">
                         <p>
-                            <strong>Original title:</strong> {{movie?.title}}
+                            <strong>Original title:</strong>
+                            {{ movie?.title }}
                         </p>
                         <p>
-                            <strong>Year:</strong> {{movie?.year}}
+                            <strong>Year:</strong>
+                            {{ movie?.year }}
                         </p>
                         <p>
-                            <strong>Running time:</strong> {{movie?.runtime}}
+                            <strong>Running time:</strong>
+                            {{ movie?.runtime }}
                         </p>
                         <p>
-                            <strong>Director:</strong> {{movie?.director}}
+                            <strong>Director:</strong>
+                            {{ movie?.director }}
                         </p>
                         <p>
-                            <strong>Cast:</strong> {{movie?.actors}}
+                            <strong>Cast:</strong>
+                            {{ movie?.actors }}
                         </p>
                         <p>
-                            <strong>Genre: </strong><span v-for="genre in movie?.genres">{{genre}}, </span>
+                            <strong>Genre:</strong>
+                            <span v-for="genre in movie?.genres" :key="genre">{{ genre }},</span>
                         </p>
                         <p>
-                            <strong>Synopsis:</strong> {{movie?.plot}}
+                            <strong>Synopsis:</strong>
+                            {{ movie?.plot }}
                         </p>
                     </div>
                 </div>
