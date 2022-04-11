@@ -25,16 +25,16 @@ export enum Genre {
 }
 
 interface IMovie {
-  _id?: string;
-  title?: string;
-  year?: string;
-  runtime?: string;
-  genres?: Genre[];
-  director?: string;
-  actors?: string;
-  plot?: string;
-  posterUrl?: string;
-  reviews?: IReview[];
+  _id: string;
+  title: string;
+  year: string;
+  runtime: string;
+  genres: Genre[];
+  director: string;
+  actors: string;
+  plot: string;
+  posterUrl: string;
+  reviews: IReview[];
 }
 
 export default IMovie;

@@ -2,12 +2,13 @@
 import { reactive } from "vue";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { IUserSignUp } from "../services/serviceTypes";
 
 const errorMessage = ref<string>("");
 
 const router = useRouter();
 
-const user = reactive({
+const user = reactive<IUserSignUp>({
     username: "",
     email: "",
     password: "",

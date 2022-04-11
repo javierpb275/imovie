@@ -5,13 +5,13 @@ import { ref } from "vue";
 import { AuthService } from "../services/authService";
 import { FetchService } from "../services/fetchService";
 import { API_URL } from "../config/constants";
-import IUser from "../interfaces/user.interface";
+import { IUserSignIn } from "../services/serviceTypes";
 
 const router = useRouter();
 
 const errorMessage = ref<string>("");
 
-const user = reactive<IUser>({
+const user = reactive<IUserSignIn>({
   email: "",
   password: "",
 });
