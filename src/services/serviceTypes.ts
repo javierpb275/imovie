@@ -23,3 +23,8 @@ export interface IUserSignUp {
   password: string;
   avatar: string;
 }
+
+export enum Tokens {
+  ACCESS_TOKEN = "accessToken",
+  REFRESH_TOKEN = "refreshToken",
+}

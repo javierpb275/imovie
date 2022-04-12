@@ -7,13 +7,14 @@ import {
   IReturnData,
   IUserSignIn,
   IUserSignUp,
+  Tokens
 } from "./serviceTypes";
 
 export class AuthService {
   //SAVE USER TOKENS IN LOCALSTORAGE------------------------------
   static saveUserTokens(data: ITokenData) {
-    localStorage.setItem("accessToken", data.accessToken);
-    localStorage.setItem("refreshToken", data.refreshToken);
+    localStorage.setItem(Tokens.ACCESS_TOKEN, data.accessToken);
+    localStorage.setItem(Tokens.REFRESH_TOKEN, data.refreshToken);
   }
 
   //SIGNIN-------------------------------------------------------
@@ -96,71 +97,19 @@ export class AuthService {
     return returnData;
   }
 
-  //SIGNOUT-------------------------------------------------
-  static async signOut(): Promise<IReturnData> {
-    /*     console.log("3.1 clear user store");
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshtoken");
-    console.log("3.3 Call signout route in backend"); */
-
-    const returnData: IReturnData = {
-      error: false,
-      value: "",
-    };
-    if (
-      !localStorage.getItem("refreshToken") ||
-      !localStorage.getItem("accessToken")
-    ) {
-      returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-001";
-    }
-    const body: BodyType = {
-      token: localStorage.getItem("refreshToken"),
-    };
-    const headers: HeadersType = {
-      Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    };
-
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshtoken");
-
-    try {
-      const response = await FetchService.callApi(
-        API_URL.USERS.SIGNOUT.URL,
-        API_URL.USERS.SIGNOUT.METHOD,
-        body,
-        headers
-      );
-      const data = await response.json();
-      if (data.error) {
-        returnData.error = true;
-        returnData.value = data.error;
-        return returnData;
-      }
-      if (!returnData.error) {
-        returnData.value = data;
-      }
-    } catch (err) {
-      console.log(err);
-      returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-000";
-    }
-    return returnData;
-  }
-
   //REFRESH TOKEN---------------------------------------------------
   static async refreshToken(): Promise<IReturnData> {
     const returnData: IReturnData = {
       error: false,
       value: "",
     };
-    if (!localStorage.getItem("refreshToken")) {
+    if (!localStorage.getItem(Tokens.REFRESH_TOKEN)) {
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-001";
       return returnData;
     }
     const body: BodyType = {
-      token: localStorage.getItem("refreshToken"),
+      token: localStorage.getItem(Tokens.REFRESH_TOKEN),
     };
     try {
       const response = await FetchService.callApi(
@@ -196,6 +145,59 @@ export class AuthService {
 
     return returnData;
   }
+
+  //SIGNOUT-------------------------------------------------
+  static async signOut(): Promise<IReturnData> {
+
+    const returnData: IReturnData = {
+      error: false,
+      value: "",
+    };
+    if (
+      !localStorage.getItem(Tokens.REFRESH_TOKEN) ||
+      !localStorage.getItem(Tokens.ACCESS_TOKEN)
+    ) {
+      returnData.error = true;
+      returnData.value = "Authentication problem. Error Code: IMO-001-001";
+      return returnData;
+    }
+    const body: BodyType = {
+      token: localStorage.getItem(Tokens.REFRESH_TOKEN),
+    };
+    const headers: HeadersType = {
+      Authorization: `Bearer ${localStorage.getItem(Tokens.ACCESS_TOKEN)}`,
+    };
+
+    try {
+      const response = await FetchService.callApi(
+        API_URL.USERS.SIGNOUT.URL,
+        API_URL.USERS.SIGNOUT.METHOD,
+        body,
+        headers
+      );
+      const data = await response.json();
+      if (data.error) {
+        returnData.error = true;
+        returnData.value = data.error;
+        return returnData;
+      }
+
+      localStorage.removeItem(Tokens.ACCESS_TOKEN);
+      localStorage.removeItem(Tokens.REFRESH_TOKEN);
+
+      //CLEAR STORE
+
+      returnData.value = data;
+    } catch (err) {
+      console.log(err);
+      returnData.error = true;
+      returnData.value = "Authentication problem. Error Code: IMO-001-000";
+    }
+    return returnData;
+  }
+
+  //checkToken
+  //static async getAndValidateHeaderToken2(): Promise<HeadersType> {}
 
   static async getAndValidateHeaderToken(): Promise<HeadersType> {
     // todo: validate token, if expired call refresh endpoint with refresh token, if refresh token signout user and redirect to login page
