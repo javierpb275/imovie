@@ -28,3 +28,9 @@ export enum Tokens {
   ACCESS_TOKEN = "accessToken",
   REFRESH_TOKEN = "refreshToken",
 }
+
+export interface IPayload {
+  id: string;
+  iat: number;
+  exp: number;
+}
