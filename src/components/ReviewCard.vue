@@ -59,52 +59,33 @@ const props = defineProps({
 
 <template>
     <div class="flex justify-center">
-        <div class="block p-3 my-3 rounded-lg shadow-lg bg-white w-72">
+        <div class="block p-3 my-5 rounded-lg shadow-lg bg-white w-72  lg:w-2/3">
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="inline-block float-left">
                     <CustomAvatar
                         :avatar-url="'https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png'"
-                        :size="10"
-                    />
+                        :size="10" />
                     <p>{{ props.username }}</p>
                 </div>
-                <div id="movie-title-points-container">
-                    <h6
-                        class="text-gray-900 text-xl leading-tight font-medium mb-1"
-                    >{{ props.movieTitle }}</h6>
-                    <RatingStars
-                        :class="'flex justify-center'"
-                        :size="6"
-                        :points="props.points"
-                        :isFor="'review'"
-                    />
+                <h6 class="text-gray-900 text-xl leading-tight font-medium mb-1">{{ props.movieTitle }}</h6>
+
+                <div id="movie-title-points-container" class="lg:inline-flex">
+                    <RatingStars :class="'flex justify-center cursor-pointer'" :size="6" :points="props.points" :isFor="'review'" />
                 </div>
             </div>
-            <div id="fav-like-button-container" class="mb-0 mt-3">
-                <CustomSVG
-                    :svgName="filledEmptyHeart"
-                    :class="'h-5 w-5 text-red-700 float-left'"
-                    @click="checkIfFavorite"
-                />
+            <div id="fav-like-button-container" class="mb-0 mt-3 lg:inline-flex">
+                <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 float-left cursor-pointer'"
+                    @click="checkIfFavorite" />
                 <span class="float-left ml-10">{{ props.dislikes.length }}</span>
-                <CustomSVG
-                    :svgName="filledEmptyThumbDown"
-                    :class="'h-5 w-5 text-blue-700 float-left'"
-                    @click="checkIfDislike"
-                />
+                <CustomSVG :svgName="filledEmptyThumbDown" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
+                    @click="checkIfDislike" />
                 <span class="float-left ml-10">{{ props.likes.length }}</span>
-                <CustomSVG
-                    :svgName="filledEmptyThumbUp"
-                    :class="'h-5 w-5 text-blue-700 float-left'"
-                    @click="checkIfLike"
-                />
-                <CustomSVG
-                    :svgName="upDownArrow"
-                    :class="'h-8 w-8 text-gray-900 float-right'"
-                    @click="showText"
-                />
+                <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
+                    @click="checkIfLike" />
+                <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 float-right cursor-pointer'" @click="showText" />
             </div>
-            <div id="text-container" class="float-left mt-0 mb-1" v-if="upDownArrow === 'up-arrow'">
+
+            <div id="text-container" class="float-left mt-0 mb-1 cursor-pointer" v-if="upDownArrow === 'up-arrow'">
                 <p class="text-gray-700 text-sm mb-0 mt-1">{{ props.text }}</p>
             </div>
         </div>

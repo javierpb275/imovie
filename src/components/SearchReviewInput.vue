@@ -8,7 +8,7 @@ import CustomSVG from './CustomSVG.vue';
             class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none"
             type="search"
             name="search"
-            placeholder="Search opinion..."
+            placeholder="Search..."
         />
         <button type="submit" class="absolute top-0 mt-5 mr-4 ml-2">
             <CustomSVG :svgName="'search'" :class="'text-gray-900 h-5 w-5 fill-current'" />

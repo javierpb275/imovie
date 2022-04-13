@@ -7,10 +7,10 @@ import { reviews } from '../assets/reviews';
 </script>
 
 <template>
-  <div>
+  <div class="mt-12 lg:ml-80">
     <SelectReviewFilter />
     <SearchReviewInput />
-    <p class="mt-4 mb-4 text-s">Latest Opinions</p>
+    <p class="mt-16 mb-5 text-2xl font-bold">Latest Opinions</p>
     <ButtonGroupUsersFollowees />
     <ReviewCardList :reviews="reviews" />
   </div>

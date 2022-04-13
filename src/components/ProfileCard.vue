@@ -30,7 +30,7 @@ import CustomSVG from '../components/CustomSVG.vue';
                             :svgName="'settings'"
                             :class="'text-white w-9 h-9 px-2 py-2 inline-flex'"
                         />
-                        <span class="pt-2">Settings</span>
+                        <span class="pt-2">Profile settings</span>
                     </button>
                 </div>
             </div>

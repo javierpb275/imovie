@@ -9,7 +9,7 @@ import { movies } from '../assets/movies';
     <div class="lg:ml-64">
         <SelectMovieFilter />
         <SearchMovieInput />
-        <p class="mt-9 lg:mt-14 text-3xl">Movies</p>
+        <p class="mt-12 text-2xl font-bold">Movies</p>
         <MovieCardList :movies="movies" />
     </div>
 </template>

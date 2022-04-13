@@ -1,7 +1,7 @@
 <template>
     <div>
         <select
-            class="form-select text-white bg-red-700 rounded text-tiny px-1 py-1"
+            class="form-select text-white bg-red-700 hover:bg-red-800 rounded text-tiny px-1 py-1 cursor-pointer"
             aria-label="Default select example"
         >
             <option value="title" selected>Movie title</option>
