@@ -7,14 +7,34 @@ import {
   IReturnData,
   IUserSignIn,
   IUserSignUp,
-  Tokens
+  Tokens,
+  IPayload
 } from "./serviceTypes";
+import jwt from "jsonwebtoken";
+
 
 export class AuthService {
   //SAVE USER TOKENS IN LOCALSTORAGE------------------------------
   static saveUserTokens(data: ITokenData) {
     localStorage.setItem(Tokens.ACCESS_TOKEN, data.accessToken);
     localStorage.setItem(Tokens.REFRESH_TOKEN, data.refreshToken);
+  }
+
+  //REMOVE TOKENS AND CLEAR STORE-----------------------------------
+  static removeTokens() {
+    localStorage.removeItem(Tokens.ACCESS_TOKEN);
+    localStorage.removeItem(Tokens.REFRESH_TOKEN);
+  }
+
+  //CLEAR STORE----------------------------------------------------
+  static clearStore() {
+    //CLEAR STORE
+  }
+
+  //REMOVE TOKENS AND CLEAR STORE-----------------------------------
+  static removeTokensAndClearStore() {
+    AuthService.removeTokens();
+    AuthService.clearStore();
   }
 
   //SIGNIN-------------------------------------------------------
@@ -148,7 +168,6 @@ export class AuthService {
 
   //SIGNOUT-------------------------------------------------
   static async signOut(): Promise<IReturnData> {
-
     const returnData: IReturnData = {
       error: false,
       value: "",
@@ -182,10 +201,7 @@ export class AuthService {
         return returnData;
       }
 
-      localStorage.removeItem(Tokens.ACCESS_TOKEN);
-      localStorage.removeItem(Tokens.REFRESH_TOKEN);
-
-      //CLEAR STORE
+      AuthService.removeTokensAndClearStore();
 
       returnData.value = data;
     } catch (err) {
@@ -197,7 +213,32 @@ export class AuthService {
   }
 
   //checkToken
-  //static async getAndValidateHeaderToken2(): Promise<HeadersType> {}
+  static async getAndValidateHeaderToken2(): Promise<HeadersType|IReturnData> {
+    const returnData: IReturnData = {
+      error: false,
+      value: "",
+    };
+    let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+    let refreshToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+    if (!refreshToken || !accessToken) {
+      returnData.error = true;
+      returnData.value = "Authentication problem. Error Code: IMO-001-001";
+      AuthService.removeTokensAndClearStore();
+      return returnData;
+    }
+   
+
+    // 1. VALIDATE TOKEN WITH JWT
+    //const payload = jwt.verify(accessToken, "fafwef") as IPayload;
+
+    // 2. IF NOT VALID REFRESHTOKEN
+    // 2.1 IF ERROR RETURN ERROR
+    
+    //3. IF OK RETURN HEADER OBJECT WITH AUTH TOKEN
+
+
+    return { Authorization: `Bearer ${accessToken}` };
+  }
 
   static async getAndValidateHeaderToken(): Promise<HeadersType> {
     // todo: validate token, if expired call refresh endpoint with refresh token, if refresh token signout user and redirect to login page
