@@ -8,10 +8,8 @@ import {
   IUserSignIn,
   IUserSignUp,
   Tokens,
-  IPayload
+  IPayload,
 } from "./serviceTypes";
-import jwt from "jsonwebtoken";
-
 
 export class AuthService {
   //SAVE USER TOKENS IN LOCALSTORAGE------------------------------
@@ -35,6 +33,17 @@ export class AuthService {
   static removeTokensAndClearStore() {
     AuthService.removeTokens();
     AuthService.clearStore();
+  }
+
+  //CHECK MINUTES OF TOKEN'S LIFE--------------------------------------------
+  static checkMinutesOfTokensLife(expiration: number) {
+    const expirationMs = expiration * 1000;
+    const now = Date.now();
+    const diffMs = now - expirationMs;
+    const minutes = Math.floor(diffMs / 60000);
+    //const seconds = ((diffMs % 60000) / 1000).toFixed(0);
+    //const time = minutes + ":" + (diffMs < 10 ? '0' : '') + seconds;
+    return minutes;
   }
 
   //SIGNIN-------------------------------------------------------
@@ -212,69 +221,55 @@ export class AuthService {
     return returnData;
   }
 
-  //checkToken
-  static async getAndValidateHeaderToken2(): Promise<HeadersType|IReturnData> {
+  //GET AND VALIDATE HEADER TOKEN
+  static async getAndValidateHeaderToken(): Promise<
+    HeadersType | IReturnData
+  > {
     const returnData: IReturnData = {
       error: false,
       value: "",
     };
+
     let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
-    let refreshToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+    let refreshToken = localStorage.getItem(Tokens.REFRESH_TOKEN);
+
     if (!refreshToken || !accessToken) {
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-001";
       AuthService.removeTokensAndClearStore();
       return returnData;
     }
-   
 
-    // 1. VALIDATE TOKEN WITH JWT
-    //const payload = jwt.verify(accessToken, "fafwef") as IPayload;
+    const payload = JSON.parse(atob(accessToken.split(".")[1])) as IPayload;
 
-    // 2. IF NOT VALID REFRESHTOKEN
-    // 2.1 IF ERROR RETURN ERROR
-    
-    //3. IF OK RETURN HEADER OBJECT WITH AUTH TOKEN
+    if (!payload || !payload.id || !payload.exp || !payload.iat) {
+      returnData.error = true;
+      returnData.value = "Authentication problem. Error Code: IMO-001-002";
+      AuthService.removeTokensAndClearStore();
+      return returnData;
+    }
 
+    if (payload.id !== "userfromstore._id") {
+      returnData.error = true;
+      returnData.value = "Authentication problem. Error Code: IMO-001-002";
+      AuthService.removeTokensAndClearStore();
+      return returnData;
+    }
+
+    const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
+
+    if (minutes >= 10) {
+      const result = await AuthService.refreshToken();
+      if (result.error) {
+        returnData.error = true;
+        returnData.value = "Authentication problem. Error Code: IMO-001-002";
+        AuthService.removeTokensAndClearStore();
+        return returnData;
+      }
+      accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+    }
 
     return { Authorization: `Bearer ${accessToken}` };
   }
 
-  static async getAndValidateHeaderToken(): Promise<HeadersType> {
-    // todo: validate token, if expired call refresh endpoint with refresh token, if refresh token signout user and redirect to login page
-    let token = localStorage.getItem("accessToken");
-    console.log("TODO: 1. validateToken");
-
-    const isValid = false;
-
-    try {
-      if (!isValid) {
-        console.log("TODO: 2. refreshToken if accestoken not valid");
-
-        const refreshToken = localStorage.getItem("refreshToken");
-        const response = await FetchService.callApi(
-          API_URL.USERS.REFRESH_TOKEN.URL,
-          API_URL.USERS.REFRESH_TOKEN.METHOD,
-          { token: refreshToken }
-        );
-        const data = await response.json();
-
-        if (data.error || !data.accessToken || !data.refreshToken) {
-          throw Error("Error refreshing token, signout");
-        }
-
-        AuthService.saveUserTokens({
-          accessToken: data.accessToken,
-          refreshToken: data.refreshToken,
-        });
-
-        token = data.accessToken;
-      }
-    } catch (error) {
-      console.log("TODO: 3. if refresh token fails call sign out function");
-      AuthService.signOut();
-    }
-
-    return { Authorization: `Bearer ${token}` };
-  }
 }
