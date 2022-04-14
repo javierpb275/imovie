@@ -10,7 +10,7 @@ import CustomSVG from '../components/CustomSVG.vue';
                 <!-- Image for mobile view-->
                 <div
                     class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
-                    style="background-image: url('../../public/img/avatars/default-avatar.PNG')"
+                    style="background-image: url('/img/avatars/default-avatar.PNG')"
                 ></div>
 
                 <h1 class="text-3xl font-bold pt-8 lg:pt-0">@Username</h1>
@@ -39,7 +39,7 @@ import CustomSVG from '../components/CustomSVG.vue';
         <!--Img Col-->
         <div class="w-full lg:w-1/4">
             <img
-                src="../../public/img/avatars/default-avatar.PNG"
+                src="/img/avatars/default-avatar.PNG"
                 class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
             />
         </div>
