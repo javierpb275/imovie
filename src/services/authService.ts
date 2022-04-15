@@ -188,6 +188,7 @@ export class AuthService {
       !localStorage.getItem(Tokens.REFRESH_TOKEN) ||
       !localStorage.getItem(Tokens.ACCESS_TOKEN)
     ) {
+      AuthService.removeTokensAndClearStore();
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-001";
       return returnData;
@@ -208,6 +209,7 @@ export class AuthService {
       );
       const data = await response.json();
       if (data.error) {
+        AuthService.removeTokensAndClearStore();
         returnData.error = true;
         returnData.value = data.error;
         return returnData;
@@ -217,6 +219,7 @@ export class AuthService {
 
       returnData.value = data;
     } catch (err) {
+      AuthService.removeTokensAndClearStore();
       console.log(err);
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-000";
@@ -260,6 +263,7 @@ export class AuthService {
         accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
       }
     } catch (err) {
+      AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
     }
 

@@ -53,27 +53,32 @@ const showVerticalMenu = () => {
 };
 
 const signOut = async () => {
-    const errorObject = {
-        Authorization: "ERROR"
+  const errorObject = {
+    Authorization: "ERROR"
+  }
+  try {
+    const headers = await AuthService.getAndValidateHeaderToken();
+    if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
+      AuthService.removeTokensAndClearStore();
+      await router.push("/signin");
+      return;
     }
-    try {
-        const headers = await AuthService.getAndValidateHeaderToken();
-        if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
-            await router.push("/signin");
-            return;
-        }
-        const data = await authStore.signout();
-        if (data.error) {
-            console.log(data);
-            errorMessage.value = data.value;
-            return;
-        }
-        console.log(data);
-        await router.push("/signin");
-    } catch (err) {
-        errorMessage.value = "Error Signing Out";
-        console.log(errorMessage.value)
+    const data = await authStore.signout();
+    if (data.error) {
+      AuthService.removeTokensAndClearStore();
+      await router.push("/signin");
+      console.log(data);
+      errorMessage.value = data.value;
+      return;
     }
+    console.log(data);
+    await router.push("/signin");
+  } catch (err) {
+    AuthService.removeTokensAndClearStore();
+    await router.push("/signin");
+    errorMessage.value = "Error Signing Out";
+    console.log(errorMessage.value)
+  }
 }
 </script>
 
@@ -94,11 +99,12 @@ const signOut = async () => {
     </nav>
 
     <div v-if="verticalMenu === true && authStore.user">
-      <VerticalMenu :openedVerticalMenu="showVerticalMenu" :authUser="authStore.user" :signOut="signOut" :errorMessage="errorMessage"/>
+      <VerticalMenu :openedVerticalMenu="showVerticalMenu" :authUser="authStore.user" :signOut="signOut"
+        :errorMessage="errorMessage" />
     </div>
 
     <div class="hidden lg:block" v-if="authStore.user">
-      <VerticalMenuFullscreen :authUser="authStore.user" :signOut="signOut" :errorMessage="errorMessage"/>
+      <VerticalMenuFullscreen :authUser="authStore.user" :signOut="signOut" :errorMessage="errorMessage" />
     </div>
   </div>
 </template>

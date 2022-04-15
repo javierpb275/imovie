@@ -3,12 +3,17 @@ import { API_URL } from "../config/constants";
 import IUser from "../interfaces/user.interface";
 import { AuthService } from "../services/authService";
 import { FetchService } from "../services/fetchService";
-import { HeadersType, IReturnData, IUserSignIn, IUserSignUp } from "../services/serviceTypes";
+import {
+  HeadersType,
+  IReturnData,
+  IUserSignIn,
+  IUserSignUp,
+} from "../services/serviceTypes";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: null as IUser | null,
-    isAuthorized: false
+    isAuthorized: false,
   }),
   getters: {},
   actions: {
@@ -67,21 +72,21 @@ export const useAuthStore = defineStore("auth", {
         if (data.error) {
           return {
             error: true,
-            value: data.error
-          }
+            value: data.error,
+          };
         }
         this.user = data;
         return {
           error: false,
-          value: data
-        }
+          value: data,
+        };
       } catch (err) {
         return {
           error: true,
           value: "Error Getting Profile",
         };
       }
-    }
+    },
   },
   persist: true,
 });
