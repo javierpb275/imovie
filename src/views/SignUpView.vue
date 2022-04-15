@@ -15,7 +15,7 @@ const user = reactive<IUserSignUp>({
     username: "",
     email: "",
     password: "",
-    avatar: "img/avatars/default-avatar.PNG",
+    avatar: "/img/avatars/default-avatar.PNG",
 });
 
 const repeatedPassword = ref<string>("");

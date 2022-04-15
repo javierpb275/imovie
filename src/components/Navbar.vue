@@ -2,16 +2,79 @@
 import CustomSVG from "./CustomSVG.vue";
 import VerticalMenu from "./VerticalMenu.vue";
 import VerticalMenuFullscreen from "./VerticalMenuFullscreen.vue";
-import { ref } from "vue";
 import { useAuthStore } from "../stores/auth";
+import { ref, onMounted } from 'vue'
+import { AuthService } from "../services/authService";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const errorMessage = ref<string>("");
 
 const authStore = useAuthStore();
+
+onMounted(async () => {
+
+  if (authStore.isAuthorized) {
+    const errorObject = {
+      Authorization: "ERROR"
+    }
+
+    try {
+      const headers = await AuthService.getAndValidateHeaderToken();
+      if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
+        await router.push("/signin");
+        return;
+      }
+
+      const data = await authStore.getProfile(headers);
+
+      if (data.error) {
+        console.log(data);
+        errorMessage.value = data.value;
+        return;
+      }
+
+      console.log(data)
+
+    } catch (err) {
+      errorMessage.value = "Error Getting Profile";
+      console.log(errorMessage.value)
+    }
+
+  }
+
+})
 
 const verticalMenu = ref<boolean>(false);
 
 const showVerticalMenu = () => {
   verticalMenu.value = verticalMenu.value === false ? true : false;
 };
+
+const signOut = async () => {
+    const errorObject = {
+        Authorization: "ERROR"
+    }
+    try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
+            await router.push("/signin");
+            return;
+        }
+        const data = await authStore.signout();
+        if (data.error) {
+            console.log(data);
+            errorMessage.value = data.value;
+            return;
+        }
+        console.log(data);
+        await router.push("/signin");
+    } catch (err) {
+        errorMessage.value = "Error Signing Out";
+        console.log(errorMessage.value)
+    }
+}
 </script>
 
 <template>
@@ -30,12 +93,12 @@ const showVerticalMenu = () => {
       </router-link>
     </nav>
 
-    <div v-if="verticalMenu === true">
-      <VerticalMenu :openedVerticalMenu="showVerticalMenu" />
+    <div v-if="verticalMenu === true && authStore.user">
+      <VerticalMenu :openedVerticalMenu="showVerticalMenu" :authUser="authStore.user" :signOut="signOut" :errorMessage="errorMessage"/>
     </div>
 
-    <div class="hidden lg:block">
-      <VerticalMenuFullscreen />
+    <div class="hidden lg:block" v-if="authStore.user">
+      <VerticalMenuFullscreen :authUser="authStore.user" :signOut="signOut" :errorMessage="errorMessage"/>
     </div>
   </div>
 </template>
