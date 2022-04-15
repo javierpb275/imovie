@@ -12,7 +12,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -25,7 +24,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -40,7 +38,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -67,7 +64,6 @@ export const reviews: IReview[] = [
       _id: "1",
       role: Role.ADMIN,
       email: "admin@gmail.com",
-      password: "Abc123..$",
       username: "admin",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -86,7 +82,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -99,7 +94,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -114,7 +108,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -141,7 +134,6 @@ export const reviews: IReview[] = [
       _id: "2",
       role: Role.USER,
       email: "pepe@gmail.com",
-      password: "Abc123..$",
       username: "pepe",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -160,7 +152,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -173,7 +164,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -188,7 +178,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -215,7 +204,6 @@ export const reviews: IReview[] = [
       _id: "1",
       role: Role.ADMIN,
       email: "admin@gmail.com",
-      password: "Abc123..$",
       username: "admin",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -234,7 +222,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -247,7 +234,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -262,7 +248,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -289,7 +274,6 @@ export const reviews: IReview[] = [
       _id: "3",
       role: Role.USER,
       email: "maria@gmail.com",
-      password: "Abc123..$",
       username: "maria",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -308,7 +292,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -321,7 +304,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -336,7 +318,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -363,7 +344,6 @@ export const reviews: IReview[] = [
       _id: "3",
       role: Role.USER,
       email: "maria@gmail.com",
-      password: "Abc123..$",
       username: "maria",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -382,7 +362,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -395,7 +374,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -410,7 +388,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -437,7 +414,6 @@ export const reviews: IReview[] = [
       _id: "1",
       role: Role.ADMIN,
       email: "admin@gmail.com",
-      password: "Abc123..$",
       username: "admin",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -456,7 +432,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -469,7 +444,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -484,7 +458,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -511,7 +484,6 @@ export const reviews: IReview[] = [
       _id: "2",
       role: Role.USER,
       email: "pepe@gmail.com",
-      password: "Abc123..$",
       username: "pepe",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -530,7 +502,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -543,7 +514,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -558,7 +528,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -585,7 +554,6 @@ export const reviews: IReview[] = [
       _id: "1",
       role: Role.ADMIN,
       email: "admin@gmail.com",
-      password: "Abc123..$",
       username: "admin",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -604,7 +572,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -617,7 +584,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -632,7 +598,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -659,7 +624,6 @@ export const reviews: IReview[] = [
       _id: "3",
       role: Role.USER,
       email: "maria@gmail.com",
-      password: "Abc123..$",
       username: "maria",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -678,7 +642,6 @@ export const reviews: IReview[] = [
         _id: "1",
         role: Role.ADMIN,
         email: "admin@gmail.com",
-        password: "Abc123..$",
         username: "admin",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -691,7 +654,6 @@ export const reviews: IReview[] = [
         _id: "2",
         role: Role.USER,
         email: "pepe@gmail.com",
-        password: "Abc123..$",
         username: "pepe",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -706,7 +668,6 @@ export const reviews: IReview[] = [
         _id: "3",
         role: Role.USER,
         email: "maria@gmail.com",
-        password: "Abc123..$",
         username: "maria",
         avatar:
           "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",
@@ -733,7 +694,6 @@ export const reviews: IReview[] = [
       _id: "3",
       role: Role.USER,
       email: "maria@gmail.com",
-      password: "Abc123..$",
       username: "maria",
       avatar:
         "https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png",

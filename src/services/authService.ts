@@ -10,6 +10,7 @@ import {
   Tokens,
   IPayload,
 } from "./serviceTypes";
+import { useAuthStore } from "../stores/auth";
 
 export class AuthService {
   //SAVE USER TOKENS IN LOCALSTORAGE------------------------------
@@ -26,7 +27,9 @@ export class AuthService {
 
   //CLEAR STORE----------------------------------------------------
   static clearStore() {
-    //CLEAR STORE
+    const authStore = useAuthStore();
+    authStore.user = null;
+    authStore.isAuthorized = false;
   }
 
   //REMOVE TOKENS AND CLEAR STORE-----------------------------------
@@ -222,38 +225,27 @@ export class AuthService {
   }
 
   //GET AND VALIDATE HEADER TOKEN
-  static async getAndValidateHeaderToken(): Promise<
-    HeadersType | IReturnData
-  > {
-    const returnData: IReturnData = {
-      error: false,
-      value: "",
-    };
-
+  static async getAndValidateHeaderToken(): Promise<HeadersType> {
     let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
     let refreshToken = localStorage.getItem(Tokens.REFRESH_TOKEN);
 
     if (!refreshToken || !accessToken) {
-      returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-001";
       AuthService.removeTokensAndClearStore();
-      return returnData;
+      return { Authorization: `ERROR` };
     }
 
     const payload = JSON.parse(atob(accessToken.split(".")[1])) as IPayload;
 
     if (!payload || !payload.id || !payload.exp || !payload.iat) {
-      returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-002";
       AuthService.removeTokensAndClearStore();
-      return returnData;
+      return { Authorization: `ERROR` };
     }
 
-    if (payload.id !== "userfromstore._id") {
-      returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-002";
+    const authStore = useAuthStore();
+
+    if (payload.id !== authStore.user?._id) {
       AuthService.removeTokensAndClearStore();
-      return returnData;
+      return { Authorization: `ERROR` };
     }
 
     const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
@@ -261,15 +253,12 @@ export class AuthService {
     if (minutes >= 10) {
       const result = await AuthService.refreshToken();
       if (result.error) {
-        returnData.error = true;
-        returnData.value = "Authentication problem. Error Code: IMO-001-002";
         AuthService.removeTokensAndClearStore();
-        return returnData;
+        return { Authorization: `ERROR` };
       }
       accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
     }
 
     return { Authorization: `Bearer ${accessToken}` };
   }
-
 }

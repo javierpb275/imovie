@@ -9,7 +9,6 @@ interface IUser {
   _id: string;
   role: Role;
   email: string;
-  password: string;
   username: string;
   avatar: string;
   createdReviews: IReview[];
