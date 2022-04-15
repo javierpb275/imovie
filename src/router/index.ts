@@ -12,22 +12,66 @@ import FollowingView from "../views/FollowingView.vue";
 import NewReleasesView from "../views/NewReleasesView.vue";
 import MyProfileView from "../views/MyProfileView.vue";
 import { movies } from "../assets/movies";
+import { useAuthStore } from "../stores/auth";
+import { AuthService } from "../services/authService";
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "Home",
     component: HomeView,
+    beforeEnter: async (to, _, next) => {
+      try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        const authStore = useAuthStore();
+        if (authStore.isAuthorized) {
+          next({ path: "/reviews" });
+          return;
+        }
+        next();
+      } catch (err) {
+        AuthService.removeTokensAndClearStore();
+        next();
+      }
+    },
   },
   {
     path: "/signin",
     name: "SignIn",
     component: SignInView,
+    beforeEnter: async (to, _, next) => {
+      try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        const authStore = useAuthStore();
+        if (authStore.isAuthorized) {
+          next({ path: "/reviews" });
+          return;
+        }
+        next();
+      } catch (err) {
+        AuthService.removeTokensAndClearStore();
+        next();
+      }
+    },
   },
   {
     path: "/signup",
     name: "SignUp",
     component: SignUpView,
+    beforeEnter: async (to, _, next) => {
+      try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        const authStore = useAuthStore();
+        if (authStore.isAuthorized) {
+          next({ path: "/reviews" });
+          return;
+        }
+        next();
+      } catch (err) {
+        AuthService.removeTokensAndClearStore();
+        next();
+      }
+    },
   },
   {
     path: "/reviews",

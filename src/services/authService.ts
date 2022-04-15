@@ -250,13 +250,17 @@ export class AuthService {
 
     const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
 
-    if (minutes >= 10) {
-      const result = await AuthService.refreshToken();
-      if (result.error) {
-        AuthService.removeTokensAndClearStore();
-        return { Authorization: `ERROR` };
+    try {
+      if (minutes >= 10) {
+        const result = await AuthService.refreshToken();
+        if (result.error) {
+          AuthService.removeTokensAndClearStore();
+          return { Authorization: `ERROR` };
+        }
+        accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
       }
-      accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+    } catch (err) {
+      return { Authorization: `ERROR` };
     }
 
     return { Authorization: `Bearer ${accessToken}` };

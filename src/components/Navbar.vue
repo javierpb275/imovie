@@ -3,6 +3,9 @@ import CustomSVG from "./CustomSVG.vue";
 import VerticalMenu from "./VerticalMenu.vue";
 import VerticalMenuFullscreen from "./VerticalMenuFullscreen.vue";
 import { ref } from "vue";
+import { useAuthStore } from "../stores/auth";
+
+const authStore = useAuthStore();
 
 const verticalMenu = ref<boolean>(false);
 
@@ -12,13 +15,13 @@ const showVerticalMenu = () => {
 </script>
 
 <template>
-  <div>
+  <div v-if="authStore.isAuthorized">
     <nav class="sticky top-0 z-50 flex justify-between px-4 pt-4 mb-4 bg-white">
       <div class="flex lg:hidden">
         <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
       </div>
 
-      <router-link to="/" href="#">
+      <router-link to="/reviews" href="#">
         <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-36" />
       </router-link>
 

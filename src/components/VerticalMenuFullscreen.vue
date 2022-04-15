@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import CustomAvatar from './CustomAvatar.vue';
 import CustomSVG from './CustomSVG.vue';
-
 import { ref } from 'vue'
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
+import { AuthService } from '../services/authService';
 
+const router = useRouter();
+
+const authStore = useAuthStore();
+
+const errorMessage = ref<string>("");
 
 const darkLightMode = ref<string>('switch-light-mode');
 
@@ -13,6 +20,29 @@ const changeVisualMode = () => {
 }
 
 let hovered = ref<boolean>(false);
+
+const signOut = async () => {
+    const errorObject = {
+        Authorization: "ERROR"
+    }
+    try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
+            await router.push("/signin");
+        }
+        const data = await authStore.signout();
+        if (data.error) {
+            console.log(data);
+            errorMessage.value = data.value;
+            return;
+        }
+        console.log(data);
+        await router.push("/signin");
+    } catch (err) {
+        errorMessage.value = "Error Signing Out";
+        console.log(errorMessage.value)
+    }
+}
 
 </script>
 
@@ -76,9 +106,9 @@ let hovered = ref<boolean>(false);
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>
 
-                <router-link to="/" href="#" class="flex justify-end mt-5 mr-6">
+                <div @click="signOut" class="flex justify-end mt-5 mr-6">
                     <CustomSVG :svgName="'sign-out'" :class="'text-white w-6 h-6 inline'" />
-                </router-link>
+                </div>
             </nav>
         </div>
     </div>

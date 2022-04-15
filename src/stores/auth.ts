@@ -19,7 +19,7 @@ export const useAuthStore = defineStore("auth", {
         this.user = data.value.user;
         this.isAuthorized = true;
         return data;
-      } catch (error) {
+      } catch (err) {
         return {
           error: true,
           value: "Error Signing In",
@@ -35,7 +35,7 @@ export const useAuthStore = defineStore("auth", {
         this.user = data.value.user;
         this.isAuthorized = true;
         return data;
-      } catch (error) {
+      } catch (err) {
         return {
           error: true,
           value: "Error Signing Up",
@@ -46,7 +46,7 @@ export const useAuthStore = defineStore("auth", {
       try {
         const data = await AuthService.signOut();
         return data;
-      } catch (error) {
+      } catch (err) {
         return {
           error: true,
           value: "Error Signing Out",
