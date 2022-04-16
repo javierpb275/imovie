@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-const isLoggedIn = ref<boolean>(true);
+import { useAuthStore } from "../stores/auth";
+
+const authStore = useAuthStore();
 
 </script>
 
@@ -22,14 +23,14 @@ const isLoggedIn = ref<boolean>(true);
 
                 <router-link
                     to="/"
-                    v-if="!isLoggedIn"
+                    v-if="!authStore.isAuthorized"
                     class="px-6 py-2 text-sm font-semibold text-red-800 bg-white"
-                >Go home</router-link>
+                >Go Home</router-link>
                 <router-link
-                    to="/movies"
-                    v-if="isLoggedIn"
+                    to="/reviews"
+                    v-if="authStore.isAuthorized"
                     class="px-6 py-2 text-sm font-semibold text-red-800 bg-white"
-                >Go to movies</router-link>
+                >Go to Reviews</router-link>
             </div>
         </div>
     </div>
