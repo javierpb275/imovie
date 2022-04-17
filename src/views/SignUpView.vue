@@ -21,6 +21,14 @@ const user = reactive<IUserSignUp>({
 const repeatedPassword = ref<string>("");
 
 const submit = async () => {
+    if (!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(user.email))) {
+        errorMessage.value = `${user.email} is not an email`;
+        return;
+    }
+    if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(user.password))) {
+        errorMessage.value = "Password is not secure";
+        return;
+    }
     if (user.password !== repeatedPassword.value) {
         errorMessage.value = "Passwords are not equal";
         return;
@@ -55,7 +63,7 @@ const submit = async () => {
             <div class="mb-4">
                 <input v-model="user.email"
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email" type="email" placeholder="Email" />
+                    id="email" type="text" placeholder="Email" />
             </div>
             <div class="mb-4">
                 <input v-model="user.password"
