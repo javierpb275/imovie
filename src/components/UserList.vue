@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import UserCard from './UserCard.vue';
-const props = defineProps(['movies'])
+const props = defineProps(['users'])
 </script>
 
 <template>
-    <div class="overflow-y-auto max-h-screen">
-        <li v-for="movie in movies" :key="movie._id" class="list-none mt-2 mb-2">
+    <div class="overflow-y-auto max-h-screen lg:grid lg:grid-cols-2">
+        <li v-for="user in users" :key="user._id" class="list-none mt-2 mb-2">
             <UserCard
-                :id="movie._id"
-                :posterUrl="movie.posterUrl"
-                :year="movie.year"
-                :title="movie.title"
-                :plot="movie.plot"
+                :id="user._id"
+                :username="user.username"
+                :avatar="user.avatar"
+                :followers="user.followers"
+                :followees="user.followees"
             />
         </li>
     </div>

@@ -45,8 +45,8 @@ export const useMovieStore = defineStore("movie", {
       async getMovie(headers: HeadersType, movieId: string): Promise<IReturnData> {
         try {
           const response = await FetchService.callApi(
-            API_URL.MOVIES.GET_MOVIES.URL + movieId,
-            API_URL.MOVIES.GET_MOVIES.METHOD,
+            API_URL.MOVIES.GET_MOVIE.URL + movieId,
+            API_URL.MOVIES.GET_MOVIE.METHOD,
             undefined,
             headers
           );
