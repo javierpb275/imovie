@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { API_URL } from "../config/constants";
+import { getQuery } from "../helpers/query.helper";
 import IMovie from "../interfaces/movie.interface";
 import { FetchService } from "../services/fetchService";
 import { HeadersType, IReturnData } from "../services/serviceTypes";
@@ -11,10 +12,10 @@ export const useMovieStore = defineStore("movie", {
   }),
   getters: {},
   actions: {
-    async getMovies(headers: HeadersType, query?: string): Promise<IReturnData> {
+    async getMovies(headers: HeadersType, queryObject?: object): Promise<IReturnData> {
         let url = API_URL.MOVIES.GET_MOVIES.URL;
-        if (query) {
-          url += "?" + query;
+        if (queryObject) {
+          url += getQuery(queryObject)
         }
         try {
           const response = await FetchService.callApi(
