@@ -53,7 +53,7 @@ export const API_URL = {
       METHOD: "GET",
     },
     GET_USER: {
-      URL: "/users", // /:id
+      URL: "/users/", // :id
       METHOD: "GET",
     },
   },
@@ -63,7 +63,7 @@ export const API_URL = {
       METHOD: "GET",
     },
     GET_MOVIE: {
-      URL: "/movies", // /:id
+      URL: "/movies/", // :id
       METHOD: "GET",
     },
     CREATE_MOVIE: {
@@ -71,11 +71,11 @@ export const API_URL = {
       METHOD: "POST",
     },
     UPDATE_MOVIE: {
-      URL: "/movies", // /:id
+      URL: "/movies/", // :id
       METHOD: "PATCH",
     },
     DELETE_MOVIE: {
-      URL: "/movies", // /:id
+      URL: "/movies/", // :id
       METHOD: "DELETE",
     },
   },
@@ -85,7 +85,7 @@ export const API_URL = {
       METHOD: "GET",
     },
     GET_REVIEW: {
-      URL: "/reviews", // /:id
+      URL: "/reviews/", // :id
       METHOD: "GET",
     },
     CREATE_REVIEW: {
@@ -93,11 +93,11 @@ export const API_URL = {
       METHOD: "POST",
     },
     UPDATE_REVIEW: {
-      URL: "/reviews", // /:id
+      URL: "/reviews/", // :id
       METHOD: "PATCH",
     },
     DELETE_REVIEW: {
-      URL: "/reviews", // /:id
+      URL: "/reviews/", // :id
       METHOD: "DELETE",
     },
     ADD_LIKE: {
@@ -133,11 +133,11 @@ export const API_URL = {
       METHOD: "GET",
     },
     GET_USER_REVIEWS: {
-      URL: "/reviews/userReviews", // /:userId
+      URL: "/reviews/userReviews/", // :userId
       METHOD: "GET",
     },
     GET_MOVIE_REVIEWS: {
-      URL: "/reviews/movieReviews", // /:movieId
+      URL: "/reviews/movieReviews/", // :movieId
       METHOD: "GET",
     },
   },
