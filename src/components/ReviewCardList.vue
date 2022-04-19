@@ -9,14 +9,13 @@ const props = defineProps(['reviews'])
         <li v-for="review in props.reviews" :key="review._id" class="list-none mt-2 mb-2">
             <ReviewCard
                 :id="review._id"
-                :avatar="review.user.avatar"
-                :username="review.user.username"
-                :movieTitle="review.movie.title"
                 :text="review.text"
                 :points="review.points"
+                :movieTitle="review.movie.title"
+                :username="review.user.username"
+                :avatar="review.user.avatar"
                 :likes="review.likes"
                 :dislikes="review.dislikes"
-                :favorites="review.user.favorites"
             />
         </li>
     </div>

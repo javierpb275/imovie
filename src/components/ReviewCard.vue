@@ -30,7 +30,7 @@ const showText = () => {
 }
 
 const props = defineProps({
-    movieTitle: {
+    id: {
         type: String,
         required: true
     },
@@ -38,12 +38,20 @@ const props = defineProps({
         type: String,
         required: true
     },
+    points: {
+        type: Number,
+        required: true
+    },
+    movieTitle: {
+        type: String,
+        required: true
+    },
     username: {
         type: String,
         required: true
     },
-    points: {
-        type: Number,
+    avatar: {
+        type: String,
         required: true
     },
     likes: {
@@ -63,7 +71,7 @@ const props = defineProps({
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="inline-block float-left">
                     <CustomAvatar
-                        :avatar-url="'https://www.seekpng.com/png/detail/20-204778_cool-avatar-png-picture-fortnite.png'"
+                        :avatar-url="props.avatar"
                         :size="10" />
                     <p>{{ props.username }}</p>
                 </div>

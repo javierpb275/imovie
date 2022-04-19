@@ -3,7 +3,52 @@ import SelectReviewFilter from '../components/SelectReviewFilter.vue';
 import SearchReviewInput from '../components/SearchReviewInput.vue';
 import ButtonGroupUsersFollowees from '../components/ButtonGroupUsersFollowees.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
-import { reviews } from '../assets/reviews';
+import { ref, onMounted } from 'vue'
+import { useAuthStore } from '../stores/auth';
+import { useReviewStore } from '../stores/review'; 
+import { AuthService } from '../services/authService';
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const authStore = useAuthStore();
+const reviewStore = useReviewStore();
+
+const errorMessage = ref<string>("");
+
+onMounted(async () => {
+    if (authStore.isAuthorized) {
+        const errorObject = {
+            Authorization: "ERROR"
+        }
+
+        try {
+            const headers = await AuthService.getAndValidateHeaderToken();
+            if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
+                await router.push("/signin");
+                return;
+            }
+            const data = await reviewStore.getReviews(headers)
+
+            if (data.error) {
+                console.log(data);
+                errorMessage.value = data.value;
+                return;
+            }
+
+            if (!data.value.length) {
+                errorMessage.value = "No reviews found!";
+                return;
+            }
+
+            console.log(data)
+
+        } catch (err) {
+            errorMessage.value = "Error Getting Reviews";
+            console.log(errorMessage.value)
+        }
+    }
+})
 </script>
 
 <template>
@@ -12,6 +57,6 @@ import { reviews } from '../assets/reviews';
     <SearchReviewInput />
     <p class="mt-16 mb-5 text-2xl font-bold">Latest Opinions</p>
     <ButtonGroupUsersFollowees />
-    <ReviewCardList :reviews="reviews" />
+    <ReviewCardList :reviews="reviewStore.reviews" />
   </div>
 </template>
