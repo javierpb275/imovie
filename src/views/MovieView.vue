@@ -27,6 +27,8 @@ const calculatePointsOfMovie = () => {
 
 const movieTitle = computed(() => route.params.title) as ComputedRef<string>;
 
+//ANOTHER OPTION CAN BE CREATE A ROUTE THAT GETS THE MOVIE WITH ALL ITS REVIEWS
+
 //MAYBE USE ONBEFOREMOUNT FOR MOVIES AND THEN ONMOUNTED FOR THE REVIEWS
 onMounted(async () => {
     if (authStore.isAuthorized) {
