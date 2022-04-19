@@ -52,10 +52,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="mt-12 lg:ml-80">
+  <div class="lg:ml-64">
     <SelectReviewFilter />
     <SearchReviewInput />
-    <p class="mt-16 mb-5 text-2xl font-bold">Latest Opinions</p>
+    <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
     <ButtonGroupUsersFollowees />
     <ReviewCardList :reviews="reviewStore.reviews" />
   </div>

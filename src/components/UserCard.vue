@@ -37,11 +37,6 @@ const props = defineProps({
         <div id="profile" class="lg:w-2/3 rounded-lg mx-6 lg:mx-0">
             <div class="p-4 md:p-12 text-center lg:text-left">
                 <!-- Image for mobile view-->
-                <!-- <div
-                    class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
-                    style="background-image: url('/img/avatars/default-avatar.PNG')"
-                ></div> -->
-
                 <img
                     class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 w-2/4 cursor-pointer"
                     :src="props.avatar"

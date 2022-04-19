@@ -69,7 +69,7 @@ const props = defineProps({
     <div class="flex justify-center">
         <div class="block p-3 my-5 rounded-lg shadow-lg bg-white w-72  lg:w-2/3">
             <div id="user-movie-info-container" class="mb-1">
-                <div id="avatar-username-container" class="inline-block float-left">
+                <div id="avatar-username-container" class="inline-block float-left lg:relative">
                     <CustomAvatar
                         :avatar-url="props.avatar"
                         :size="10" />
@@ -84,14 +84,18 @@ const props = defineProps({
             <div id="fav-like-button-container" class="mb-0 mt-3 lg:inline-flex">
                 <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 float-left cursor-pointer'"
                     @click="checkIfFavorite" />
+            </div>
+
+            <div class="mb-0 mt-3 lg:inline-flex">
                 <span class="float-left ml-10">{{ props.dislikes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbDown" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
                     @click="checkIfDislike" />
                 <span class="float-left ml-10">{{ props.likes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
                     @click="checkIfLike" />
-                <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 float-right cursor-pointer lg:hidden'" @click="showText" />
             </div>
+                
+                <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 float-right cursor-pointer lg:hidden'" @click="showText" />
 
             <div id="text-container" class="float-left mt-0 mb-1 cursor-pointer lg:hidden" v-if="upDownArrow === 'up-arrow'">
                 <p class="text-gray-700 text-sm mb-0 mt-1">{{ props.text }}</p>

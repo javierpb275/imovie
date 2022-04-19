@@ -251,17 +251,17 @@ export class AuthService {
       return { Authorization: `ERROR` };
     }
 
-    //const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
+    const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
 
     try {
-      //if (minutes >= 10) {
+      if (minutes >= 10) {
         const result = await AuthService.refreshToken();
         if (result.error) {
           AuthService.removeTokensAndClearStore();
           return { Authorization: `ERROR` };
         }
         accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
-      //}
+      }
     } catch (err) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };

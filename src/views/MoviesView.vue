@@ -58,7 +58,7 @@ onMounted(async () => {
             {{ errorMessage }}
         </div>
         <div v-else>
-            <p class="mt-12 text-2xl font-bold">Movies</p>
+            <p class="mt-7 mb-2 text-2xl font-bold">Movies</p>
             <MovieCardList :movies="movieStore.movies" />
         </div>
     </div>
