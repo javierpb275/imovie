@@ -80,7 +80,7 @@ export const useReviewStore = defineStore("review", {
       headers: HeadersType,
       movieId: string,
       queryObject?: object
-    ) {
+    ): Promise<IReturnData> {
       let url = API_URL.REVIEWS.GET_MOVIE_REVIEWS.URL + movieId;
       if (queryObject) {
         url += getQuery(queryObject);
@@ -115,7 +115,7 @@ export const useReviewStore = defineStore("review", {
       headers: HeadersType,
       userId: string,
       queryObject?: object
-    ) {
+    ): Promise<IReturnData> {
       let url = API_URL.REVIEWS.GET_USER_REVIEWS.URL + userId;
       if (queryObject) {
         url += getQuery(queryObject);

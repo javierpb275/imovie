@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import RatingStars from './RatingStars.vue';
+import { computed, ComputedRef, onMounted, onUpdated, ref, onBeforeMount } from 'vue';
+import { useReviewStore } from '../stores/review';
+
+const reviewStore = useReviewStore();
 
 const props = defineProps({
     id: {
@@ -38,22 +42,40 @@ const props = defineProps({
         type: String,
         required: true
     },
+    points: {
+        type: Number,
+        required: true
+    }
 });
 
+const points = ref<number>(0);
+
+//IT DOESN'T WORK ALWAYS. PENDING FIXING
+onBeforeMount(() => {
+    reviewStore.reviews.map(review => {
+        points.value += review.points;
+    });
+    points.value = points.value / reviewStore.reviews.length;
+    console.log(points.value)
+})
+
+//PENDING CALCULATING POINTS OF MOVIE. maybe use a computed property?
+//const points = computed(() => props.points) as ComputedRef<number>;
 </script>
+
+
 
 <template>
     <div style="background-color:rgba(0, 0, 0, 0)">
         <div class="container px-5 py-5 mx-auto mt-10" style="cursor: auto;">
             <div class="lg:w-auto lg:ml-64 mx-auto flex flex-wrap">
-                <img :alt="props.title"
-                    class="lg:w-1/3 w-full lg:h-auto h-80 object-contain object-center rounded"
+                <img :alt="props.title" class="lg:w-1/3 w-full lg:h-auto h-80 object-contain object-center rounded"
                     :src="props.posterUrl" style="cursor: auto;" />
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0" style="cursor: auto;">
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-1" style="cursor: auto;">{{
                         props.title
                     }}</h1>
-                    <RatingStars :class="'flex justify-center'" :size="10" :points="3" :isFor="'movie'" />
+                    <RatingStars :class="'flex justify-center'" :size="10" :points="points" :isFor="'movie'" />
                     <div id="info-movie">
                         <p>
                             <strong>Original title:</strong>
