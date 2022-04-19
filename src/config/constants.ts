@@ -41,15 +41,15 @@ export const API_URL = {
       METHOD: "POST",
     },
     GET_FOLLOWERS: {
-      URL: "/users/followers",
+      URL: "/users/followers", // ?
       METHOD: "GET",
     },
     GET_FOLLOWEES: {
-      URL: "/users/followees",
+      URL: "/users/followees", // ?
       METHOD: "GET",
     },
     GET_USERS: {
-      URL: "/users",
+      URL: "/users", // ?
       METHOD: "GET",
     },
     GET_USER: {
@@ -59,7 +59,7 @@ export const API_URL = {
   },
   MOVIES: {
     GET_MOVIES: {
-      URL: "/movies",
+      URL: "/movies", // ?
       METHOD: "GET",
     },
     GET_MOVIE: {
@@ -81,7 +81,7 @@ export const API_URL = {
   },
   REVIEWS: {
     GET_REVIEWS: {
-      URL: "/reviews",
+      URL: "/reviews", // ?
       METHOD: "GET",
     },
     GET_REVIEW: {
@@ -125,19 +125,19 @@ export const API_URL = {
       METHOD: "POST",
     },
     GET_FAVORITE_REVIEWS: {
-      URL: "/reviews/me/favoriteReviews",
+      URL: "/reviews/me/favoriteReviews", // ?
       METHOD: "GET",
     },
     GET_CREATED_REVIEWS: {
-      URL: "/reviews/me/createdReviews",
+      URL: "/reviews/me/createdReviews", // ?
       METHOD: "GET",
     },
     GET_USER_REVIEWS: {
-      URL: "/reviews/userReviews/", // :userId
+      URL: "/reviews/userReviews/", // :userId ?
       METHOD: "GET",
     },
     GET_MOVIE_REVIEWS: {
-      URL: "/reviews/movieReviews/", // :movieId
+      URL: "/reviews/movieReviews/", // :movieId ?
       METHOD: "GET",
     },
   },
