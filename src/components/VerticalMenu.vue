@@ -80,7 +80,8 @@ const errorMessage = computed(() =>
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>
 
-                <div @click="props.signOut" class="flex justify-end mt-5 mr-6">
+                <div @click="props.signOut" class="flex justify-end mt-5 mr-6 cursor-pointer">
+                    <p class="pr-2">Sign out</p>
                     <CustomSVG :svgName="'sign-out'" :class="'text-white w-6 h-6 inline'" />
                 </div>
             </nav>

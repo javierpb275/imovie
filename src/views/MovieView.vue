@@ -55,11 +55,22 @@ onMounted(async () => {
 
 <template>
     <div class="lg:ml-36">
-        <Movie :id="movieStore.movies[0]._id" :title="movieStore.movies[0].title" :year="movieStore.movies[0].year"
-            :runtime="movieStore.movies[0].runtime" :genres="movieStore.movies[0].genres"
-            :director="movieStore.movies[0].director" :actors="movieStore.movies[0].actors"
-            :plot="movieStore.movies[0].plot" :posterUrl="movieStore.movies[0].posterUrl" />
+        <Movie :id="movieStore.movies[0]._id" 
+            :title="movieStore.movies[0].title" 
+            :year="movieStore.movies[0].year"
+            :runtime="movieStore.movies[0].runtime" 
+            :genres="movieStore.movies[0].genres"
+            :director="movieStore.movies[0].director" 
+            :actors="movieStore.movies[0].actors"
+            :plot="movieStore.movies[0].plot" 
+            :posterUrl="movieStore.movies[0].posterUrl" 
+        />
         <h1 class="mt-9 lg:mt-14 text-3xl">Opinions:</h1>
-        <ReviewCardList :reviews="movieReviews" />
+        <div v-if="!movieReviews.length">
+            <p class="text-red-800 text-xl italic font-bold py-5">There are yet no opinions for this film!</p>
+        </div>
+        <div v-else>
+            <ReviewCardList :reviews="movieReviews" />
+        </div>
     </div>
 </template>
