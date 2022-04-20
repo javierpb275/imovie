@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RatingStars from './RatingStars.vue';
-import { computed, ComputedRef, onMounted, onUpdated, ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount } from 'vue';
 import { useReviewStore } from '../stores/review';
 
 const reviewStore = useReviewStore();
@@ -41,26 +41,25 @@ const props = defineProps({
     posterUrl: {
         type: String,
         required: true
-    },
-    points: {
-        type: Number,
-        required: true
     }
 });
 
 const points = ref<number>(0);
 
-//IT DOESN'T WORK ALWAYS. PENDING FIXING
-onBeforeMount(() => {
+const calculatePointsOfMovie = () => {
+    if (!reviewStore.reviews.length) {
+        points.value = 0;
+        return;
+    }
     reviewStore.reviews.map(review => {
         points.value += review.points;
     });
     points.value = points.value / reviewStore.reviews.length;
-    console.log(points.value)
-})
+}
 
-//PENDING CALCULATING POINTS OF MOVIE. maybe use a computed property?
-//const points = computed(() => props.points) as ComputedRef<number>;
+onBeforeMount(() => {
+    calculatePointsOfMovie();
+});
 </script>
 
 
