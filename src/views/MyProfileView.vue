@@ -8,9 +8,8 @@ import { reviews } from '../assets/reviews';
 <template>
     <div>
         <ProfileCard />
-
-        <div class="max-w-5xl items-center h-auto mx-auto lg:ml-80 lg:my-24">
-            <p class="mt-4 mb-4 text-2xl font-bold">Favorite reviews</p>
+        <div class="max-w-5xl h-auto mx-auto lg:ml-64 lg:my-24">
+            <p class="mb-4 text-2xl lg:ml-6 font-bold">Favorite reviews</p>
             <ReviewCardList :reviews="reviews" class="lg:w-5xl" />
         </div>
     </div>
