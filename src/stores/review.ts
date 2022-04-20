@@ -78,10 +78,10 @@ export const useReviewStore = defineStore("review", {
     },
     async getMovieReviews(
       headers: HeadersType,
-      movieId: string,
+      movieTitle: any,
       queryObject?: object
     ): Promise<IReturnData> {
-      let url = API_URL.REVIEWS.GET_MOVIE_REVIEWS.URL + movieId;
+      let url = API_URL.REVIEWS.GET_MOVIE_REVIEWS.URL + movieTitle;
       if (queryObject) {
         url += getQuery(queryObject);
       }
@@ -113,10 +113,10 @@ export const useReviewStore = defineStore("review", {
     },
     async getUserReviews(
       headers: HeadersType,
-      userId: string,
+      username: any,
       queryObject?: object
     ): Promise<IReturnData> {
-      let url = API_URL.REVIEWS.GET_USER_REVIEWS.URL + userId;
+      let url = API_URL.REVIEWS.GET_USER_REVIEWS.URL + username;
       if (queryObject) {
         url += getQuery(queryObject);
       }

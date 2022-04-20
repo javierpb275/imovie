@@ -133,11 +133,11 @@ export const API_URL = {
       METHOD: "GET",
     },
     GET_USER_REVIEWS: {
-      URL: "/reviews/userReviews/", // :userId ?
+      URL: "/reviews/userReviews/", // :username ?
       METHOD: "GET",
     },
     GET_MOVIE_REVIEWS: {
-      URL: "/reviews/movieReviews/", // :movieId ?
+      URL: "/reviews/movieReviews/", // :movieTitle ?
       METHOD: "GET",
     },
   },
