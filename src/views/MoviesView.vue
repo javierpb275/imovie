@@ -51,7 +51,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="lg:ml-64">
+    <div class="lg:ml-44">
         <SelectMovieFilter />
         <SearchMovieInput />
         <div v-if="errorMessage">
@@ -59,7 +59,10 @@ onMounted(async () => {
         </div>
         <div v-else>
             <p class="mt-7 mb-2 text-2xl font-bold">Movies</p>
-            <MovieCardList :movies="movieStore.movies" />
+
+            <div class="max-w-5xl h-auto mx-auto lg:mb-24">
+                <MovieCardList :movies="movieStore.movies" />
+            </div>
         </div>
     </div>
 </template>

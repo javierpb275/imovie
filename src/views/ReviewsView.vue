@@ -52,7 +52,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="lg:ml-64">
+  <div class="lg:ml-44">
     <SelectReviewFilter />
     <SearchReviewInput />
     <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>

@@ -32,9 +32,13 @@ const submit = async () => {
 </script>
 
 <template>
-  <div>
+    <img
+            src="/img/IMOvie_logo_wobg.png"
+            alt="imovie-icon"
+            class="object-contain w-60 h-30 mb-28 ml-14 pt-10"
+        />
+  <div class="lg:w-3/4 mx-auto">
     <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
-      <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12" />
       <div class="mb-4">
         <input v-model="user.email"
           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
