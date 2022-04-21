@@ -21,28 +21,22 @@ const user = computed(() =>
         <div id="profile" class="w-full lg:w-3/5 rounded-lg mx-6 lg:mx-0">
             <div class="p-4 md:p-12 text-center lg:text-left">
                 <!-- Image for mobile view-->
-                <div
-                    class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
-                    :style="`background-image: url('${user.avatar}')`"
-                ></div>
+                <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
+                    :style="`background-image: url('${user.avatar}')`"></div>
 
-                <h1 class="text-3xl font-bold pt-8 lg:pt-0">@{{user.username}}</h1>
+                <h1 class="text-3xl font-bold pt-8 lg:pt-0">@{{ user.username }}</h1>
                 <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-red-800"></div>
 
                 <div class="inline-flex">
-                    <p class="pt-8 text-md">{{user.followees.length}} Following</p>
+                    <p class="pt-8 text-md">{{ user.followees.length }} Following</p>
                     <p class="pt-8 text-md">||</p>
-                    <p class="pt-8 text-md">{{user.followers.length}} Followers</p>
+                    <p class="pt-8 text-md">{{ user.followers.length }} Followers</p>
                 </div>
 
                 <div class="pt-8 pb-8">
                     <button
-                        class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm"
-                    >
-                        <CustomSVG
-                            :svgName="'settings'"
-                            :class="'text-white w-9 h-9 px-2 py-2 inline-flex'"
-                        />
+                        class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
+                        <CustomSVG :svgName="'settings'" :class="'text-white w-9 h-9 px-2 py-2 inline-flex'" />
                         <span class="pt-2">Profile settings</span>
                     </button>
                 </div>
@@ -51,10 +45,7 @@ const user = computed(() =>
 
         <!--Img Col-->
         <div class="w-full lg:w-1/4">
-            <img
-                :src="user.avatar"
-                class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
-            />
+            <img :src="user.avatar" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
         </div>
     </div>
 </template>

@@ -49,7 +49,7 @@ onMounted(async () => {
 <template>
     <div class="lg:ml-36">
         <div v-if="!reviewData.value" class="my-56">
-            <Spinner/>
+            <Spinner />
         </div>
         <div v-else>
             <Movie :id="movieStore.movies[0]._id" :title="movieStore.movies[0].title" :year="movieStore.movies[0].year"

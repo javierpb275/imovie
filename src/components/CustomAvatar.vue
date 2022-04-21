@@ -12,9 +12,5 @@ const props = defineProps({
 </script>
 
 <template>
-    <img
-        :class="'rounded-full w-' + props.size + ' h-' + props.size"
-        :src="props.avatarUrl"
-        :alt="props.avatarUrl"
-    />
+    <img :class="'rounded-full w-' + props.size + ' h-' + props.size" :src="props.avatarUrl" :alt="props.avatarUrl" />
 </template>

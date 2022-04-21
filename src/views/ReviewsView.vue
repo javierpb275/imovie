@@ -5,7 +5,7 @@ import ButtonGroupUsersFollowees from '../components/ButtonGroupUsersFollowees.v
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth';
-import { useReviewStore } from '../stores/review'; 
+import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
 import { useRouter } from "vue-router";
 
@@ -52,12 +52,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="lg:ml-44">
-    <SelectReviewFilter />
-    <SearchReviewInput />
-    <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
-    <ButtonGroupUsersFollowees />
-  </div>
+    <div class="lg:ml-44">
+        <SelectReviewFilter />
+        <SearchReviewInput />
+        <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
+        <ButtonGroupUsersFollowees />
+    </div>
 
     <div class="max-w-5xl h-auto mx-auto lg:ml-64 lg:mb-24">
         <ReviewCardList :reviews="reviewStore.reviews" />

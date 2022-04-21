@@ -51,7 +51,8 @@ const errorMessage = computed(() =>
 
                 <CustomSVG v-show="hovered" :svgName="'settings'" :class="'text-white w-10 h-10 px-2  inline '" />
                 <div>{{ authUser.username }}</div>
-                <div class="text-sm">{{ authUser.followees.length }} Following || {{ authUser.followers.length }} Followers
+                <div class="text-sm">{{ authUser.followees.length }} Following || {{ authUser.followers.length }}
+                    Followers
                 </div>
             </router-link>
 
