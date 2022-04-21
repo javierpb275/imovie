@@ -3,8 +3,8 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter()
 
-const goToUser = (id: string) => {
-  router.push({ path: `/user/${id}` })
+const goToUser = (username: string) => {
+  router.push({ path: `/user/${username}` })
 }
 
 const props = defineProps({
@@ -22,11 +22,11 @@ const props = defineProps({
   },
   followers: {
     type: Array,
-    required: false
+    required: true
   },
   followees: {
     type: Array,
-    required: false
+    required: true
   }
 });
 </script>
@@ -41,16 +41,16 @@ const props = defineProps({
                     class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 w-2/4 cursor-pointer"
                     :src="props.avatar"
                     :alt="props.username"
-                    @click="goToUser(props.id)"
+                    @click="goToUser(props.username)"
                 />
 
                 <h1 class="text-2xl font-bold pt-8 lg:pt-0">{{props.username}}</h1>
                 <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-red-800"></div>
 
                 <div class="inline-flex">
-                    <p class="pt-8 text-md">{{props.followees?.length}} Following</p>
+                    <p class="pt-8 text-md">{{props.followees.length}} Following</p>
                     <p class="pt-8 text-md">||</p>
-                    <p class="pt-8 text-md">{{props.followers?.length}} Followers</p>
+                    <p class="pt-8 text-md">{{props.followers.length}} Followers</p>
                 </div>
 
             </div>
@@ -60,7 +60,7 @@ const props = defineProps({
         <div class="w-full lg:w-1/5">
             <img
                 :src="props.avatar"
-                @click="goToUser(props.id)"
+                @click="goToUser(props.username)"
                 class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block cursor-pointer"
             />
         </div>

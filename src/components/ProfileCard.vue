@@ -1,5 +1,18 @@
 <script setup lang="ts">
+import { computed, ComputedRef } from 'vue';
 import CustomSVG from '../components/CustomSVG.vue';
+import IUser from '../interfaces/user.interface';
+
+const props = defineProps({
+    user: {
+        type: Object,
+        required: true
+    }
+});
+
+const user = computed(() =>
+    props.user
+) as ComputedRef<IUser>
 </script>
 
 <template>
@@ -10,16 +23,16 @@ import CustomSVG from '../components/CustomSVG.vue';
                 <!-- Image for mobile view-->
                 <div
                     class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
-                    style="background-image: url('/img/avatars/default-avatar.PNG')"
+                    :style="`background-image: url('${user.avatar}')`"
                 ></div>
 
-                <h1 class="text-3xl font-bold pt-8 lg:pt-0">@Username</h1>
+                <h1 class="text-3xl font-bold pt-8 lg:pt-0">@{{user.username}}</h1>
                 <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-red-800"></div>
 
                 <div class="inline-flex">
-                    <p class="pt-8 text-md">234 Following</p>
+                    <p class="pt-8 text-md">{{user.followees.length}} Following</p>
                     <p class="pt-8 text-md">||</p>
-                    <p class="pt-8 text-md">866 Followers</p>
+                    <p class="pt-8 text-md">{{user.followers.length}} Followers</p>
                 </div>
 
                 <div class="pt-8 pb-8">
@@ -39,7 +52,7 @@ import CustomSVG from '../components/CustomSVG.vue';
         <!--Img Col-->
         <div class="w-full lg:w-1/4">
             <img
-                src="/img/avatars/default-avatar.PNG"
+                :src="user.avatar"
                 class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
             />
         </div>

@@ -14,6 +14,8 @@ import MyProfileView from "../views/MyProfileView.vue";
 import { useAuthStore } from "../stores/auth";
 import { AuthService } from "../services/authService";
 import { useMovieStore } from "../stores/movie";
+import { useUserStore } from "../stores/user";
+import UserView from '../views/UserView.vue';
 
 const viewsGuard = async () => {
   try {
@@ -157,6 +159,32 @@ const routes: RouteRecordRaw[] = [
         const { title } = to.params;
         const movies = await movieStore.getMovies(data.headers, {title});
         if (!movies.value.length || movies.error) {
+          next({ path: "/error" });
+          return;
+        }
+        //-------------------------------------------
+        next();
+      } catch (err) {
+        next({ path: "/signin" });
+      }
+    },
+  },
+  {
+    path: "/user/:username",
+    name: "User",
+    component: UserView,
+    beforeEnter: async (to, _, next) => {
+      try {
+        const data = await viewsGuard();
+        if (!data.isAuthorized) {
+          next({ path: "/signin" });
+          return;
+        }
+        //IF USER IS NOT FOUND----------------------
+        const userStore = useUserStore();
+        const { username } = to.params;
+        const users = await userStore.getUsers(data.headers, {username});
+        if (!users.value.length || users.error) {
           next({ path: "/error" });
           return;
         }

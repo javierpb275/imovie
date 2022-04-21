@@ -1,17 +1,19 @@
 <script setup lang="ts">
 import ProfileCard from '../components/ProfileCard.vue';
-import ButtonGroupMyOpinionsFavoriteOpinions from '../components/ButtonGroupMyOpinionsFavoriteOpinions.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { onMounted, reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
 import { IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
+import { useUserStore } from '../stores/user';
 
 const router = useRouter();
+const route = useRoute();
 const authStore = useAuthStore();
+const userStore = useUserStore();
 const reviewStore = useReviewStore();
 
 const errorMessage = ref<string>("");
@@ -37,10 +39,10 @@ onMounted(async () => {
                 await router.push("/signin");
                 return;
             }
-            const user = await authStore.getProfile(headers)
-            userData.error = user.error;
-            userData.value = user.value;
-            const { error, value } = await reviewStore.getCreatedReviews(headers)
+            const users = await userStore.getUsers(headers, { username: route.params.username })
+            userData.error = users.error;
+            userData.value = users.value;
+            const { error, value } = await reviewStore.getUserReviews(headers, route.params.username)
             reviewData.error = error;
             reviewData.value = value;
         } catch (err) {
@@ -57,11 +59,10 @@ onMounted(async () => {
             <Spinner />
         </div>
         <div v-else>
-            <ProfileCard :user="authStore.user" />
+            <ProfileCard :user="userStore.users[0]"/>
         </div>
         <div class="max-w-5xl h-auto mx-auto lg:ml-64 lg:my-24">
-            <ButtonGroupMyOpinionsFavoriteOpinions />
-            <p class="mb-4 text-2xl font-bold">My Reviews</p>
+            <p class="mb-4 text-2xl lg:ml-6 font-bold">Reviews</p>
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>
