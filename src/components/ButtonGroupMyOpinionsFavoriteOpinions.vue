@@ -4,7 +4,6 @@
 
 
 <template>
-    <div class="flex items-center justify-center mb-3">
         <div class="flex items-center justify-center mb-3">
             <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
                 <button
