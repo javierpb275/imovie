@@ -32,6 +32,7 @@ const submit = async () => {
 </script>
 
 <template>
+<div>
     <img
             src="/img/IMOvie_logo_wobg.png"
             alt="imovie-icon"
@@ -61,5 +62,6 @@ const submit = async () => {
         </div>
       </div>
     </form>
+  </div>
   </div>
 </template>
