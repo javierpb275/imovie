@@ -264,23 +264,6 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/new-releases",
-    name: "NewReleases",
-    component: NewReleasesView,
-    beforeEnter: async (to, _, next) => {
-      try {
-        const data = await viewsGuard();
-        if (!data.isAuthorized) {
-          next({ path: "/signin" });
-          return;
-        }
-        next();
-      } catch (err) {
-        next({ path: "/signin" });
-      }
-    },
-  },
-  {
     path: "/:catchAll(.*)",
     name: "NotFoundView",
     component: () => import("../views/NotFoundView.vue"),

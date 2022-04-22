@@ -57,9 +57,9 @@ onMounted(async () => {
             <Spinner />
         </div>
         <div v-else>
-            <ProfileCard :user="authStore.user" />
-        </div>
-        <div class="max-w-5xl h-auto mx-auto lg:ml-64 lg:my-24">
+            <ProfileCard :user="userData.value" />
+        </div>        
+        <div class="lg:ml-64 lg:mr-14 lg:my-24">
             <ButtonGroupMyOpinionsFavoriteOpinions />
             <p class="mb-4 text-2xl font-bold">My Reviews</p>
             <div v-if="!reviewData.value">

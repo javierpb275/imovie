@@ -52,14 +52,16 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="lg:ml-44">
-        <SelectReviewFilter />
-        <SearchReviewInput />
-        <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
-        <ButtonGroupUsersFollowees />
-    </div>
+    <div>
+        <div class="lg:ml-64 lg:mr-14 lg:my-24">
+            <SelectReviewFilter />
+            <SearchReviewInput />
+            <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
+            <ButtonGroupUsersFollowees />
+        </div>
 
-    <div class="max-w-5xl h-auto mx-auto lg:ml-64 lg:mb-24">
-        <ReviewCardList :reviews="reviewStore.reviews" />
+        <div class="max-w-5xl h-auto mx-auto lg:ml-64 lg:mb-24">
+            <ReviewCardList :reviews="reviewStore.reviews" />
+        </div>
     </div>
 </template>
