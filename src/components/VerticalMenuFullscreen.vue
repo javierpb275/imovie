@@ -44,7 +44,7 @@ const errorMessage = computed(() =>
         <!-- sidebar -->
         <div
             class="sidebar bg-red-800 text-white w-64 space-y-6 pt-2 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
-            <router-link to="/my-profile" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
+            <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
                 @mouseover="hovered = true" @mouseleave="hovered = false">
                 <CustomAvatar :avatar-url="'/img/avatars/default-avatar.PNG'" :size="12"
                     class="m-auto hover:drop-shadow-2xl" />

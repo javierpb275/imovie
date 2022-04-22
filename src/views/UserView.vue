@@ -61,7 +61,7 @@ onMounted(async () => {
         <div v-else>
             <ProfileCard :user="userStore.users[0]" />
         </div>
-        <div class="max-w-5xl h-auto mx-auto lg:ml-64 lg:my-24">
+        <div class="lg:ml-64 lg:mr-14 lg:my-24">
             <p class="mb-4 text-2xl lg:ml-6 font-bold">Reviews</p>
             <div v-if="!reviewData.value">
                 <Spinner />
