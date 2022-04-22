@@ -3,13 +3,14 @@ import ProfileCard from '../components/ProfileCard.vue';
 import ButtonGroupMyOpinionsFavoriteOpinions from '../components/ButtonGroupMyOpinionsFavoriteOpinions.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { onMounted, reactive, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
-import { IReturnData } from '../services/serviceTypes';
+import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 
+const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
 const reviewStore = useReviewStore();
@@ -26,6 +27,24 @@ const userData = reactive<IReturnData>({
     value: null
 });
 
+const getReviews = async (headers: HeadersType, queryObject?: object) => {
+    try {
+        if (route.params.reviews === 'my-reviews') {
+            const { error, value } = await reviewStore.getCreatedReviews(headers, queryObject)
+            reviewData.error = error;
+            reviewData.value = value;
+        }
+        if (route.params.reviews === 'favorite-reviews') {
+            const { error, value } = await reviewStore.getFavoriteReviews(headers, queryObject)
+            reviewData.error = error;
+            reviewData.value = value;
+        }
+    } catch (err) {
+        errorMessage.value = "Error Getting reviews";
+        console.log(err)
+    }
+}
+
 onMounted(async () => {
     if (authStore.isAuthorized) {
         const errorObject = {
@@ -37,18 +56,20 @@ onMounted(async () => {
                 await router.push("/signin");
                 return;
             }
+
             const user = await authStore.getProfile(headers)
             userData.error = user.error;
             userData.value = user.value;
-            const { error, value } = await reviewStore.getCreatedReviews(headers)
-            reviewData.error = error;
-            reviewData.value = value;
+
+            await getReviews(headers);
+
         } catch (err) {
             errorMessage.value = "Error Getting User";
             console.log(errorMessage.value)
         }
     }
 })
+
 </script>
 
 <template>
@@ -61,7 +82,8 @@ onMounted(async () => {
         </div>        
         <div class="lg:ml-64 lg:mr-14 lg:my-24">
             <ButtonGroupMyOpinionsFavoriteOpinions />
-            <p class="mb-4 text-2xl font-bold">My Reviews</p>
+            <p v-if="route.params.reviews === 'my-reviews'" class="mb-4 text-2xl font-bold">My Reviews</p>
+            <p v-if="route.params.reviews === 'favorite-reviews'" class="mb-4 text-2xl font-bold">Favorite Reviews</p>
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>

@@ -15,7 +15,7 @@ import { useAuthStore } from "../stores/auth";
 import { AuthService } from "../services/authService";
 import { useMovieStore } from "../stores/movie";
 import { useUserStore } from "../stores/user";
-import UserView from '../views/UserView.vue';
+import UserView from "../views/UserView.vue";
 
 const viewsGuard = async () => {
   try {
@@ -157,7 +157,7 @@ const routes: RouteRecordRaw[] = [
         //IF MOVIE IS NOT FOUND----------------------
         const movieStore = useMovieStore();
         const { title } = to.params;
-        const movies = await movieStore.getMovies(data.headers, {title});
+        const movies = await movieStore.getMovies(data.headers, { title });
         if (!movies.value.length || movies.error) {
           next({ path: "/error" });
           return;
@@ -183,7 +183,7 @@ const routes: RouteRecordRaw[] = [
         //IF USER IS NOT FOUND----------------------
         const userStore = useUserStore();
         const { username } = to.params;
-        const users = await userStore.getUsers(data.headers, {username});
+        const users = await userStore.getUsers(data.headers, { username });
         if (!users.value.length || users.error) {
           next({ path: "/error" });
           return;
@@ -213,7 +213,7 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/my-profile",
+    path: "/my-profile/:reviews",
     name: "MyProfileView",
     component: MyProfileView,
     beforeEnter: async (to, _, next) => {
@@ -223,6 +223,15 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/signin" });
           return;
         }
+        //SHOW MY REVIEWS OR FAVORITE REVIEWS-------------------
+        const options = ["my-reviews", "favorite-reviews"];
+        const { reviews } = to.params;
+        const foundPath = options.find((path) => path === reviews);
+        if (!foundPath) {
+          next({ path: "/error" });
+          return;
+        }
+        //---------------------------------------------------
         next();
       } catch (err) {
         next({ path: "/signin" });
