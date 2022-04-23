@@ -40,7 +40,7 @@ const submit = async () => {
             return;
         }
         console.log(data);
-        await router.push("/reviews");
+        await router.push("/reviews/followed-users");
     } catch (err) {
         errorMessage.value = "Error Signing Up";
     }

@@ -3,18 +3,45 @@ import SelectReviewFilter from '../components/SelectReviewFilter.vue';
 import SearchReviewInput from '../components/SearchReviewInput.vue';
 import ButtonGroupUsersFollowees from '../components/ButtonGroupUsersFollowees.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { HeadersType, IReturnData } from '../services/serviceTypes';
+import Spinner from '../components/Spinner.vue';
 
 const router = useRouter();
-
+const route = useRoute();
 const authStore = useAuthStore();
 const reviewStore = useReviewStore();
 
 const errorMessage = ref<string>("");
+
+const reviewData = reactive<IReturnData>({
+    error: false,
+    value: null
+});
+
+const getReviews = async (headers: HeadersType, queryObject?: object) => {
+    let returnData: IReturnData = {
+        error: false,
+        value: null
+    };
+    try {
+        if (route.params.users === 'all-users') {
+            returnData = await reviewStore.getReviews(headers, queryObject)
+        }
+        if (route.params.users === 'followed-users') {
+            returnData = await reviewStore.getReviews(headers, {followers: authStore.user._id, ...queryObject})
+        }
+        reviewData.error = returnData.error
+        reviewData.value = returnData.value;
+    } catch (err) {
+        errorMessage.value = "Error Getting reviews";
+        console.log(err)
+    }
+}
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
@@ -28,20 +55,8 @@ onMounted(async () => {
                 await router.push("/signin");
                 return;
             }
-            const data = await reviewStore.getReviews(headers)
 
-            if (data.error) {
-                console.log(data);
-                errorMessage.value = data.value;
-                return;
-            }
-
-            if (!data.value.length) {
-                errorMessage.value = "No reviews found!";
-                return;
-            }
-
-            console.log(data)
+            await getReviews(headers)
 
         } catch (err) {
             errorMessage.value = "Error Getting Reviews";
@@ -54,16 +69,21 @@ onMounted(async () => {
 <template>
     <div>
         <div class="lg:ml-44">
-
             <SelectReviewFilter />
             <SearchReviewInput />
             <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
             <ButtonGroupUsersFollowees />
         </div>
-
-
         <div class="lg:ml-64 lg:mr-14 lg:my-24">
-            <ReviewCardList :reviews="reviewStore.reviews" />
+            <div v-if="!reviewData.value">
+                <Spinner />
+            </div>
+            <div v-else-if="!reviewData.value.length">
+                NO REVIEWS YET
+            </div>
+            <div v-else>
+                <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
+            </div>
         </div>
     </div>
 </template>

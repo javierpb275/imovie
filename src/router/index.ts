@@ -9,7 +9,6 @@ import MovieView from "../views/MovieView.vue";
 import FavoriteOpinionsView from "../views/FavoriteOpinionsView.vue";
 import MyProfileSettingsView from "../views/MyProfileSettingsView.vue";
 import FollowingView from "../views/FollowingView.vue";
-import NewReleasesView from "../views/NewReleasesView.vue";
 import MyProfileView from "../views/MyProfileView.vue";
 import { useAuthStore } from "../stores/auth";
 import { AuthService } from "../services/authService";
@@ -93,7 +92,7 @@ const routes: RouteRecordRaw[] = [
     },
   },
   {
-    path: "/reviews",
+    path: "/reviews/:users",
     name: "Reviews",
     component: ReviewsView,
     beforeEnter: async (to, _, next) => {
@@ -103,6 +102,15 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/signin" });
           return;
         }
+        //SHOW FOLLOWEES REVIEWS OR USER REVIEWS-------------------
+        const options = ["followed-users", "all-users"];
+        const { users } = to.params;
+        const foundPath = options.find((path) => path === users);
+        if (!foundPath) {
+          next({ path: "/error" });
+          return;
+        }
+        //---------------------------------------------------
         next();
       } catch (err) {
         next({ path: "/signin" });

@@ -89,7 +89,7 @@ const signOut = async () => {
         <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
       </div>
 
-      <router-link to="/reviews" href="#">
+      <router-link to="/reviews/followed-users" href="#">
         <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-36" />
       </router-link>
 

@@ -63,6 +63,11 @@ const errorMessage = computed(() =>
                     @click="props.openedVerticalMenu">
                     <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
                 </router-link>
+                <router-link to="/reviews/followed-users" href="#"
+                    class="flex justify-between px-4 pb-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
+                    @click="props.openedVerticalMenu">
+                    <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Reviews
+                </router-link>
                 <router-link to="/following" href="#"
                     class="flex justify-between px-4 pb-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                     @click="props.openedVerticalMenu">
@@ -74,11 +79,10 @@ const errorMessage = computed(() =>
                     <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
                 </router-link>
 
-                <a href="#"
-                    class="flex justify-between px-4 pb-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
+                <div class="flex justify-between px-4 pb-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                     @click="changeVisualMode">
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
-                </a>
+                </div>
 
                 <div @click="props.signOut" class="flex justify-end mt-5 mr-6 cursor-pointer">
                     <p class="pr-2">Sign out</p>

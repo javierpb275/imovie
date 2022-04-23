@@ -62,6 +62,10 @@ const errorMessage = computed(() =>
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
                 </router-link>
+                <router-link to="/reviews/followed-users" href="#"
+                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Reviews
+                </router-link>
                 <router-link to="/following" href="#"
                     class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
