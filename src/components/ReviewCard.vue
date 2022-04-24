@@ -71,7 +71,7 @@ const props = defineProps({
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4">
                     <div class="ml-4">
-                        <CustomAvatar :avatar-url="props.avatar" :size="10" />
+                        <CustomAvatar :avatar-url="props.avatar" :class="'rounded-full w-16 h-16'" />
                     </div>
                     <div class="text-left">{{ props.username }}</div>
                 </div>

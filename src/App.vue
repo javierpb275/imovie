@@ -3,7 +3,7 @@ import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <div>
+  <div class="min-h-screen">
     <Navbar />
     <router-view :key="$route.fullPath"></router-view>
   </div>
@@ -12,6 +12,5 @@ import Navbar from './components/Navbar.vue';
 <style>
 #app {
   text-align: center;
-  height: 100vh;
 }
 </style>

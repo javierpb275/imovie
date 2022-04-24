@@ -51,34 +51,36 @@ const submit = async () => {
 </script>
 
 <template>
-    <div>
+    <div class="min-h-screen">
         <!-- <div class="text-3xl text-red-700 font-semibold mt-20 mb-10">IMOvie</div> -->
+        <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 lg:ml-12 mx-auto" />
         <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
-            <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 ml-12" />
-            <div class="mb-4">
-                <input v-model="user.username"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="text" placeholder="Username" />
-            </div>
-            <div class="mb-4">
-                <input v-model="user.email"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                    id="email" type="text" placeholder="Email" />
-            </div>
-            <div class="mb-4">
-                <input v-model="user.password"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                    id="password" type="password" placeholder="Password" />
-                <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
-            </div>
-            <div class="mb-14">
-                <input v-model="repeatedPassword"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
-                    id="repeated-password" type="password" placeholder="Repeat password" />
-                <p class="align-baseline font-bold text-sm text-red-700 mt-4" v-if="errorMessage.length">{{
-                    errorMessage
-                }}</p>
-                <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
+            <div class="lg:w-2/4 mx-auto">
+                <div class="mb-4">
+                    <input v-model="user.username"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                        id="username" type="text" placeholder="Username" />
+                </div>
+                <div class="mb-4">
+                    <input v-model="user.email"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                        id="email" type="text" placeholder="Email" />
+                </div>
+                <div class="mb-4">
+                    <input v-model="user.password"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password" type="password" placeholder="Password" />
+                    <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
+                </div>
+                <div class="mb-14">
+                    <input v-model="repeatedPassword"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                        id="repeated-password" type="password" placeholder="Repeat password" />
+                    <p class="align-baseline font-bold text-sm text-red-700 mt-4" v-if="errorMessage.length">{{
+                        errorMessage
+                    }}</p>
+                    <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
+                </div>
             </div>
 
             <div class="mb-10">

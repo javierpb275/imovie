@@ -46,7 +46,7 @@ const errorMessage = computed(() =>
             class="sidebar bg-red-800 text-white w-64 space-y-6 pt-2 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
                 @mouseover="hovered = true" @mouseleave="hovered = false">
-                <CustomAvatar :avatar-url="'/img/avatars/default-avatar.PNG'" :size="12"
+                <CustomAvatar :avatar-url="'/img/avatars/default-avatar.PNG'" :class="'rounded-full w-28 h-28'"
                     class="m-auto hover:drop-shadow-2xl" />
 
                 <CustomSVG v-show="hovered" :svgName="'settings'" :class="'text-white w-10 h-10 px-2  inline '" />
@@ -59,24 +59,24 @@ const errorMessage = computed(() =>
             <!-- nav -->
             <nav>
                 <router-link to="/movies" href="#"
-                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
                 </router-link>
                 <router-link to="/reviews/followed-users" href="#"
-                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Reviews
                 </router-link>
                 <router-link to="/following" href="#"
-                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
                 </router-link>
                 <router-link to="/favorite-opinions" href="#"
-                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
                 </router-link>
 
                 <a href="#"
-                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
+                    class="flex justify-between px-4 py-3 mb-12 mx-2 rounded transition duration-200 hover:bg-gray-800"
                     @click="changeVisualMode">
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>

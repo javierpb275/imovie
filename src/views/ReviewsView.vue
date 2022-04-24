@@ -67,14 +67,14 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div>
+    <div class="min-h-screen">
         <div class="lg:ml-44">
             <SelectReviewFilter />
             <SearchReviewInput />
             <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
             <ButtonGroupUsersFollowees />
         </div>
-        <div class="lg:ml-64 lg:mr-14 lg:my-24">
+        <div class="lg:ml-64 lg:mr-14 lg:my-16">
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>
