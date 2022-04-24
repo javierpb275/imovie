@@ -3,10 +3,11 @@ import UserList from '../components/UserList.vue';
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { AuthService } from '../services/authService';
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from '../stores/user';
 
 const router = useRouter();
+const route = useRoute();
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
@@ -25,10 +26,9 @@ onMounted(async () => {
                 await router.push("/signin");
                 return;
             }
-            const data = await userStore.getFollowees(headers)
+            const data = await userStore.getFollowees(headers, route.query)
 
             if (data.error) {
-                console.log(data);
                 errorMessage.value = data.value;
                 return;
             }
@@ -38,11 +38,8 @@ onMounted(async () => {
                 return;
             }
 
-            console.log(data)
-
         } catch (err) {
             errorMessage.value = "Error Getting Users";
-            console.log(errorMessage.value)
         }
     }
 })

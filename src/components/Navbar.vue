@@ -30,16 +30,12 @@ onMounted(async () => {
       const data = await authStore.getProfile(headers);
 
       if (data.error) {
-        console.log(data);
         errorMessage.value = data.value;
         return;
       }
 
-      console.log(data)
-
     } catch (err) {
       errorMessage.value = "Error Getting Profile";
-      console.log(errorMessage.value)
     }
 
   }
@@ -67,17 +63,14 @@ const signOut = async () => {
     if (data.error) {
       AuthService.removeTokensAndClearStore();
       await router.push("/signin");
-      console.log(data);
       errorMessage.value = data.value;
       return;
     }
-    console.log(data);
     await router.push("/signin");
   } catch (err) {
     AuthService.removeTokensAndClearStore();
     await router.push("/signin");
     errorMessage.value = "Error Signing Out";
-    console.log(errorMessage.value)
   }
 }
 </script>

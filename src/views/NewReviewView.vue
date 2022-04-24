@@ -6,9 +6,10 @@ import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useMovieStore } from '../stores/movie';
 import { AuthService } from '../services/authService';
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
+const route = useRoute();
 
 const authStore = useAuthStore();
 const movieStore = useMovieStore();
@@ -32,10 +33,10 @@ async function searchMovie() {
                 await router.push("/signin");
                 return;
             }
-            const data = await movieStore.getMovies(headers, { title: 'Stardust' })
+
+            const data = await movieStore.getMovies(headers, route.query)
 
             if (data.error) {
-                console.log(data);
                 errorMessage.value = data.value;
                 return;
             }
@@ -46,11 +47,9 @@ async function searchMovie() {
             }
 
             theMovie.value = data.value
-            console.log(theMovie.value)
 
         } catch (err) {
             errorMessage.value = "Error Getting Movies";
-            console.log(errorMessage.value)
         }
     }
 }

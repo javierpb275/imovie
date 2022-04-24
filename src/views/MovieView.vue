@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import Movie from '../components/Movie.vue';
-import ReviewCardList from '../components/ReviewCardList.vue';
-import { onMounted, reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { useAuthStore } from '../stores/auth';
-import { useMovieStore } from '../stores/movie';
-import { useReviewStore } from '../stores/review';
-import { AuthService } from '../services/authService';
-import { IReturnData } from '../services/serviceTypes';
-import Spinner from '../components/Spinner.vue';
+import Movie from "../components/Movie.vue";
+import ReviewCardList from "../components/ReviewCardList.vue";
+import { onMounted, reactive, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth";
+import { useMovieStore } from "../stores/movie";
+import { useReviewStore } from "../stores/review";
+import { AuthService } from "../services/authService";
+import { IReturnData } from "../services/serviceTypes";
+import Spinner from "../components/Spinner.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -20,30 +20,33 @@ const errorMessage = ref<string>("");
 
 const reviewData = reactive<IReturnData>({
     error: false,
-    value: null
+    value: null,
 });
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
         const errorObject = {
-            Authorization: "ERROR"
-        }
+            Authorization: "ERROR",
+        };
         try {
             const headers = await AuthService.getAndValidateHeaderToken();
             if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
                 await router.push("/signin");
                 return;
             }
-            await movieStore.getMovies(headers, { title: route.params.title })
-            const { error, value } = await reviewStore.getMovieReviews(headers, route.params.title, { limit: 9999999999 })
+            await movieStore.getMovies(headers, { title: route.params.title });
+            const { error, value } = await reviewStore.getMovieReviews(
+                headers,
+                route.params.title,
+                { limit: 9999999999, ...route.query }
+            );
             reviewData.error = error;
             reviewData.value = value;
         } catch (err) {
             errorMessage.value = "Error Getting Movie";
-            console.log(errorMessage.value)
         }
     }
-})
+});
 </script>
 
 <template>
@@ -57,9 +60,7 @@ onMounted(async () => {
                 :director="movieStore.movies[0].director" :actors="movieStore.movies[0].actors"
                 :plot="movieStore.movies[0].plot" :posterUrl="movieStore.movies[0].posterUrl" />
             <h1 class="mt-9 lg:mt-14 text-3xl">Opinions:</h1>
-            <div v-if="!reviewStore.reviews.length">
-                NO REVIEWS YET
-            </div>
+            <div v-if="!reviewStore.reviews.length">NO REVIEWS FOUND</div>
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" />
             </div>

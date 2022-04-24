@@ -94,12 +94,12 @@ const props = defineProps({
                     <span class="float-left mr-1">{{ props.dislikes.length }}</span>
                     <CustomSVG :svgName="filledEmptyThumbDown"
                         :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike" />
-                    
+
                     <div id="fav-like-button-container" class="mb-0 mt-10">
-                    <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
-                        @click="checkIfFavorite" />
+                        <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
+                            @click="checkIfFavorite" />
                     </div>
-                    
+
                     <span class="float-left mr-1 ml-4">{{ props.likes.length }}</span>
                     <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
                         @click="checkIfLike" />

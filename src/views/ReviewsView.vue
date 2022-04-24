@@ -33,13 +33,12 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
             returnData = await reviewStore.getReviews(headers, queryObject)
         }
         if (route.params.users === 'followed-users') {
-            returnData = await reviewStore.getReviews(headers, {followers: authStore.user._id, ...queryObject})
+            returnData = await reviewStore.getReviews(headers, { followers: authStore.user._id, ...queryObject })
         }
         reviewData.error = returnData.error
         reviewData.value = returnData.value;
     } catch (err) {
         errorMessage.value = "Error Getting reviews";
-        console.log(err)
     }
 }
 
@@ -48,7 +47,6 @@ onMounted(async () => {
         const errorObject = {
             Authorization: "ERROR"
         }
-
         try {
             const headers = await AuthService.getAndValidateHeaderToken();
             if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
@@ -56,11 +54,10 @@ onMounted(async () => {
                 return;
             }
 
-            await getReviews(headers)
+            await getReviews(headers, route.query)
 
         } catch (err) {
             errorMessage.value = "Error Getting Reviews";
-            console.log(errorMessage.value)
         }
     }
 })
@@ -79,7 +76,7 @@ onMounted(async () => {
                 <Spinner />
             </div>
             <div v-else-if="!reviewData.value.length">
-                NO REVIEWS YET
+                NO REVIEWS FOUND
             </div>
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />

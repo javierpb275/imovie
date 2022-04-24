@@ -1,42 +1,38 @@
 <script setup lang="ts">
-import CustomAvatar from './CustomAvatar.vue';
-import CustomSVG from './CustomSVG.vue';
-import { ref } from 'vue'
-import { computed, ComputedRef } from '@vue/reactivity';
-import IUser from '../interfaces/user.interface';
+import CustomAvatar from "./CustomAvatar.vue";
+import CustomSVG from "./CustomSVG.vue";
+import { ref } from "vue";
+import { computed, ComputedRef } from "@vue/reactivity";
+import IUser from "../interfaces/user.interface";
 
-const darkLightMode = ref<string>('switch-light-mode');
+const darkLightMode = ref<string>("switch-light-mode");
 
 const changeVisualMode = () => {
-    darkLightMode.value = darkLightMode.value === "switch-light-mode" ?
-        "switch-dark-mode" : "switch-light-mode";
-}
+    darkLightMode.value =
+        darkLightMode.value === "switch-light-mode"
+            ? "switch-dark-mode"
+            : "switch-light-mode";
+};
 
 let hovered = ref<boolean>(false);
 
 const props = defineProps({
     authUser: {
         type: Object,
-        required: true
+        required: true,
     },
     signOut: {
         type: Function,
-        required: true
+        required: true,
     },
     errorMessage: {
-        type: String
-    }
+        type: String,
+    },
 });
 
-const authUser = computed(() =>
-    props.authUser
-) as ComputedRef<IUser>
+const authUser = computed(() => props.authUser) as ComputedRef<IUser>;
 
-const errorMessage = computed(() =>
-    props.errorMessage
-) as ComputedRef<string>
-
-
+const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 </script>
 
 <template>
@@ -51,7 +47,9 @@ const errorMessage = computed(() =>
 
                 <CustomSVG v-show="hovered" :svgName="'settings'" :class="'text-white w-10 h-10 px-2  inline '" />
                 <div>{{ authUser.username }}</div>
-                <div class="text-sm">{{ authUser.followees.length }} Following || {{ authUser.followers.length }}
+                <div class="text-sm">
+                    {{ authUser.followees.length }} Following ||
+                    {{ authUser.followers.length }}
                     Followers
                 </div>
             </router-link>
