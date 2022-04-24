@@ -41,7 +41,6 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
         }
     } catch (err) {
         errorMessage.value = "Error Getting reviews";
-        console.log(err)
     }
 }
 
@@ -61,11 +60,10 @@ onMounted(async () => {
             userData.error = user.error;
             userData.value = user.value;
 
-            await getReviews(headers);
+            await getReviews(headers, route.query);
 
         } catch (err) {
             errorMessage.value = "Error Getting User";
-            console.log(errorMessage.value)
         }
     }
 })
@@ -79,7 +77,7 @@ onMounted(async () => {
         </div>
         <div v-else>
             <ProfileCard :user="userData.value" />
-        </div>        
+        </div>
         <div class="lg:ml-64 lg:mr-14 lg:my-24">
             <ButtonGroupMyOpinionsFavoriteOpinions />
             <p v-if="route.params.reviews === 'my-reviews'" class="mb-4 text-2xl font-bold">My Reviews</p>
@@ -88,7 +86,7 @@ onMounted(async () => {
                 <Spinner />
             </div>
             <div v-else-if="!reviewData.value.length">
-                NO REVIEWS YET
+                NO REVIEWS FOUND
             </div>
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />

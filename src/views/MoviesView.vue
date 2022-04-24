@@ -3,14 +3,15 @@ import SelectMovieFilter from '../components/SelectMovieFilter.vue';
 import SearchMovieInput from '../components/SearchMovieInput.vue';
 import MovieCardList from '../components/MovieCardList.vue';
 import Spinner from '../components/Spinner.vue';
-import {IReturnData } from '../services/serviceTypes';
+import { IReturnData } from '../services/serviceTypes';
 import { ref, onMounted, reactive } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useMovieStore } from '../stores/movie';
 import { AuthService } from '../services/authService';
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 const router = useRouter();
+const route = useRoute();
 
 const authStore = useAuthStore();
 const movieStore = useMovieStore();
@@ -35,7 +36,7 @@ onMounted(async () => {
                 return;
             }
 
-            const data = await movieStore.getMovies(headers)
+            const data = await movieStore.getMovies(headers, route.query)
 
             let returnMovies: IReturnData = {
                 error: false,
@@ -47,7 +48,6 @@ onMounted(async () => {
             moviesData.value = returnMovies.value
 
             if (data.error) {
-                console.log(data);
                 errorMessage.value = data.value;
                 return;
             }
@@ -57,11 +57,8 @@ onMounted(async () => {
                 return;
             }
 
-            console.log(data)
-
         } catch (err) {
             errorMessage.value = "Error Getting Movies";
-            console.log(errorMessage.value)
         }
     }
 })

@@ -42,12 +42,11 @@ onMounted(async () => {
             const users = await userStore.getUsers(headers, { username: route.params.username })
             userData.error = users.error;
             userData.value = users.value;
-            const { error, value } = await reviewStore.getUserReviews(headers, route.params.username)
+            const { error, value } = await reviewStore.getUserReviews(headers, route.params.username, route.query)
             reviewData.error = error;
             reviewData.value = value;
         } catch (err) {
             errorMessage.value = "Error Getting User";
-            console.log(errorMessage.value)
         }
     }
 })
@@ -67,7 +66,7 @@ onMounted(async () => {
                 <Spinner />
             </div>
             <div v-else-if="!reviewData.value.length">
-                NO REVIEWS YET
+                NO REVIEWS FOUND
             </div>
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />

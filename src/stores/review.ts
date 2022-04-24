@@ -34,7 +34,9 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        const fileteredReviews = data.filter(review => review.user !== null && review.movie !== null);
+        const fileteredReviews = data.filter(
+          (review) => review.user !== null && review.movie !== null
+        );
         this.reviews = fileteredReviews;
         return {
           error: false,
@@ -100,10 +102,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        this.reviews = data;
+        const fileteredReviews = data.filter(
+          (review) => review.user !== null && review.movie !== null
+        );
+        this.reviews = fileteredReviews;
         return {
           error: false,
-          value: data,
+          value: fileteredReviews,
         };
       } catch (err) {
         return {
@@ -135,10 +140,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        this.reviews = data;
+        const fileteredReviews = data.filter(
+          (review) => review.user !== null && review.movie !== null
+        );
+        this.reviews = fileteredReviews;
         return {
           error: false,
-          value: data,
+          value: fileteredReviews,
         };
       } catch (err) {
         return {
@@ -169,10 +177,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        this.reviews = data;
+        const fileteredReviews = data.filter(
+          (review) => review.user !== null && review.movie !== null
+        );
+        this.reviews = fileteredReviews;
         return {
           error: false,
-          value: data,
+          value: fileteredReviews,
         };
       } catch (err) {
         return {
@@ -203,10 +214,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        this.reviews = data;
+        const fileteredReviews = data.filter(
+          (review) => review.user !== null && review.movie !== null
+        );
+        this.reviews = fileteredReviews;
         return {
           error: false,
-          value: data,
+          value: fileteredReviews,
         };
       } catch (err) {
         return {

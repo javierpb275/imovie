@@ -39,7 +39,6 @@ const submit = async () => {
             errorMessage.value = data.value;
             return;
         }
-        console.log(data);
         await router.push("/reviews/followed-users");
     } catch (err) {
         errorMessage.value = "Error Signing Up";
@@ -76,7 +75,7 @@ const submit = async () => {
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                     id="repeated-password" type="password" placeholder="Repeat password" />
                 <p class="align-baseline font-bold text-sm text-red-700 mt-4" v-if="errorMessage.length">{{
-                    errorMessage
+                        errorMessage
                 }}</p>
                 <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
             </div>
