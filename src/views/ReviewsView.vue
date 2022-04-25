@@ -10,6 +10,7 @@ import { AuthService } from '../services/authService';
 import { useRoute, useRouter } from "vue-router";
 import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
+import ReviewsFilter from '../components/ReviewsFilter.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -66,8 +67,7 @@ onMounted(async () => {
 <template>
     <div class="min-h-screen">
         <div class="lg:ml-44">
-            <SelectReviewFilter />
-            <SearchReviewInput />
+            <ReviewsFilter/>
             <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
             <ButtonGroupUsersFollowees />
         </div>
