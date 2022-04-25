@@ -67,11 +67,11 @@ const props = defineProps({
 
 <template>
     <div class="flex justify-center">
-        <div class="block p-3 my-5 rounded-lg shadow-xl bg-white w-72  lg:w-4/5">
+        <div class="block p-3 my-5 rounded-lg shadow-xl bg-white w-80  lg:w-4/5">
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4">
                     <div class="ml-4">
-                        <CustomAvatar :avatar-url="props.avatar" :class="'rounded-full w-16 h-16'" />
+                        <CustomAvatar :avatar-url="props.avatar" :class="'rounded-full w-12 h-12'" />
                     </div>
                     <div class="text-left">{{ props.username }}</div>
                 </div>

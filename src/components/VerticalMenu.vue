@@ -47,8 +47,7 @@ const errorMessage = computed(() =>
             class="sidebar bg-red-800 text-white w-64 space-y-6 pt-4 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
                 @click="props.openedVerticalMenu">
-                <CustomAvatar :avatar-url="authUser.avatar" :class="'rounded-full w-28 h-28'"
-                    class="m-auto drop-shadow-2xl" />
+                <CustomAvatar :avatar-url="authUser.avatar" :class="'rounded-full w-28 h-28'" class="m-auto drop-shadow-2xl" />
 
                 <CustomSVG :svgName="'settings'" :class="'text-white w-10 h-10 px-2 inline '" />
                 <div>{{ authUser.username }}</div>
@@ -86,7 +85,7 @@ const errorMessage = computed(() =>
                 </div>
 
                 <div @click="props.signOut" class="flex justify-end mt-5 mr-6 cursor-pointer">
-                    <p class="pr-2">Sign out</p>
+                    <p class="pr-2 hover:-translate-x-3 transition duration-700">Sign out</p>
                     <CustomSVG :svgName="'sign-out'" :class="'text-white w-6 h-6 inline'" />
                 </div>
             </nav>

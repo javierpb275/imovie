@@ -78,7 +78,7 @@ onMounted(async () => {
         <div v-else>
             <ProfileCard :user="userData.value" />
         </div>
-        <div class="lg:ml-64 lg:mr-14 lg:my-24">
+        <div class="lg:ml-64 lg:mr-14 lg:my-5">
             <ButtonGroupMyOpinionsFavoriteOpinions />
             <p v-if="route.params.reviews === 'my-reviews'" class="mb-4 text-2xl font-bold">My Reviews</p>
             <p v-if="route.params.reviews === 'favorite-reviews'" class="mb-4 text-2xl font-bold">Favorite Reviews</p>

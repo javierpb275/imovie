@@ -14,7 +14,7 @@ const changeVisualMode = () => {
             : "switch-light-mode";
 };
 
-let hovered = ref<boolean>(false);
+// let hovered = ref<boolean>(false);
 
 const props = defineProps({
     authUser: {
@@ -36,17 +36,16 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 </script>
 
 <template>
-    <div class="absolute h-screen z-40">
+    <div class="absolute min-h-screen z-40">
         <!-- sidebar -->
         <div
             class="sidebar bg-red-800 text-white w-64 space-y-6 pt-2 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
-            <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
-                @mouseover="hovered = true" @mouseleave="hovered = false">
+            <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200">
                 <CustomAvatar :avatar-url="'/img/avatars/default-avatar.PNG'" :class="'rounded-full w-28 h-28'"
-                    class="m-auto hover:drop-shadow-2xl" />
+                    class="m-auto hover:drop-shadow-2xl hover:scale-105 transition duration-300" />
 
-                <CustomSVG v-show="hovered" :svgName="'settings'" :class="'text-white w-10 h-10 px-2  inline '" />
-                <div>{{ authUser.username }}</div>
+                <!-- <CustomSVG v-show="hovered" :svgName="'settings'" :class="'text-white w-10 h-10 px-2  inline '" /> -->
+                <div class="mt-2">{{ authUser.username }}</div>
                 <div class="text-sm">
                     {{ authUser.followees.length }} Following ||
                     {{ authUser.followers.length }}
@@ -57,30 +56,30 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
             <!-- nav -->
             <nav>
                 <router-link to="/movies" href="#"
-                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
                 </router-link>
                 <router-link to="/reviews/followed-users" href="#"
-                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Reviews
                 </router-link>
                 <router-link to="/following" href="#"
-                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
                 </router-link>
                 <router-link to="/favorite-opinions" href="#"
-                    class="flex justify-between px-4 py-3 mb-8 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
                 </router-link>
 
                 <a href="#"
-                    class="flex justify-between px-4 py-3 mb-12 mx-2 rounded transition duration-200 hover:bg-gray-800"
+                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                     @click="changeVisualMode">
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>
 
-                <div @click="props.signOut" class="flex justify-end mt-5 mr-6 cursor-pointer">
-                    <p class="pr-2">Sign out</p>
+                <div @click="props.signOut" class="flex justify-end px-4 py-4 mx-2 mt-5 cursor-pointer rounded transition duration-200 hover:bg-gray-800">
+                    <p class="pr-2 hover:-translate-x-3 transition duration-700">Sign out</p>
                     <CustomSVG :svgName="'sign-out'" :class="'text-white w-6 h-6 inline'" />
                 </div>
             </nav>

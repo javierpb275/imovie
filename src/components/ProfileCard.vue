@@ -17,21 +17,21 @@ const user = computed(() =>
 </script>
 
 <template>
-    <div class="max-w-5xl flex items-center h-auto flex-wrap mx-auto lg:ml-80 mt-28 lg:my-0">
+    <div class="max-w-5xl flex items-center h-auto flex-wrap mx-auto lg:ml-96 mt-24 lg:my-0">
         <!--Main Col-->
         <div id="profile" class="w-full lg:w-3/5 rounded-lg mx-6 lg:mx-0">
             <div class="p-4 md:p-12 text-center lg:text-left">
                 <!-- Image for mobile view-->
-                <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
+                <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-40 w-40 bg-cover bg-center"
                     :style="`background-image: url('${user.avatar}')`"></div>
 
                 <h1 class="text-3xl font-bold pt-8 lg:pt-0">@{{ user.username }}</h1>
                 <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-red-800"></div>
 
                 <div class="inline-flex">
-                    <p class="pt-8 text-md">{{ user.followees.length }} Following</p>
-                    <p class="pt-8 text-md">||</p>
-                    <p class="pt-8 text-md">{{ user.followers.length }} Followers</p>
+                    <p class="pt-3 text-md">{{ user.followees.length }} Following</p>
+                    <p class="pt-3 text-md">||</p>
+                    <p class="pt-3 text-md">{{ user.followers.length }} Followers</p>
                 </div>
 
                 <div class="pt-8 pb-8">
@@ -45,7 +45,7 @@ const user = computed(() =>
         </div>
 
         <!--Img Col-->
-        <div class="w-full lg:w-1/4">
+        <div class="w-full lg:w-1/5">
             <img :src="user.avatar" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
         </div>
     </div>
