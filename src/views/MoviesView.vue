@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import SelectMovieFilter from '../components/SelectMovieFilter.vue';
-import SearchMovieInput from '../components/SearchMovieInput.vue';
 import MovieCardList from '../components/MovieCardList.vue';
 import Spinner from '../components/Spinner.vue';
 import { IReturnData } from '../services/serviceTypes';
@@ -9,6 +7,8 @@ import { useAuthStore } from '../stores/auth';
 import { useMovieStore } from '../stores/movie';
 import { AuthService } from '../services/authService';
 import { useRouter, useRoute } from "vue-router";
+import MoviesFilter from '../components/MoviesFilter.vue';
+import Pagination from '../components/Pagination.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -36,7 +36,7 @@ onMounted(async () => {
                 return;
             }
 
-            const data = await movieStore.getMovies(headers, route.query)
+            const data = await movieStore.getMovies(headers, {sort: '-year', ...route.query})
 
             let returnMovies: IReturnData = {
                 error: false,
@@ -66,8 +66,7 @@ onMounted(async () => {
 
 <template>
     <div class="lg:ml-44">
-        <SelectMovieFilter />
-        <SearchMovieInput />
+        <MoviesFilter/>
         <div v-if="errorMessage">
             {{ errorMessage }}
         </div>
@@ -83,5 +82,6 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
+        <Pagination/>
     </div>
 </template>

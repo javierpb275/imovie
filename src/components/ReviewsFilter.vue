@@ -49,7 +49,7 @@ onMounted(() => {
         <div class="pt-2 relative mx-auto text-gray-600">
             <input
                 class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
-                type="search" name="search" placeholder="Search..." v-model="filterValue"/>
+                type="search" name="search" :placeholder="filterProperty+'...'" v-model="filterValue" @keydown.enter="findReview"/>
             <button type="submit" class="absolute top-0 mt-5 mr-4 ml-2" @click="findReview">
                 <CustomSVG :svgName="'search'" :class="'text-gray-900 h-5 w-5 fill-current'" />
             </button>

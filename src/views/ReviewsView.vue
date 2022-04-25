@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import SelectReviewFilter from '../components/SelectReviewFilter.vue';
-import SearchReviewInput from '../components/SearchReviewInput.vue';
 import ButtonGroupUsersFollowees from '../components/ButtonGroupUsersFollowees.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { ref, onMounted, reactive } from 'vue'
@@ -11,6 +9,7 @@ import { useRoute, useRouter } from "vue-router";
 import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 import ReviewsFilter from '../components/ReviewsFilter.vue';
+import Pagination from '../components/Pagination.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -82,5 +81,6 @@ onMounted(async () => {
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
         </div>
+        <Pagination/>
     </div>
 </template>
