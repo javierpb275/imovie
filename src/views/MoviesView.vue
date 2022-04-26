@@ -65,7 +65,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="lg:ml-44">
+    <div class="lg:ml-44 mt-20 lg:mt-20">
         <MoviesFilter/>
         <div v-if="errorMessage">
             {{ errorMessage }}

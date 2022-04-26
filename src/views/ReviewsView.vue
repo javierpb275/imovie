@@ -65,7 +65,7 @@ onMounted(async () => {
 
 <template>
     <div class="min-h-screen">
-        <div class="lg:ml-44">
+        <div class="lg:ml-44 mt-20 lg:mt-20">
             <ReviewsFilter/>
             <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
             <ButtonGroupUsersFollowees />

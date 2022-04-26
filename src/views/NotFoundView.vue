@@ -7,7 +7,7 @@ const authStore = useAuthStore();
 
 <template>
     <div class="flex items-center justify-center w-screen h-screen bg-gradient-to-r from-red-800 to-red-700">
-        <div class="px-40 py-20 bg-black rounded-md shadow-xl">
+        <div class="lg:px-40 px-5 lg:ml-40 lg:py-20 py-8 bg-black rounded-md shadow-xl">
             <div class="flex flex-col items-center">
                 <h1 class="font-bold text-red-700 text-9xl">404</h1>
 

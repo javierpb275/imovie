@@ -77,7 +77,7 @@ const signOut = async () => {
 
 <template>
   <div v-if="authStore.isAuthorized">
-    <nav class="sticky top-0 z-50 flex justify-between px-4 pt-4 mb-4 bg-white">
+    <nav class="fixed w-full top-0 z-50 flex justify-between px-4 py-4 mb-4 bg-white">
       <div class="flex lg:hidden">
         <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
       </div>

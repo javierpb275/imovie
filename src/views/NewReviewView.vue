@@ -57,7 +57,7 @@ async function searchMovie() {
 
 <template>
     <div>
-        <div class="lg:ml-64 lg:mr-14 lg:my-12">
+        <div class="lg:ml-64 lg:mr-14 mt-20 lg:mt-24">
             <SearchMovieInput />
 
             <button type="button" @click="searchMovie"

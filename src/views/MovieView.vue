@@ -50,7 +50,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="lg:ml-36">
+    <div class="lg:ml-36 mt-20 lg:mt-20">
         <div v-if="!reviewData.value" class="my-56">
             <Spinner />
         </div>
