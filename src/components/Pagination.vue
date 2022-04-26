@@ -14,11 +14,12 @@ const previousPage = () => {
     } else {
         route.query.skip = String(Number(route.query.skip) - 10)
     }
+    let theQuery = getQuery(route.query);
     let path = route.fullPath;
     let textToRemove = path.split('?');
     path = path.replace('?' + textToRemove[1], '');
-    let theQuery = getQuery(route.query);
-    router.push(path + theQuery);//url does not change! pending fixing!
+    let thePath = path + theQuery;
+    router.push(thePath);//url does not change! pending fixing!
 }
 
 const nextPage = () => {
@@ -27,11 +28,12 @@ const nextPage = () => {
     } else {
         route.query.skip = String(Number(route.query.skip) + 10)
     }
+    let theQuery = getQuery(route.query);
     let path = route.fullPath;
     let textToRemove = path.split('?');
     path = path.replace('?' + textToRemove[1], '');
-    let theQuery = getQuery(route.query);
-    router.push(path + theQuery);//url does not change! pending fixing!
+    let thePath = path + theQuery;
+    router.push(thePath);//url does not change! pending fixing!
 }
 
 onMounted(() => {

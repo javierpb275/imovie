@@ -12,6 +12,32 @@ export const useReviewStore = defineStore("review", {
   }),
   getters: {},
   actions: {
+    async addLike(headers: HeadersType, reviewId: string): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.ADD_LIKE.URL,
+          API_URL.REVIEWS.ADD_LIKE.METHOD,
+          {reviewId},
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Adding Like",
+        };
+      }
+    },
     async getReviews(
       headers: HeadersType,
       queryObject?: object
