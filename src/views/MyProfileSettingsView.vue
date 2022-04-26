@@ -2,5 +2,5 @@
 </script>
 
 <template>
-    <div></div>
+    <div class="mt-20 lg:mt-20"></div>
 </template>

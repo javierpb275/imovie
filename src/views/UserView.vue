@@ -57,7 +57,7 @@ onMounted(async () => {
         <div v-if="!userData.value" class="my-56">
             <Spinner />
         </div>
-        <div v-else>
+        <div v-else class="mt-32 lg:mt-12">
             <ProfileCard :user="userStore.users[0]" />
         </div>
         <div class="lg:ml-64 lg:mr-14 lg:my-24">

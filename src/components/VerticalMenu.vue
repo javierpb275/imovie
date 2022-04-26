@@ -41,15 +41,13 @@ const errorMessage = computed(() =>
 </script>
 
 <template>
-    <div class="absolute h-screen z-40">
+    <div class="fixed h-full top-12 z-40">
         <!-- sidebar -->
         <div
             class="sidebar bg-red-800 text-white w-64 space-y-6 pt-4 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
                 @click="props.openedVerticalMenu">
-                <CustomAvatar :avatar-url="authUser.avatar" :class="'rounded-full w-28 h-28'" class="m-auto drop-shadow-2xl" />
-
-                <CustomSVG :svgName="'settings'" :class="'text-white w-10 h-10 px-2 inline '" />
+                <CustomAvatar :avatar-url="authUser.avatar" :class="'rounded-full w-28 h-28 mb-3'" class="m-auto drop-shadow-2xl" />
                 <div>{{ authUser.username }}</div>
                 <div class="text-sm">{{ authUser.followees.length }} Following || {{ authUser.followers.length }}
                     Followers

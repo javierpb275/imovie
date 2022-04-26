@@ -36,7 +36,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 </script>
 
 <template>
-    <div class="absolute min-h-screen z-40">
+    <div class="fixed h-full top-20 z-50">
         <!-- sidebar -->
         <div
             class="sidebar bg-red-800 text-white w-64 space-y-6 pt-2 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
