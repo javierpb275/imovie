@@ -3,7 +3,7 @@ import { API_URL } from "../config/constants";
 import { getQuery } from "../helpers/query.helper";
 import IReview from "../interfaces/review.interface";
 import { FetchService } from "../services/fetchService";
-import { HeadersType, IReturnData } from "../services/serviceTypes";
+import { BodyType, HeadersType, IReturnData } from "../services/serviceTypes";
 
 export const useReviewStore = defineStore("review", {
   state: () => ({
@@ -12,12 +12,251 @@ export const useReviewStore = defineStore("review", {
   }),
   getters: {},
   actions: {
-    async addLike(headers: HeadersType, reviewId: string): Promise<IReturnData> {
+    async deleteReview(
+      headers: HeadersType,
+      reviewId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.DELETE_REVIEW.URL + reviewId,
+          API_URL.REVIEWS.DELETE_REVIEW.METHOD,
+          undefined,
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        this.review = data;
+        return {
+          error: false,
+          value: data,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Deleting Review",
+        };
+      }
+    },
+    async updateReview(
+      headers: HeadersType,
+      reviewId: string,
+      review: BodyType
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.UPDATE_REVIEW.URL + reviewId,
+          API_URL.REVIEWS.UPDATE_REVIEW.METHOD,
+          review,
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        this.review = data;
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Updating Review",
+        };
+      }
+    },
+    async createReview(
+      headers: HeadersType,
+      review: IReview
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.CREATE_REVIEW.URL,
+          API_URL.REVIEWS.CREATE_REVIEW.METHOD,
+          review,
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        this.review = data;
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Creating Review",
+        };
+      }
+    },
+    async removeLike(
+      headers: HeadersType,
+      reviewId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.REMOVE_LIKE.URL,
+          API_URL.REVIEWS.REMOVE_LIKE.METHOD,
+          { reviewId },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Removing Like",
+        };
+      }
+    },
+    async removeDislike(
+      headers: HeadersType,
+      reviewId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.REMOVE_DISLIKE.URL,
+          API_URL.REVIEWS.REMOVE_DISLIKE.METHOD,
+          { reviewId },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Removing Dislike",
+        };
+      }
+    },
+    async removeFavorites(
+      headers: HeadersType,
+      reviewId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.REMOVE_FAVORITES.URL,
+          API_URL.REVIEWS.REMOVE_FAVORITES.METHOD,
+          { reviewId },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Removing from Favorites",
+        };
+      }
+    },
+    async addFavorites(
+      headers: HeadersType,
+      reviewId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.ADD_FAVORITES.URL,
+          API_URL.REVIEWS.ADD_FAVORITES.METHOD,
+          { reviewId },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Adding to Favorites",
+        };
+      }
+    },
+    async addDislike(
+      headers: HeadersType,
+      reviewId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.REVIEWS.ADD_DISLIKE.URL,
+          API_URL.REVIEWS.ADD_DISLIKE.METHOD,
+          { reviewId },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Adding Dislike",
+        };
+      }
+    },
+    async addLike(
+      headers: HeadersType,
+      reviewId: string
+    ): Promise<IReturnData> {
       try {
         const response = await FetchService.callApi(
           API_URL.REVIEWS.ADD_LIKE.URL,
           API_URL.REVIEWS.ADD_LIKE.METHOD,
-          {reviewId},
+          { reviewId },
           headers
         );
         const data = await response.json();
@@ -60,13 +299,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        const fileteredReviews = data.filter(
+        const filteredReviews = data.filter(
           (review) => review.user !== null && review.movie !== null
         );
-        this.reviews = fileteredReviews;
+        this.reviews = filteredReviews;
         return {
           error: false,
-          value: fileteredReviews,
+          value: filteredReviews,
         };
       } catch (err) {
         return {
@@ -128,13 +367,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        const fileteredReviews = data.filter(
+        const filteredReviews = data.filter(
           (review) => review.user !== null && review.movie !== null
         );
-        this.reviews = fileteredReviews;
+        this.reviews = filteredReviews;
         return {
           error: false,
-          value: fileteredReviews,
+          value: filteredReviews,
         };
       } catch (err) {
         return {
@@ -166,13 +405,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        const fileteredReviews = data.filter(
+        const filteredReviews = data.filter(
           (review) => review.user !== null && review.movie !== null
         );
-        this.reviews = fileteredReviews;
+        this.reviews = filteredReviews;
         return {
           error: false,
-          value: fileteredReviews,
+          value: filteredReviews,
         };
       } catch (err) {
         return {
@@ -203,13 +442,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        const fileteredReviews = data.filter(
+        const filteredReviews = data.filter(
           (review) => review.user !== null && review.movie !== null
         );
-        this.reviews = fileteredReviews;
+        this.reviews = filteredReviews;
         return {
           error: false,
-          value: fileteredReviews,
+          value: filteredReviews,
         };
       } catch (err) {
         return {
@@ -240,13 +479,13 @@ export const useReviewStore = defineStore("review", {
             value: data.error,
           };
         }
-        const fileteredReviews = data.filter(
+        const filteredReviews = data.filter(
           (review) => review.user !== null && review.movie !== null
         );
-        this.reviews = fileteredReviews;
+        this.reviews = filteredReviews;
         return {
           error: false,
-          value: fileteredReviews,
+          value: filteredReviews,
         };
       } catch (err) {
         return {
