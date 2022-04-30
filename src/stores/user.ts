@@ -12,6 +12,64 @@ export const useUserStore = defineStore("user", {
   }),
   getters: {},
   actions: {
+    async stopFollowing(
+      headers: HeadersType,
+      followeeId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.USERS.STOP_FOLLOWING.URL,
+          API_URL.USERS.STOP_FOLLOWING.METHOD,
+          { followeeId },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Stoping following.",
+        };
+      }
+    },
+    async startFollowing(
+      headers: HeadersType,
+      followeeId: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.USERS.START_FOLLOWING.URL,
+          API_URL.USERS.START_FOLLOWING.METHOD,
+          { followeeId },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        return {
+          error: false,
+          value: data.value,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Starting following.",
+        };
+      }
+    },
     async getFollowees(
       headers: HeadersType,
       queryObject?: object

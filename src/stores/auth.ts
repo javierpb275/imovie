@@ -4,6 +4,7 @@ import IUser from "../interfaces/user.interface";
 import { AuthService } from "../services/authService";
 import { FetchService } from "../services/fetchService";
 import {
+  BodyType,
   HeadersType,
   IReturnData,
   IUserSignIn,
@@ -84,6 +85,67 @@ export const useAuthStore = defineStore("auth", {
         return {
           error: true,
           value: "Error Getting Profile",
+        };
+      }
+    },
+    async deleteProfile(
+      headers: HeadersType,
+      refreshToken: string
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.USERS.PROFILE.DELETE_PROFILE.URL,
+          API_URL.USERS.PROFILE.DELETE_PROFILE.METHOD,
+          { token: refreshToken },
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        this.user = null;
+        this.isAuthorized = false;
+        return {
+          error: false,
+          value: data,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Deleting Profile",
+        };
+      }
+    },
+    async updateProfile(
+      headers: HeadersType,
+      user: BodyType
+    ): Promise<IReturnData> {
+      try {
+        const response = await FetchService.callApi(
+          API_URL.USERS.PROFILE.UPDATE_PROFILE.URL,
+          API_URL.USERS.PROFILE.UPDATE_PROFILE.METHOD,
+          user,
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        this.user = data;
+        return {
+          error: false,
+          value: data,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Updating Profile",
         };
       }
     },

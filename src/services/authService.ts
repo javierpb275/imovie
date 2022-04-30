@@ -140,14 +140,14 @@ export class AuthService {
       returnData.value = "Authentication problem. Error Code: IMO-001-001";
       return returnData;
     }
-    const body: BodyType = {
-      token: localStorage.getItem(Tokens.REFRESH_TOKEN),
-    };
+
     try {
       const response = await FetchService.callApi(
         API_URL.USERS.REFRESH_TOKEN.URL,
         API_URL.USERS.REFRESH_TOKEN.METHOD,
-        body
+        {
+          token: localStorage.getItem(Tokens.REFRESH_TOKEN)
+        }
       );
       const data = await response.json();
 
@@ -169,6 +169,8 @@ export class AuthService {
       });
 
       returnData.value = data;
+
+      console.log('refreshtoken',data)
     } catch (err) {
       console.log(err);
       returnData.error = true;
@@ -251,17 +253,18 @@ export class AuthService {
       return { Authorization: `ERROR` };
     }
 
-    const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
+    //const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
 
     try {
-      if (minutes >= 10) {
+      //if (minutes >= 10) {
         const result = await AuthService.refreshToken();
+        console.log('getandvalidateheadertoken', result)
         if (result.error) {
           AuthService.removeTokensAndClearStore();
           return { Authorization: `ERROR` };
         }
         accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
-      }
+      //}
     } catch (err) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
