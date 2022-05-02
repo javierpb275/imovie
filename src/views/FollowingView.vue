@@ -46,7 +46,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="lg:mt-10 h-full lg:ml-28">
+    <div class="lg:mt-20 h-full lg:ml-28">
         <p class=" text-2xl font-bold">Users</p>
         <UserList :users="userStore.users" />
     </div>

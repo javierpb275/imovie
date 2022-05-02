@@ -40,7 +40,7 @@ const props = defineProps({
         <img class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 w-2/4 cursor-pointer" :src="props.avatar"
           :alt="props.username" @click="goToUser(props.username)" />
 
-        <h1 class="text-2xl font-bold pt-8 lg:pt-0">{{ props.username }}</h1>
+        <h1 class="text-2xl font-bold pt-8 lg:pt-0">@{{ props.username }}</h1>
         <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-red-800"></div>
 
         <div class="inline-flex">
@@ -55,7 +55,7 @@ const props = defineProps({
     <!--Img Col-->
     <div class="w-full lg:w-1/5">
       <img :src="props.avatar" @click="goToUser(props.username)"
-        class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block cursor-pointer" />
+        class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block cursor-pointer hover:scale-105 transition duration-500" />
     </div>
   </div>
 </template>

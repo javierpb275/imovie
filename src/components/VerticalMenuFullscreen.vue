@@ -36,10 +36,10 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 </script>
 
 <template>
-    <div class="fixed h-full top-20 z-50">
+    <div class="fixed h-screen top-20 z-50">
         <!-- sidebar -->
         <div
-            class="sidebar bg-red-800 text-white w-64 space-y-6 pt-2 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
+            class="sidebar bg-red-800 text-white w-64 pt-2 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200">
                 <CustomAvatar :avatar-url="'/img/avatars/default-avatar.PNG'" :class="'rounded-full w-28 h-28'"
                     class="m-auto hover:drop-shadow-2xl hover:scale-105 transition duration-300" />

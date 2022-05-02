@@ -80,7 +80,7 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
+        <Pagination class="my-2"/>
         </div>
-        <Pagination/>
     </div>
 </template>
