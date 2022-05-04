@@ -24,7 +24,7 @@ const props = defineProps({
 const points = ref<number>(props.points)
 
 const changePoints = (number: number) => {
-    if (props.isFor === "review") {
+    if (props.isFor === "create-review") {
         points.value = number;
     }
 }
