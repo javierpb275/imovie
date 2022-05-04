@@ -4,31 +4,72 @@ import CustomSVG from "./CustomSVG.vue";
 import { ref, onMounted } from "vue";
 import RatingStars from "./RatingStars.vue";
 import { useAuthStore } from "../stores/auth";
+import { reviews } from "../assets/reviews";
+import { useReviewStore } from "../stores/review";
+import { AuthService } from "../services/authService";
 
 const authStore = useAuthStore();
+const reviewStore = useReviewStore()
 
 const upDownArrow = ref<string>("down-arrow");
 const filledEmptyHeart = ref<string>("empty-heart");
 const filledEmptyThumbDown = ref<string>("empty-thumb-down");
 const filledEmptyThumbUp = ref<string>("empty-thumb-up");
 
-const checkIfDislike = () => {
-    filledEmptyThumbDown.value =
-        filledEmptyThumbDown.value === "empty-thumb-down"
-            ? "filled-thumb-down"
-            : "empty-thumb-down";
+const checkIfDislike = async (reviewId: string) => {
+    try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        if (filledEmptyThumbDown.value === "filled-thumb-down") {
+            await reviewStore.removeDislike(headers, reviewId);
+            filledEmptyThumbDown.value = "empty-thumb-down"
+            return;
+        }
+        if (filledEmptyThumbDown.value === "empty-thumb-down") {
+            await reviewStore.addDislike(headers, reviewId);
+            filledEmptyThumbDown.value = "filled-thumb-down";
+            filledEmptyThumbUp.value = "empty-thumb-up";
+            return;
+        }
+    } catch (err) {
+        console.log(err)
+    }
 };
 
-const checkIfLike = () => {
-    filledEmptyThumbUp.value =
-        filledEmptyThumbUp.value === "empty-thumb-up"
-            ? "filled-thumb-up"
-            : "empty-thumb-up";
+const checkIfLike = async (reviewId: string) => {
+    try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        if (filledEmptyThumbUp.value === "filled-thumb-up") {
+            await reviewStore.removeLike(headers, reviewId);
+            filledEmptyThumbUp.value = "empty-thumb-up"
+            return;
+        }
+        if (filledEmptyThumbUp.value === "empty-thumb-up") {
+            await reviewStore.addLike(headers, reviewId);
+            filledEmptyThumbUp.value = "filled-thumb-up";
+            filledEmptyThumbDown.value = "empty-thumb-down";
+            return;
+        }
+    } catch (err) {
+        console.log(err)
+    }
 };
 
-const checkIfFavorite = () => {
-    filledEmptyHeart.value =
-        filledEmptyHeart.value === "empty-heart" ? "filled-heart" : "empty-heart";
+const checkIfFavorite = async (reviewId: string) => {
+    try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        if (filledEmptyHeart.value === "filled-heart") {
+            await reviewStore.removeFavorites(headers, reviewId);
+            filledEmptyHeart.value = "empty-heart";
+            return;
+        }
+        if (filledEmptyHeart.value === "empty-heart") {
+            await reviewStore.addFavorites(headers, reviewId);
+            filledEmptyHeart.value = "filled-heart";
+            return;
+        }
+    } catch (err) {
+        console.log(err)
+    }
 };
 
 const showText = () => {
@@ -76,6 +117,12 @@ const props = defineProps({
     const foundDislike = props.dislikes.find(
         (dislike) => dislike === authStore.user?._id
     );
+    const foundFavorite = authStore.favoriteReviews.find(review => review._id === props.id);
+    if (foundFavorite) {
+        filledEmptyHeart.value = "filled-heart";
+    } else {
+        filledEmptyHeart.value = "empty-heart";
+    }
     if (foundLike) {
         filledEmptyThumbUp.value = "filled-thumb-up";
     } else {
@@ -119,16 +166,16 @@ const props = defineProps({
                 <div class="mb-0 mt-3 inline-flex">
                     <span class="float-left mr-1">{{ props.dislikes.length }}</span>
                     <CustomSVG :svgName="filledEmptyThumbDown"
-                        :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike" />
+                        :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike(props.id)" />
 
                     <div id="fav-like-button-container" class="mb-0 mt-10">
                         <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
-                            @click="checkIfFavorite" />
+                            @click="checkIfFavorite(props.id)" />
                     </div>
 
                     <span class="float-left mr-1 ml-4">{{ props.likes.length }}</span>
                     <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
-                        @click="checkIfLike" />
+                        @click="checkIfLike(props.id)" />
                 </div>
             </div>
             <p class="text-gray-700 text-sm mb-2 mt-1 hidden lg:block">
@@ -138,18 +185,18 @@ const props = defineProps({
             <div class="mb-5 mt-3 hidden lg:inline-flex justify-center">
                 <span class="float-left mr-1">{{ props.dislikes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbDown"
-                    :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike" />
+                    :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike(props.id)" />
 
                 <!-- El botón de favoritear desaparece en versión movil, sin puto sentido -->
                 <div id="fav-like-button-container" class="mb-0 mt-10">
                     <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
-                        @click="checkIfFavorite" />
+                        @click="checkIfFavorite(props.id)" />
                 </div>
                 <!-- fin del botón de favoritear -->
 
                 <span class="float-left mr-1 ml-4">{{ props.likes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
-                    @click="checkIfLike" />
+                    @click="checkIfLike(props.id)" />
             </div>
         </div>
     </div>

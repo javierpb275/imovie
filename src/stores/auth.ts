@@ -1,5 +1,7 @@
 import { defineStore } from "pinia";
 import { API_URL } from "../config/constants";
+import { getQuery } from "../helpers/query.helper";
+import IReview from "../interfaces/review.interface";
 import IUser from "../interfaces/user.interface";
 import { AuthService } from "../services/authService";
 import { FetchService } from "../services/fetchService";
@@ -15,6 +17,7 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: null as IUser | null,
     isAuthorized: false,
+    favoriteReviews: [] as IReview[]
   }),
   getters: {},
   actions: {
@@ -146,6 +149,43 @@ export const useAuthStore = defineStore("auth", {
         return {
           error: true,
           value: "Error Updating Profile",
+        };
+      }
+    },
+    async getFavoriteReviews(
+      headers: HeadersType,
+      queryObject?: object
+    ): Promise<IReturnData> {
+      let url = API_URL.REVIEWS.GET_FAVORITE_REVIEWS.URL;
+      if (queryObject) {
+        url += getQuery(queryObject);
+      }
+      try {
+        const response = await FetchService.callApi(
+          url,
+          API_URL.REVIEWS.GET_FAVORITE_REVIEWS.METHOD,
+          undefined,
+          headers
+        );
+        const data = await response.json();
+        if (data.error) {
+          return {
+            error: true,
+            value: data.error,
+          };
+        }
+        const filteredReviews = data.filter(
+          (review) => review.user !== null && review.movie !== null
+        );
+        this.favoriteReviews = filteredReviews;
+        return {
+          error: false,
+          value: filteredReviews,
+        };
+      } catch (err) {
+        return {
+          error: true,
+          value: "Error Getting Reviews",
         };
       }
     },
