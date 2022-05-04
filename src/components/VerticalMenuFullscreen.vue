@@ -39,7 +39,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
     <div class="fixed h-screen top-20 z-50">
         <!-- sidebar -->
         <div
-            class="sidebar bg-red-800 text-white w-64 pt-2 px-3 absolute left-0 transition duration-200 ease-in-out">
+            class="sidebar bg-red-800 text-white w-64 space-y-1 pt-2 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200">
                 <CustomAvatar :avatar-url="'/img/avatars/default-avatar.PNG'" :class="'rounded-full w-28 h-28'"
                     class="m-auto hover:drop-shadow-2xl hover:scale-105 transition duration-300" />
@@ -67,10 +67,10 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
                 </router-link>
-                <router-link to="/favorite-opinions" href="#"
+                <!-- <router-link to="/favorite-opinions" href="#"
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
-                </router-link>
+                </router-link> -->
 
                 <a href="#"
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"

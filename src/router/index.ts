@@ -203,23 +203,23 @@ const routes: RouteRecordRaw[] = [
       }
     },
   },
-  {
-    path: "/favorite-opinions",
-    name: "FavoriteOpinions",
-    component: FavoriteOpinionsView,
-    beforeEnter: async (to, _, next) => {
-      try {
-        const data = await viewsGuard();
-        if (!data.isAuthorized) {
-          next({ path: "/signin" });
-          return;
-        }
-        next();
-      } catch (err) {
-        next({ path: "/signin" });
-      }
-    },
-  },
+  // {
+  //   path: "/favorite-opinions",
+  //   name: "FavoriteOpinions",
+  //   component: FavoriteOpinionsView,
+  //   beforeEnter: async (to, _, next) => {
+  //     try {
+  //       const data = await viewsGuard();
+  //       if (!data.isAuthorized) {
+  //         next({ path: "/signin" });
+  //         return;
+  //       }
+  //       next();
+  //     } catch (err) {
+  //       next({ path: "/signin" });
+  //     }
+  //   },
+  // },
   {
     path: "/my-profile/:reviews",
     name: "MyProfileView",
