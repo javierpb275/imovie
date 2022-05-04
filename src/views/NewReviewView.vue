@@ -57,21 +57,21 @@ async function searchMovie() {
 
 <template>
     <div>
-        <div class="lg:ml-64 lg:mr-14 mt-20 lg:mt-24">
+        <div class="lg:ml-64 lg:mr-14 mt-28 lg:mt-24">
             <SearchMovieInput />
 
             <button type="button" @click="searchMovie"
-                class="rounded-lg inline-block mt-10 px-3 py-2.5 bg-red-700 hover:bg-red-800 cursor-pointer text-white text-s leading-tight">
-                Buscar película
+                class="rounded-lg inline-block  mt-5 px-3 py-2.5 bg-red-700 hover:bg-red-800 cursor-pointer text-white text-s leading-tight">
+                Find a movie
             </button>
 
             <div class="my-20">{{ theMovie }}</div>
 
             <textarea
-                class="rounded-lg placeholder:italic placeholder:text-slate-400 border border-slate-300 shadow-sm focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
+                class="lg:w-auto w-80 rounded-lg placeholder:italic placeholder:text-slate-400 border border-slate-300 shadow-sm focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
                 rows="4" cols="50" placeholder="Write here your opinion:"></textarea>
 
-            <RatingStars :class="'flex justify-center'" :size="10" :points="points" :isFor="'movie'" />
+            <RatingStars :class="'flex justify-center mt-4 mb-12'" :size="10" :points="points" :isFor="'movie'" />
 
             <button type="button"
                 class="rounded-lg inline-block mt-10 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight">
