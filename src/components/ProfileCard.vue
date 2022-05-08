@@ -2,6 +2,14 @@
 import { computed, ComputedRef } from 'vue';
 import CustomSVG from '../components/CustomSVG.vue';
 import IUser from '../interfaces/user.interface';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+const goToSettings = () => {
+  router.push({ path: `/my-profile-settings` })
+}
+
 
 const props = defineProps({
     user: {
@@ -37,7 +45,7 @@ const user = computed(() =>
                     <button
                         class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
                         <CustomSVG :svgName="'settings'" :class="'text-white w-9 h-9 px-2 py-2 inline-flex'" />
-                        <span class="pt-2">Profile settings</span>
+                        <span class="pt-2" @click="goToSettings()">Profile settings</span>
                     </button>
                 </div>
             </div>

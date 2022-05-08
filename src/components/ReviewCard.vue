@@ -7,6 +7,17 @@ import { useAuthStore } from "../stores/auth";
 import { reviews } from "../assets/reviews";
 import { useReviewStore } from "../stores/review";
 import { AuthService } from "../services/authService";
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
+
+const goToUser = (username: string) => {
+  router.push({ path: `/user/${username}` })
+}
+
+const goToMovie = (movieTitle: string) => {
+  router.push({ path: `/movie/${movieTitle}` })
+}
 
 const authStore = useAuthStore();
 const reviewStore = useReviewStore()
@@ -140,18 +151,18 @@ const props = defineProps({
     <div class="flex justify-center">
         <div class="block p-3 my-5 rounded-lg shadow-xl bg-white w-80 lg:w-4/5">
             <div id="user-movie-info-container" class="mb-1">
-                <div id="avatar-username-container" class="mb-4">
+                <div id="avatar-username-container" class="mb-4 ">
                     <div class="ml-4">
-                        <CustomAvatar :avatar-url="props.avatar" :class="'rounded-full w-12 h-12'" />
+                        <CustomAvatar :avatar-url="props.avatar" :class="'rounded-full w-12 h-12 hover:scale-110 transition duration-500 cursor-pointer'" @click="goToUser(props.username)"/>
                     </div>
                     <div class="text-left">{{ props.username }}</div>
                 </div>
 
-                <h6 class="text-gray-900 text-xl leading-tight font-medium mb-2">
+                <h6 class="text-gray-900 text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto w-max" @click="goToMovie(props.movieTitle)">
                     {{ props.movieTitle }}
                 </h6>
-                <div id="movie-title-points-container" class="lg:mb-5">
-                    <RatingStars :class="'flex justify-center cursor-pointer'" :size="6" :points="props.points"
+                <div id="movie-title-points-container" class="lg:mb-5 mx-auto w-max">
+                    <RatingStars :class="'flex justify-center cursor-pointer hover:scale-105 transition duration-500'" :size="6" :points="props.points"
                         :isFor="'review'" />
                 </div>
             </div>

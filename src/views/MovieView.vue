@@ -51,10 +51,10 @@ onMounted(async () => {
                 :runtime="movieStore.movies[0].runtime" :genres="movieStore.movies[0].genres"
                 :director="movieStore.movies[0].director" :actors="movieStore.movies[0].actors"
                 :plot="movieStore.movies[0].plot" :posterUrl="movieStore.movies[0].posterUrl" />
-            <h1 class="mt-9 lg:mt-14 text-3xl">Opinions:</h1>
+            <h1 class="mt-7 mb-2 text-2xl font-bold lg:ml-16">Opinions:</h1>
             <div v-if="!reviewStore.reviews.length">NO REVIEWS FOUND</div>
-            <div v-else>
-                <ReviewCardList :reviews="reviewStore.reviews" />
+            <div v-else class="lg:ml-36 lg:mr-14 lg:my-16">
+                <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
         </div>
     </div>
