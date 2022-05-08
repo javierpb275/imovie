@@ -8,33 +8,18 @@ const skip = ref<number>(0);
 const router = useRouter();
 const route = useRoute();
 
-//PENDING FIXING PAGINATION
-const previousPage = () => {
-    if (!route.query.skip || Number(route.query.skip) <= 10) {
-        route.query.skip = '0';
-    } else {
-        route.query.skip = String(Number(route.query.skip) - 10)
+const changePage = (go: string) => {
+    let skip = 0;
+    if (go === 'next') {
+        skip = route.query.skip ? Number(route.query.skip) + 10 : 10
     }
-    let theQuery = getQuery(route.query);
+    if (go === 'previous') {
+        skip = Number(route.query.skip) > 10 ? Number(route.query.skip) - 10 : 0
+    }
     let path = route.fullPath;
     let textToRemove = path.split('?');
-    path = path.replace('?' + textToRemove[1], '');
-    let thePath = path + theQuery;
-    router.push(thePath);//url does not change! pending fixing!
-}
-
-const nextPage = () => {
-    if (!route.query.skip) {
-        route.query.skip = '10';
-    } else {
-        route.query.skip = String(Number(route.query.skip) + 10)
-    }
-    let theQuery = getQuery(route.query);
-    let path = route.fullPath;
-    let textToRemove = path.split('?');
-    path = path.replace('?' + textToRemove[1], '');
-    let thePath = path + theQuery;
-    router.push(thePath);//url does not change! pending fixing!
+    path = path.replace('?' + textToRemove[1], ''); 
+    router.push({path, query: {...route.query, skip}});
 }
 
 onMounted(() => {
@@ -52,7 +37,7 @@ onMounted(() => {
                 class="font-semibold text-gray-900 dark:text-white">{{ skip + 10 }} entries</span>
         </span>
         <div class="inline-flex mt-2 xs:mt-0">
-            <button @click="previousPage"
+            <button @click="changePage('previous')"
                 class="rounded-l-md inline-flex items-center py-2 px-4 bg-red-800 hover:bg-red-700 cursor-default  text-white text-s leading-tight">
                 <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -61,7 +46,7 @@ onMounted(() => {
                 </svg>
                 Prev
             </button>
-            <button @click="nextPage"
+            <button @click="changePage('next')"
                 class="rounded-r-md inline-flex items-center py-2 px-4 bg-red-800 hover:bg-red-700 cursor-default text-white text-s leading-tight">
                 Next
                 <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
