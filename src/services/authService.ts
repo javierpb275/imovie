@@ -253,10 +253,10 @@ export class AuthService {
       return { Authorization: `ERROR` };
     }
 
-    //const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
+    const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
 
     try {
-      //if (minutes >= 10) {
+      if (minutes >= 10) {
         const result = await AuthService.refreshToken();
         console.log('getandvalidateheadertoken', result)
         if (result.error) {
@@ -264,12 +264,17 @@ export class AuthService {
           return { Authorization: `ERROR` };
         }
         accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
-      //}
+      }
     } catch (err) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
     }
 
+    return { Authorization: `Bearer ${accessToken}` };
+  }
+
+  static getHeaderToken(): HeadersType {
+    let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
     return { Authorization: `Bearer ${accessToken}` };
   }
 }

@@ -23,6 +23,7 @@ const props = defineProps({
 
 const points = ref<number>(props.points)
 
+//pending saving points in store to be used in the form for creating a review. (idea)
 const changePoints = (number: number) => {
     if (props.isFor === "create-review") {
         points.value = number;

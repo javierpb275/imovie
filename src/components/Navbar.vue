@@ -14,32 +14,18 @@ const errorMessage = ref<string>("");
 const authStore = useAuthStore();
 
 onMounted(async () => {
-
   if (authStore.isAuthorized) {
-    const errorObject = {
-      Authorization: "ERROR"
-    }
-
+    const headers = AuthService.getHeaderToken();
     try {
-      const headers = await AuthService.getAndValidateHeaderToken();
-      if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
-        await router.push("/signin");
-        return;
-      }
-
       const data = await authStore.getProfile(headers);
-
       if (data.error) {
         errorMessage.value = data.value;
         return;
       }
-
     } catch (err) {
       errorMessage.value = "Error Getting Profile";
     }
-
   }
-
 })
 
 const verticalMenu = ref<boolean>(false);

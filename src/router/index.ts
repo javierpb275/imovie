@@ -6,7 +6,6 @@ import ReviewsView from "../views/ReviewsView.vue";
 import NewReviewView from "../views/NewReviewView.vue";
 import MoviesView from "../views/MoviesView.vue";
 import MovieView from "../views/MovieView.vue";
-import FavoriteOpinionsView from "../views/FavoriteOpinionsView.vue";
 import MyProfileSettingsView from "../views/MyProfileSettingsView.vue";
 import FollowingView from "../views/FollowingView.vue";
 import MyProfileView from "../views/MyProfileView.vue";
@@ -48,7 +47,7 @@ const routes: RouteRecordRaw[] = [
       try {
         const data = await viewsGuard();
         if (data.isAuthorized) {
-          next({ path: "/reviews" });
+          next({ path: "/reviews/followed-users" });
           return;
         }
         next();
@@ -65,7 +64,7 @@ const routes: RouteRecordRaw[] = [
       try {
         const data = await viewsGuard();
         if (data.isAuthorized) {
-          next({ path: "/reviews" });
+          next({ path: "/reviews/followed-users" });
           return;
         }
         next();
@@ -82,7 +81,7 @@ const routes: RouteRecordRaw[] = [
       try {
         const data = await viewsGuard();
         if (data.isAuthorized) {
-          next({ path: "/reviews" });
+          next({ path: "/reviews/followed-users" });
           return;
         }
         next();
@@ -203,23 +202,6 @@ const routes: RouteRecordRaw[] = [
       }
     },
   },
-  // {
-  //   path: "/favorite-opinions",
-  //   name: "FavoriteOpinions",
-  //   component: FavoriteOpinionsView,
-  //   beforeEnter: async (to, _, next) => {
-  //     try {
-  //       const data = await viewsGuard();
-  //       if (!data.isAuthorized) {
-  //         next({ path: "/signin" });
-  //         return;
-  //       }
-  //       next();
-  //     } catch (err) {
-  //       next({ path: "/signin" });
-  //     }
-  //   },
-  // },
   {
     path: "/my-profile/:reviews",
     name: "MyProfileView",

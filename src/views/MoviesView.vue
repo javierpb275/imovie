@@ -6,11 +6,11 @@ import { ref, onMounted, reactive } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useMovieStore } from '../stores/movie';
 import { AuthService } from '../services/authService';
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import MoviesFilter from '../components/MoviesFilter.vue';
 import Pagination from '../components/Pagination.vue';
 
-const router = useRouter();
+
 const route = useRoute();
 
 const authStore = useAuthStore();
@@ -25,38 +25,24 @@ const moviesData = reactive<IReturnData>({
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const errorObject = {
-            Authorization: "ERROR"
-        }
-
+        const headers = AuthService.getHeaderToken();
         try {
-            const headers = await AuthService.getAndValidateHeaderToken();
-            if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
-                await router.push("/signin");
-                return;
-            }
-
             const data = await movieStore.getMovies(headers, {sort: '-year', ...route.query})
-
             let returnMovies: IReturnData = {
                 error: false,
                 value: null
             }
-
             returnMovies = data;
             moviesData.error = returnMovies.error
             moviesData.value = returnMovies.value
-
             if (data.error) {
                 errorMessage.value = data.value;
                 return;
             }
-
             if (!data.value.length) {
                 errorMessage.value = "No movies found!";
                 return;
             }
-
         } catch (err) {
             errorMessage.value = "Error Getting Movies";
         }

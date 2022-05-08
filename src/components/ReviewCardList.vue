@@ -1,36 +1,28 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-import { API_URL } from "../config/constants";
 import IReview from "../interfaces/review.interface";
 import { AuthService } from "../services/authService";
-import { FetchService } from "../services/fetchService";
 import { useAuthStore } from "../stores/auth";
 import ReviewCard from "./ReviewCard.vue";
 import Spinner from "./Spinner.vue";
 
 const props = defineProps(['reviews'])
-
 const authStore = useAuthStore();
 const errorMessage = ref<string>("");
 const favReviews = ref<IReview[]>([])
 
-
 onMounted(async () => {
+    const headers = AuthService.getHeaderToken();
     try {
-        const headers = await AuthService.getAndValidateHeaderToken();
         const returnData = await authStore.getFavoriteReviews(headers)
-        
         if (returnData.error) {
             errorMessage.value = 'Error getting reviews';
         }
-        
         favReviews.value = returnData.value;
-
     } catch (err) {
         errorMessage.value = 'Error getting reviews';
     }
 })
-
 </script>
 
 <template>

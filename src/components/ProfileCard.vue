@@ -3,7 +3,6 @@ import { computed, ComputedRef } from 'vue';
 import CustomSVG from '../components/CustomSVG.vue';
 import IUser from '../interfaces/user.interface';
 
-
 const props = defineProps({
     user: {
         type: Object,

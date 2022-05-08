@@ -25,8 +25,8 @@ export interface IUserSignUp {
 }
 
 export enum Tokens {
-  ACCESS_TOKEN = "accessToken",
-  REFRESH_TOKEN = "refreshToken",
+  ACCESS_TOKEN = "accessTokenImovie",
+  REFRESH_TOKEN = "refreshTokenImovie",
 }
 
 export interface IPayload {

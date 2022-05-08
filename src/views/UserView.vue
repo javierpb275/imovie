@@ -2,7 +2,7 @@
 import ProfileCard from '../components/ProfileCard.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { onMounted, reactive, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
@@ -10,7 +10,6 @@ import { IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 import { useUserStore } from '../stores/user';
 
-const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
 const userStore = useUserStore();
@@ -30,15 +29,8 @@ const userData = reactive<IReturnData>({
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const errorObject = {
-            Authorization: "ERROR"
-        }
+        const headers = AuthService.getHeaderToken();
         try {
-            const headers = await AuthService.getAndValidateHeaderToken();
-            if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
-                await router.push("/signin");
-                return;
-            }
             const users = await userStore.getUsers(headers, { username: route.params.username })
             userData.error = users.error;
             userData.value = users.value;

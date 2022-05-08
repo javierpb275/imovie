@@ -8,6 +8,7 @@ const skip = ref<number>(0);
 const router = useRouter();
 const route = useRoute();
 
+//PENDING FIXING PAGINATION
 const previousPage = () => {
     if (!route.query.skip || Number(route.query.skip) <= 10) {
         route.query.skip = '0';

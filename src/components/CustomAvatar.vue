@@ -8,10 +8,6 @@ const props = defineProps({
         type: String,
         required: true,
     }
-    // size: {
-    //     type: Number,
-    //     required: true
-    // },
 });
 </script>
 

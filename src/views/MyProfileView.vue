@@ -3,7 +3,7 @@ import ProfileCard from '../components/ProfileCard.vue';
 import ButtonGroupMyOpinionsFavoriteOpinions from '../components/ButtonGroupMyOpinionsFavoriteOpinions.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { onMounted, reactive, ref } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
@@ -11,7 +11,6 @@ import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 
 const route = useRoute();
-const router = useRouter();
 const authStore = useAuthStore();
 const reviewStore = useReviewStore();
 
@@ -46,22 +45,12 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const errorObject = {
-            Authorization: "ERROR"
-        }
+ const headers = AuthService.getHeaderToken();
         try {
-            const headers = await AuthService.getAndValidateHeaderToken();
-            if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
-                await router.push("/signin");
-                return;
-            }
-
             const user = await authStore.getProfile(headers)
             userData.error = user.error;
             userData.value = user.value;
-
             await getReviews(headers, route.query);
-
         } catch (err) {
             errorMessage.value = "Error Getting User";
         }

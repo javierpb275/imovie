@@ -5,13 +5,12 @@ import { ref, onMounted, reactive } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
 import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 import ReviewsFilter from '../components/ReviewsFilter.vue';
 import Pagination from '../components/Pagination.vue';
 
-const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
 const reviewStore = useReviewStore();
@@ -44,18 +43,9 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const errorObject = {
-            Authorization: "ERROR"
-        }
+        const headers = AuthService.getHeaderToken();
         try {
-            const headers = await AuthService.getAndValidateHeaderToken();
-            if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
-                await router.push("/signin");
-                return;
-            }
-
             await getReviews(headers, route.query)
-
         } catch (err) {
             errorMessage.value = "Error Getting Reviews";
         }

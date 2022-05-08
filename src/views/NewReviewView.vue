@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import SearchMovieInput from '../components/SearchMovieInput.vue';
 import RatingStars from '../components/RatingStars.vue';
-
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useMovieStore } from '../stores/movie';
 import { AuthService } from '../services/authService';
@@ -20,7 +19,7 @@ const theMovie = ref<string>("");
 
 const points = ref<number>(2);
 
-
+//Pending taking a look, since we have made changes with authorization.
 async function searchMovie() {
     if (authStore.isAuthorized) {
         const errorObject = {

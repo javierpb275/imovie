@@ -4,7 +4,7 @@ import Navbar from './components/Navbar.vue';
 
 <template>
   <div class="h-screen">
-    <Navbar />
+    <Navbar/>
     <router-view :key="$route.fullPath"></router-view>
   </div>
 </template>
@@ -15,5 +15,4 @@ import Navbar from './components/Navbar.vue';
   height:100vh;
   margin: 0;
 }
-
 </style>
