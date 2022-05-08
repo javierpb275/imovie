@@ -1,8 +1,15 @@
 <script setup lang="ts">
-import { computed, ComputedRef } from 'vue';
+import { computed, ComputedRef, onMounted, reactive, ref } from 'vue';
 import CustomSVG from '../components/CustomSVG.vue';
 import IUser from '../interfaces/user.interface';
+import { AuthService } from '../services/authService';
+import { IReturnData } from '../services/serviceTypes';
+import { useAuthStore } from '../stores/auth';
+import { useUserStore } from '../stores/user';
+import Spinner from './Spinner.vue';
 
+const authStore = useAuthStore();
+const userStore = useUserStore();
 const props = defineProps({
     user: {
         type: Object,
@@ -10,9 +17,54 @@ const props = defineProps({
     }
 });
 
+const isFollowed = ref<string>('');
+
 const user = computed(() =>
     props.user
 ) as ComputedRef<IUser>
+
+const followeesData = reactive<IReturnData>({
+    error: false,
+    value: null
+});
+
+const followUnfollow = async () => {
+    try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        if (isFollowed.value === "Unfollow") {
+            await userStore.stopFollowing(headers, props.user._id);
+            isFollowed.value = "Follow";
+            return;
+        }
+        if (isFollowed.value === "Follow") {
+            await userStore.startFollowing(headers, props.user._id);
+            isFollowed.value = "Unfollow";
+            return;
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+//PENDING FIXING. WHEN GETTING EMPTY ARRAY KEEPS SHOWING SPINNER AND DOES NOT SHOW FOLLOW BUTTON AS WE WANT
+onMounted(async () => {
+    if (props.user._id !== authStore.user?._id) {
+        const headers = AuthService.getHeaderToken();
+        try {
+            const { error, value } = await userStore.getFollowees(headers, { username: props.user.username });
+            followeesData.error = error;
+            followeesData.value = value;
+            if (!followeesData.value.length) {
+                isFollowed.value = 'Follow';
+            } else {
+                isFollowed.value = 'Unfollow';
+            }
+
+        } catch (err) {
+            console.log(err)
+        }
+    }
+})
 </script>
 
 <template>
@@ -32,14 +84,24 @@ const user = computed(() =>
                     <p class="pt-3 text-md">||</p>
                     <p class="pt-3 text-md">{{ user.followers.length }} Followers</p>
                 </div>
-
+                <!--------------------JAVIER---------------------------->
                 <div class="pt-8 pb-8">
-                    <button
+                    <button v-if="user._id === authStore.user?._id"
                         class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
                         <CustomSVG :svgName="'settings'" :class="'text-white w-9 h-9 px-2 py-2 inline-flex'" />
                         <span class="pt-2">Profile settings</span>
                     </button>
+                    <div v-else>
+                        <div v-if="!followeesData.value">
+                            <Spinner />
+                        </div>
+                        <button v-else @click="followUnfollow"
+                            class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
+                            <span>{{ isFollowed }}</span>
+                        </button>
+                    </div>
                 </div>
+                <!------------------------------------------------------>
             </div>
         </div>
 
