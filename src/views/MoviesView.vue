@@ -6,11 +6,11 @@ import { ref, onMounted, reactive } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useMovieStore } from '../stores/movie';
 import { AuthService } from '../services/authService';
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import MoviesFilter from '../components/MoviesFilter.vue';
 import Pagination from '../components/Pagination.vue';
 
-
+const router = useRouter()
 const route = useRoute();
 
 const authStore = useAuthStore();
@@ -44,7 +44,8 @@ onMounted(async () => {
                 return;
             }
         } catch (err) {
-            errorMessage.value = "Error Getting Movies";
+                    AuthService.removeTokensAndClearStore();
+      router.push("/signin");
         }
     }
 })

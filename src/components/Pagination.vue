@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { getQuery } from '../helpers/query.helper';
 
 const skip = ref<number>(0);
 

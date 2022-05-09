@@ -3,7 +3,10 @@ import { reactive, ref, onMounted } from "vue";
 import { IUserSignUp } from "../services/serviceTypes";
 import { useAuthStore } from "../stores/auth";
 import { AuthService } from "../services/authService";
-import AllAvatars from "../components/AllAvatars.vue"
+import AllAvatars from "../components/AllAvatars.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter()
 
 const errorMessage = ref<string>("");
 const authStore = useAuthStore();
@@ -19,7 +22,8 @@ onMounted(async () => {
         return;
       }
     } catch (err) {
-      errorMessage.value = "Error Getting Profile";
+                                      AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
   }
 })

@@ -42,7 +42,8 @@ const checkIfDislike = async (reviewId: string) => {
             return;
         }
     } catch (err) {
-        console.log(err)
+              AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
 };
 
@@ -61,7 +62,8 @@ const checkIfLike = async (reviewId: string) => {
             return;
         }
     } catch (err) {
-        console.log(err)
+              AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
 };
 
@@ -79,7 +81,8 @@ const checkIfFavorite = async (reviewId: string) => {
             return;
         }
     } catch (err) {
-        console.log(err)
+              AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
 };
 

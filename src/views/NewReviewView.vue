@@ -48,7 +48,8 @@ async function searchMovie() {
             theMovie.value = data.value
 
         } catch (err) {
-            errorMessage.value = "Error Getting Movies";
+                                                        AuthService.removeTokensAndClearStore();
+      router.push("/signin");
         }
     }
 }

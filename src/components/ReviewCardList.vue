@@ -5,6 +5,9 @@ import { AuthService } from "../services/authService";
 import { useAuthStore } from "../stores/auth";
 import ReviewCard from "./ReviewCard.vue";
 import Spinner from "./Spinner.vue";
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 const props = defineProps(['reviews'])
 const authStore = useAuthStore();
@@ -20,7 +23,8 @@ onMounted(async () => {
         }
         favReviews.value = returnData.value;
     } catch (err) {
-        errorMessage.value = 'Error getting reviews';
+              AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
 })
 </script>

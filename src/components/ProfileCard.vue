@@ -49,7 +49,8 @@ const followUnfollow = async () => {
             return;
         }
     } catch (err) {
-        console.log(err)
+              AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
 }
 
@@ -67,7 +68,8 @@ onMounted(async () => {
             }
 
         } catch (err) {
-            console.log(err)
+                  AuthService.removeTokensAndClearStore();
+      router.push("/signin");
         }
     }
 })

@@ -23,7 +23,8 @@ onMounted(async () => {
         return;
       }
     } catch (err) {
-      errorMessage.value = "Error Getting Profile";
+          AuthService.removeTokensAndClearStore();
+    router.push("/signin");
     }
   }
 })
@@ -56,7 +57,6 @@ const signOut = async () => {
   } catch (err) {
     AuthService.removeTokensAndClearStore();
     router.push("/signin");
-    errorMessage.value = "Error Signing Out";
   }
 }
 </script>

@@ -2,7 +2,7 @@
 import ProfileCard from '../components/ProfileCard.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { onMounted, reactive, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
@@ -10,6 +10,7 @@ import { IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 import { useUserStore } from '../stores/user';
 
+const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
 const userStore = useUserStore();
@@ -38,7 +39,8 @@ onMounted(async () => {
             reviewData.error = error;
             reviewData.value = value;
         } catch (err) {
-            errorMessage.value = "Error Getting User";
+                                                                   AuthService.removeTokensAndClearStore();
+      router.push("/signin");
         }
     }
 })

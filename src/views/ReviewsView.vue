@@ -5,12 +5,13 @@ import { ref, onMounted, reactive } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 import ReviewsFilter from '../components/ReviewsFilter.vue';
 import Pagination from '../components/Pagination.vue';
 
+const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
 const reviewStore = useReviewStore();
@@ -37,7 +38,8 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
         reviewData.error = returnData.error
         reviewData.value = returnData.value;
     } catch (err) {
-        errorMessage.value = "Error Getting reviews";
+                                                    AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
 }
 
@@ -47,7 +49,8 @@ onMounted(async () => {
         try {
             await getReviews(headers, route.query)
         } catch (err) {
-            errorMessage.value = "Error Getting Reviews";
+                                                        AuthService.removeTokensAndClearStore();
+      router.push("/signin");
         }
     }
 })

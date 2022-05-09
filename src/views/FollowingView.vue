@@ -3,9 +3,10 @@ import UserList from '../components/UserList.vue';
 import { ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { AuthService } from '../services/authService';
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from '../stores/user';
 
+const router = useRouter()
 const route = useRoute();
 
 const authStore = useAuthStore();
@@ -27,7 +28,8 @@ onMounted(async () => {
                 return;
             }
         } catch (err) {
-            errorMessage.value = "Error Getting Users";
+                    AuthService.removeTokensAndClearStore();
+      router.push("/signin");
         }
     }
 })

@@ -3,13 +3,14 @@ import ProfileCard from '../components/ProfileCard.vue';
 import ButtonGroupMyOpinionsFavoriteOpinions from '../components/ButtonGroupMyOpinionsFavoriteOpinions.vue';
 import ReviewCardList from '../components/ReviewCardList.vue';
 import { onMounted, reactive, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '../stores/auth';
 import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
 import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
 
+const router = useRouter();
 const route = useRoute();
 const authStore = useAuthStore();
 const reviewStore = useReviewStore();
@@ -39,7 +40,8 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
             reviewData.value = value;
         }
     } catch (err) {
-        errorMessage.value = "Error Getting reviews";
+                                        AuthService.removeTokensAndClearStore();
+      router.push("/signin");
     }
 }
 
@@ -52,7 +54,8 @@ onMounted(async () => {
             userData.value = user.value;
             await getReviews(headers, route.query);
         } catch (err) {
-            errorMessage.value = "Error Getting User";
+                                            AuthService.removeTokensAndClearStore();
+      router.push("/signin");
         }
     }
 })
