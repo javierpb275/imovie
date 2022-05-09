@@ -53,7 +53,18 @@ const user = reactive<IUserSignUp>({
             <input class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
                 type="password" name="password" placeholder="thePassword" />
         </div>
-        <p class=" text-xl mt-12">Choose a new avatar:</p>
+        <p class=" text-xl mb-3 mt-8 lg:my-10">Choose a new avatar:</p>
+
         <AllAvatars/>
+
+        <button type="button"
+                class="rounded-lg inline-block my-10 lg:my-16 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight">
+                Cancel
+        </button>
+
+        <button type="button"
+                class="rounded-lg inline-block my-10 lg:my-16 mx-5 px-10 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight">
+                Update it!
+        </button>
     </div>
 </template>

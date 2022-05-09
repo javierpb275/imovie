@@ -3,10 +3,10 @@
 </script>
 
 <template>
-<div class="lg:ml-28 mt-12 mx-auto">
+<div class="lg:ml-28 mx-auto">
     <div class="grid grid-cols-4 items-center">
       <div class="mb-4">
-        <img src="/img/avatars/default-avatar.PNG" class="w-40 h-auto rounded-full hover:scale-110 transition duration-500 cursor-pointer" alt="">
+        <img src="/img/avatars/default-avatar.PNG" class="w-40 h-auto rounded-full hover:scale-110 transition duration-500 cursor-pointer" >
       </div>
       <div class="mb-4">
         <img src="/img/avatars/avatar1.PNG" class="w-40 h-auto rounded-full hover:scale-110 transition duration-500 cursor-pointer" alt="">
