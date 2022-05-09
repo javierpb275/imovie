@@ -81,7 +81,6 @@ export class AuthService {
 
       returnData.value = data;
     } catch (err) {
-      console.log(err);
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-000";
     }
@@ -121,7 +120,6 @@ export class AuthService {
 
       returnData.value = data;
     } catch (err) {
-      console.log(err);
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-000";
     }
@@ -129,7 +127,7 @@ export class AuthService {
     return returnData;
   }
 
-  //REFRESH TOKEN---------------------------------------------------PENDING FIXING REFRESHTOKEN
+  //REFRESH TOKEN---------------------------------------------------
   static async refreshToken(): Promise<IReturnData> {
     localStorage.setItem("is_refreshing", "true");
     const returnData: IReturnData = {
@@ -174,10 +172,8 @@ export class AuthService {
 
       returnData.value = data;
 
-      console.log('refreshtoken',data)
     } catch (err) {
       localStorage.removeItem("is_refreshing");
-      console.log(err);
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-000";
     }
@@ -228,7 +224,6 @@ export class AuthService {
       returnData.value = data;
     } catch (err) {
       AuthService.removeTokensAndClearStore();
-      console.log(err);
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-000";
     }
@@ -259,18 +254,17 @@ export class AuthService {
       return { Authorization: `ERROR` };
     }
 
-    const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
+    //const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
 
     try {
-      if (minutes >= 10) {
+      //if (minutes >= 10) {
         const result = await AuthService.refreshToken();
-        console.log('getandvalidateheadertoken', result)
         if (result.error) {
           AuthService.removeTokensAndClearStore();
           return { Authorization: `ERROR` };
         }
         accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
-      }
+      //}
     } catch (err) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
@@ -281,10 +275,10 @@ export class AuthService {
 
   static async getHeaderToken(): Promise<HeadersType> {
     let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN)
-    if (isTokenExpired(accessToken)) {
+    //if (isTokenExpired(accessToken)) {
       await new Promise((resolve) => setTimeout(resolve, 500));
       accessToken = await checkIfAlreadyRefreshingToken();
-    }
+    //}
     return { Authorization: `Bearer ${accessToken}` };
   }
 }
