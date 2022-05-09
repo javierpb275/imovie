@@ -9,7 +9,7 @@ import Spinner from "./Spinner.vue";
 const props = defineProps(['reviews'])
 const authStore = useAuthStore();
 const errorMessage = ref<string>("");
-const favReviews = ref<IReview[]>([])
+const favReviews = ref<IReview[]|null>(null)
 
 onMounted(async () => {
     const headers = AuthService.getHeaderToken();
@@ -27,7 +27,7 @@ onMounted(async () => {
 
 <template>
     <div class="overflow-y-auto h-96">
-        <div v-if="!favReviews.length">
+        <div v-if="!favReviews">
             <Spinner/>
         </div>
         <div v-else-if="errorMessage.length">
