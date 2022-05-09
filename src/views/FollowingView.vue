@@ -36,8 +36,15 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="lg:mt-20 h-full lg:ml-28">
-        <p class=" text-2xl font-bold">Users</p>
-        <UserList :users="userStore.users" />
+    <div class="mt-24 h-full lg:ml-28">
+        <p class=" text-2xl font-bold">My followed users</p>
+
+        <div v-if="!userStore.users.length" class="mt-20">
+            You aren't following anyone yet
+        </div>
+        <div v-else>
+                <UserList :users="userStore.users" />
+        </div>
+
     </div>
 </template>
