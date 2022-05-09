@@ -42,20 +42,20 @@ const signOut = async () => {
     const headers = await AuthService.getAndValidateHeaderToken();
     if (JSON.stringify(headers) === JSON.stringify(errorObject)) {
       AuthService.removeTokensAndClearStore();
-      await router.push("/signin");
+      router.push("/signin");
       return;
     }
     const data = await authStore.signout();
     if (data.error) {
       AuthService.removeTokensAndClearStore();
-      await router.push("/signin");
+      router.push("/signin");
       errorMessage.value = data.value;
       return;
     }
-    await router.push("/signin");
+    router.push("/signin");
   } catch (err) {
     AuthService.removeTokensAndClearStore();
-    await router.push("/signin");
+    router.push("/signin");
     errorMessage.value = "Error Signing Out";
   }
 }

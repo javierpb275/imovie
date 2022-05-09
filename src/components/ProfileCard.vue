@@ -24,7 +24,7 @@ const props = defineProps({
     }
 });
 
-const isFollowed = ref<string>('');
+const isFollowed = ref<string>('Follow');
 
 const user = computed(() =>
     props.user
@@ -53,7 +53,6 @@ const followUnfollow = async () => {
     }
 }
 
-//PENDING FIXING. WHEN GETTING EMPTY ARRAY KEEPS SHOWING SPINNER AND DOES NOT SHOW FOLLOW BUTTON AS WE WANT
 onMounted(async () => {
     if (props.user._id !== authStore.user?._id) {
         const headers = AuthService.getHeaderToken();
