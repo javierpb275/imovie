@@ -12,11 +12,11 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 const goToUser = (username: string) => {
-  router.push({ path: `/user/${username}` })
+    router.push({ path: `/user/${username}` })
 }
 
 const goToMovie = (movieTitle: string) => {
-  router.push({ path: `/movie/${movieTitle}` })
+    router.push({ path: `/movie/${movieTitle}` })
 }
 
 const authStore = useAuthStore();
@@ -42,8 +42,8 @@ const checkIfDislike = async (reviewId: string) => {
             return;
         }
     } catch (err) {
-              AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 };
 
@@ -62,8 +62,8 @@ const checkIfLike = async (reviewId: string) => {
             return;
         }
     } catch (err) {
-              AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 };
 
@@ -81,8 +81,8 @@ const checkIfFavorite = async (reviewId: string) => {
             return;
         }
     } catch (err) {
-              AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 };
 
@@ -126,7 +126,7 @@ const props = defineProps({
     },
 });
 
- onMounted(async () => {
+onMounted(async () => {
     const foundLike = props.likes.find((like) => like === authStore.user?._id);
     const foundDislike = props.dislikes.find(
         (dislike) => dislike === authStore.user?._id
@@ -156,17 +156,20 @@ const props = defineProps({
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4 ">
                     <div class="ml-4">
-                        <CustomAvatar :avatar-url="props.avatar" :class="'rounded-full w-12 h-12 hover:scale-110 transition duration-500 cursor-pointer'" @click="goToUser(props.username)"/>
+                        <CustomAvatar :avatar-url="props.avatar"
+                            :class="'rounded-full w-12 h-12 hover:scale-110 transition duration-500 cursor-pointer'"
+                            @click="goToUser(props.username)" />
                     </div>
                     <div class="text-left">{{ props.username }}</div>
                 </div>
 
-                <h6 class="text-gray-900 text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto w-max" @click="goToMovie(props.movieTitle)">
+                <h6 class="text-gray-900 text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto w-max"
+                    @click="goToMovie(props.movieTitle)">
                     {{ props.movieTitle }}
                 </h6>
                 <div id="movie-title-points-container" class="lg:mb-5 mx-auto w-max">
-                    <RatingStars :class="'flex justify-center cursor-pointer hover:scale-105 transition duration-500'" :size="6" :points="props.points"
-                        :isFor="'review'" />
+                    <RatingStars :class="'flex justify-center cursor-pointer hover:scale-105 transition duration-500'"
+                        :size="6" :points="props.points" :isFor="'review'" />
                 </div>
             </div>
 
@@ -180,7 +183,8 @@ const props = defineProps({
                 <div class="mb-0 mt-3 inline-flex">
                     <span class="float-left mr-1">{{ props.dislikes.length }}</span>
                     <CustomSVG :svgName="filledEmptyThumbDown"
-                        :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike(props.id)" />
+                        :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'"
+                        @click="checkIfDislike(props.id)" />
 
                     <div id="fav-like-button-container" class="mb-0 mt-10">
                         <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"

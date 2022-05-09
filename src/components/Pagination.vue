@@ -17,8 +17,8 @@ const changePage = (go: string) => {
     }
     let path = route.fullPath;
     let textToRemove = path.split('?');
-    path = path.replace('?' + textToRemove[1], ''); 
-    router.push({path, query: {...route.query, skip}});
+    path = path.replace('?' + textToRemove[1], '');
+    router.push({ path, query: { ...route.query, skip } });
 }
 
 onMounted(() => {

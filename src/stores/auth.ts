@@ -17,7 +17,7 @@ export const useAuthStore = defineStore("auth", {
   state: () => ({
     user: null as IUser | null,
     isAuthorized: false,
-    favoriteReviews: [] as IReview[]
+    favoriteReviews: [] as IReview[],
   }),
   getters: {},
   actions: {

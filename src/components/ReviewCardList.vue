@@ -12,7 +12,7 @@ const router = useRouter()
 const props = defineProps(['reviews'])
 const authStore = useAuthStore();
 const errorMessage = ref<string>("");
-const favReviews = ref<IReview[]|null>(null)
+const favReviews = ref<IReview[] | null>(null)
 
 onMounted(async () => {
     const headers = await AuthService.getHeaderToken();
@@ -23,8 +23,8 @@ onMounted(async () => {
         }
         favReviews.value = returnData.value;
     } catch (err) {
-              AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 })
 </script>
@@ -32,15 +32,15 @@ onMounted(async () => {
 <template>
     <div class="overflow-y-auto h-96">
         <div v-if="!favReviews">
-            <Spinner/>
+            <Spinner />
         </div>
         <div v-else-if="errorMessage.length">
-            {{errorMessage}}
+            {{ errorMessage }}
         </div>
         <li v-else v-for="review in props.reviews" :key="review._id" class="list-none mt-2 mb-2">
             <ReviewCard :id="review._id" :text="review.text" :points="review.points" :movieTitle="review.movie.title"
                 :username="review.user.username" :avatar="review.user.avatar" :likes="review.likes"
-                :dislikes="review.dislikes"/>
+                :dislikes="review.dislikes" />
         </li>
     </div>
 </template>

@@ -28,8 +28,8 @@ onMounted(async () => {
                 return;
             }
         } catch (err) {
-                    AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+            AuthService.removeTokensAndClearStore();
+            router.push("/signin");
         }
     }
 })

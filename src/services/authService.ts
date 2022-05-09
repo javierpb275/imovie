@@ -146,7 +146,7 @@ export class AuthService {
         API_URL.USERS.REFRESH_TOKEN.URL,
         API_URL.USERS.REFRESH_TOKEN.METHOD,
         {
-          token: localStorage.getItem(Tokens.REFRESH_TOKEN)
+          token: localStorage.getItem(Tokens.REFRESH_TOKEN),
         }
       );
       const data = await response.json();
@@ -171,7 +171,6 @@ export class AuthService {
       });
 
       returnData.value = data;
-
     } catch (err) {
       localStorage.removeItem("is_refreshing");
       returnData.error = true;
@@ -258,12 +257,12 @@ export class AuthService {
 
     try {
       //if (minutes >= 10) {
-        const result = await AuthService.refreshToken();
-        if (result.error) {
-          AuthService.removeTokensAndClearStore();
-          return { Authorization: `ERROR` };
-        }
-        accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+      const result = await AuthService.refreshToken();
+      if (result.error) {
+        AuthService.removeTokensAndClearStore();
+        return { Authorization: `ERROR` };
+      }
+      accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
       //}
     } catch (err) {
       AuthService.removeTokensAndClearStore();
@@ -274,10 +273,10 @@ export class AuthService {
   }
 
   static async getHeaderToken(): Promise<HeadersType> {
-    let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN)
+    let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
     //if (isTokenExpired(accessToken)) {
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      accessToken = await checkIfAlreadyRefreshingToken();
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    accessToken = await checkIfAlreadyRefreshingToken();
     //}
     return { Authorization: `Bearer ${accessToken}` };
   }

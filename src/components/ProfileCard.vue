@@ -12,7 +12,7 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 const goToSettings = () => {
-  router.push({ path: `/my-profile-settings` })
+    router.push({ path: `/my-profile-settings` })
 }
 
 const authStore = useAuthStore();
@@ -49,8 +49,8 @@ const followUnfollow = async () => {
             return;
         }
     } catch (err) {
-              AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 }
 
@@ -68,8 +68,8 @@ onMounted(async () => {
             }
 
         } catch (err) {
-                  AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+            AuthService.removeTokensAndClearStore();
+            router.push("/signin");
         }
     }
 })

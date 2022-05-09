@@ -27,7 +27,7 @@ onMounted(async () => {
     if (authStore.isAuthorized) {
         const headers = await AuthService.getHeaderToken();
         try {
-            const data = await movieStore.getMovies(headers, {sort: '-year', ...route.query})
+            const data = await movieStore.getMovies(headers, { sort: '-year', ...route.query })
             let returnMovies: IReturnData = {
                 error: false,
                 value: null
@@ -44,8 +44,8 @@ onMounted(async () => {
                 return;
             }
         } catch (err) {
-                    AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+            AuthService.removeTokensAndClearStore();
+            router.push("/signin");
         }
     }
 })
@@ -53,7 +53,7 @@ onMounted(async () => {
 
 <template>
     <div class="lg:ml-44 mt-20 lg:mt-20">
-        <MoviesFilter/>
+        <MoviesFilter />
         <div v-if="errorMessage">
             {{ errorMessage }}
         </div>
@@ -69,6 +69,6 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-        <Pagination/>
+        <Pagination />
     </div>
 </template>

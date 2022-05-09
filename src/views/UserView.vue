@@ -39,8 +39,8 @@ onMounted(async () => {
             reviewData.error = error;
             reviewData.value = value;
         } catch (err) {
-                                                                   AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+            AuthService.removeTokensAndClearStore();
+            router.push("/signin");
         }
     }
 })

@@ -40,22 +40,22 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
             reviewData.value = value;
         }
     } catch (err) {
-                                        AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 }
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
- const headers = await AuthService.getHeaderToken();
+        const headers = await AuthService.getHeaderToken();
         try {
             const user = await authStore.getProfile(headers)
             userData.error = user.error;
             userData.value = user.value;
             await getReviews(headers, route.query);
         } catch (err) {
-                                            AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+            AuthService.removeTokensAndClearStore();
+            router.push("/signin");
         }
     }
 })

@@ -78,7 +78,8 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>
 
-                <div @click="props.signOut" class="flex justify-end px-4 py-4 mx-2 mt-5 cursor-pointer rounded transition duration-200 hover:bg-gray-800">
+                <div @click="props.signOut"
+                    class="flex justify-end px-4 py-4 mx-2 mt-5 cursor-pointer rounded transition duration-200 hover:bg-gray-800">
                     <p class="pr-2 hover:-translate-x-3 transition duration-700">Sign out</p>
                     <CustomSVG :svgName="'sign-out'" :class="'text-white w-6 h-6 inline'" />
                 </div>

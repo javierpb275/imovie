@@ -38,8 +38,8 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
         reviewData.error = returnData.error
         reviewData.value = returnData.value;
     } catch (err) {
-                                                    AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 }
 
@@ -49,8 +49,8 @@ onMounted(async () => {
         try {
             await getReviews(headers, route.query)
         } catch (err) {
-                                                        AuthService.removeTokensAndClearStore();
-      router.push("/signin");
+            AuthService.removeTokensAndClearStore();
+            router.push("/signin");
         }
     }
 })
@@ -59,7 +59,7 @@ onMounted(async () => {
 <template>
     <div class="min-h-screen">
         <div class="lg:ml-44 mt-20 lg:mt-20">
-            <ReviewsFilter/>
+            <ReviewsFilter />
             <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
             <ButtonGroupUsersFollowees />
         </div>
@@ -73,7 +73,7 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
-        <Pagination class="my-2"/>
+            <Pagination class="my-2" />
         </div>
     </div>
 </template>
