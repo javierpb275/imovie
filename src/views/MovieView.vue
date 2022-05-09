@@ -24,7 +24,7 @@ const reviewData = reactive<IReturnData>({
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const headers = AuthService.getHeaderToken();
+        const headers = await AuthService.getHeaderToken();
         try {
             await movieStore.getMovies(headers, { title: route.params.title });
             const { error, value } = await reviewStore.getMovieReviews(

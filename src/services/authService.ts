@@ -131,11 +131,13 @@ export class AuthService {
 
   //REFRESH TOKEN---------------------------------------------------PENDING FIXING REFRESHTOKEN
   static async refreshToken(): Promise<IReturnData> {
+    localStorage.setItem("is_refreshing", "true");
     const returnData: IReturnData = {
       error: false,
       value: "",
     };
     if (!localStorage.getItem(Tokens.REFRESH_TOKEN)) {
+      localStorage.removeItem("is_refreshing");
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-001";
       return returnData;
@@ -152,12 +154,14 @@ export class AuthService {
       const data = await response.json();
 
       if (data.error) {
+        localStorage.removeItem("is_refreshing");
         returnData.error = true;
         returnData.value = data.error;
         return returnData;
       }
 
       if (!data.accessToken || !data.refreshToken) {
+        localStorage.removeItem("is_refreshing");
         returnData.error = true;
         returnData.value = "Authentication problem. Error Code: IMO-001-001";
         return returnData;
@@ -172,11 +176,13 @@ export class AuthService {
 
       console.log('refreshtoken',data)
     } catch (err) {
+      localStorage.removeItem("is_refreshing");
       console.log(err);
       returnData.error = true;
       returnData.value = "Authentication problem. Error Code: IMO-001-000";
     }
 
+    localStorage.removeItem("is_refreshing");
     return returnData;
   }
 
@@ -231,7 +237,7 @@ export class AuthService {
 
   //GET AND VALIDATE HEADER TOKEN
   static async getAndValidateHeaderToken(): Promise<HeadersType> {
-    let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+    let accessToken = await checkIfAlreadyRefreshingToken();
     let refreshToken = localStorage.getItem(Tokens.REFRESH_TOKEN);
 
     if (!refreshToken || !accessToken) {
@@ -273,8 +279,46 @@ export class AuthService {
     return { Authorization: `Bearer ${accessToken}` };
   }
 
-  static getHeaderToken(): HeadersType {
-    let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
+  static async getHeaderToken(): Promise<HeadersType> {
+    let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN)
+    if (isTokenExpired(accessToken)) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      accessToken = await checkIfAlreadyRefreshingToken();
+    }
     return { Authorization: `Bearer ${accessToken}` };
   }
 }
+
+const checkIfAlreadyRefreshingToken = async () => {
+  if (localStorage.getItem("is_refreshing")) {
+    let a = 50;
+    let refreshed = false;
+
+    do {
+      await new Promise((resolve) => setTimeout(resolve, 250));
+
+      if (!localStorage.getItem("is_refreshing")) {
+        refreshed = true;
+      }
+
+      a--;
+    } while (a > 0 || !refreshed);
+  }
+
+  return localStorage.getItem(Tokens.ACCESS_TOKEN);
+};
+
+const isTokenExpired = (token: string | null) => {
+  if (!token) {
+    return true;
+  }
+
+  const payload = JSON.parse(atob(token.split(".")[1])) as IPayload;
+
+  const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
+  if (minutes >= 10) {
+    return true;
+  } else {
+    return false;
+  }
+};

@@ -15,7 +15,7 @@ const errorMessage = ref<string>("");
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const headers = AuthService.getHeaderToken();
+        const headers = await AuthService.getHeaderToken();
         try {
             const data = await userStore.getFollowees(headers, route.query)
             if (data.error) {

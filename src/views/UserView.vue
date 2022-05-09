@@ -29,7 +29,7 @@ const userData = reactive<IReturnData>({
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const headers = AuthService.getHeaderToken();
+        const headers = await AuthService.getHeaderToken();
         try {
             const users = await userStore.getUsers(headers, { username: route.params.username })
             userData.error = users.error;

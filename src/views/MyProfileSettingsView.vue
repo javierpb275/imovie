@@ -11,7 +11,7 @@ const authStore = useAuthStore();
 
 onMounted(async () => {
   if (authStore.isAuthorized) {
-    const headers = AuthService.getHeaderToken();
+    const headers = await AuthService.getHeaderToken();
     try {
       const data = await authStore.getProfile(headers);
       if (data.error) {

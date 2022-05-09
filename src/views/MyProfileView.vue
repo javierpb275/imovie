@@ -45,7 +45,7 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
- const headers = AuthService.getHeaderToken();
+ const headers = await AuthService.getHeaderToken();
         try {
             const user = await authStore.getProfile(headers)
             userData.error = user.error;

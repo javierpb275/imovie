@@ -43,7 +43,7 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const headers = AuthService.getHeaderToken();
+        const headers = await AuthService.getHeaderToken();
         try {
             await getReviews(headers, route.query)
         } catch (err) {

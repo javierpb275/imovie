@@ -25,7 +25,7 @@ const moviesData = reactive<IReturnData>({
 
 onMounted(async () => {
     if (authStore.isAuthorized) {
-        const headers = AuthService.getHeaderToken();
+        const headers = await AuthService.getHeaderToken();
         try {
             const data = await movieStore.getMovies(headers, {sort: '-year', ...route.query})
             let returnMovies: IReturnData = {

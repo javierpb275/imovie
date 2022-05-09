@@ -55,7 +55,7 @@ const followUnfollow = async () => {
 
 onMounted(async () => {
     if (props.user._id !== authStore.user?._id) {
-        const headers = AuthService.getHeaderToken();
+        const headers = await AuthService.getHeaderToken();
         try {
             const { error, value } = await userStore.getFollowees(headers, { username: props.user.username });
             followeesData.error = error;

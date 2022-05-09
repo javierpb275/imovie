@@ -12,7 +12,7 @@ const errorMessage = ref<string>("");
 const favReviews = ref<IReview[]|null>(null)
 
 onMounted(async () => {
-    const headers = AuthService.getHeaderToken();
+    const headers = await AuthService.getHeaderToken();
     try {
         const returnData = await authStore.getFavoriteReviews(headers)
         if (returnData.error) {
