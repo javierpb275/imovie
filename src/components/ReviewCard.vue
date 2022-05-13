@@ -172,10 +172,10 @@ onMounted(async () => {
                 </div>
             </div>
 
-                <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 cursor-pointer lg:hidden'"
+                <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 ml-64 cursor-pointer lg:hidden'"
                     @click="showText" />
 
-            <div id="text-container" class="mx-auto mt-4 mb-1 cursor-pointer lg:hidden"
+            <div id="text-container" class="mx-auto mb-1 cursor-pointer lg:hidden"
                 v-if="upDownArrow === 'up-arrow'">
                 <p class="text-gray-700 text-sm mb-0 mt-1">{{ props.text }}</p>
 
