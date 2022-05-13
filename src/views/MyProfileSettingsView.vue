@@ -9,7 +9,6 @@ const errorMessage = ref<string>("");
 const authStore = useAuthStore();
 const router = useRouter();
 
-
 onMounted(async () => {
   if (authStore.isAuthorized) {
     const headers = await AuthService.getHeaderToken();
@@ -53,6 +52,8 @@ const avatars = [
 const selectedAvatar = (avatarUrl:string) => {
   user.avatar = avatarUrl;
 }
+
+
 
 const updateUser = async () => {
   if (!user.username.length) {
@@ -107,10 +108,9 @@ const updateUser = async () => {
                 type="password" name="password" placeholder="Your password" />
         </div>
 
-        <div v-if="errorMessage.length" class="text-red-700">
+        <div v-if="errorMessage.length" class="text-red-700 font-bold">
           {{errorMessage}}
         </div>
-
 
 
         <p class=" text-xl mb-3 mt-8 lg:my-10">Choose a new avatar:</p>
@@ -119,7 +119,11 @@ const updateUser = async () => {
         <div class="lg:ml-28 mx-auto">
           <div class="grid grid-cols-4 items-center">
             <div v-for="avatar in avatars" :key="avatar" class="mb-4">
-                <img :src="avatar" class="w-40 h-auto rounded-full hover:scale-110 transition duration-500 cursor-pointer" 
+                <img v-if="user.avatar === avatar" :src="avatar" class="border-double border-8 border-red-700 w-40 h-auto rounded-full hover:scale-110 transition duration-500 cursor-pointer" 
+                @click="selectedAvatar(avatar)"
+                >
+
+                <img v-else :src="avatar" class="w-40 h-auto rounded-full hover:scale-110 transition duration-500 cursor-pointer" 
                 @click="selectedAvatar(avatar)"
                 >
             </div>

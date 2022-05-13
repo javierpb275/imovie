@@ -4,7 +4,6 @@ import CustomSVG from "./CustomSVG.vue";
 import { ref, onMounted } from "vue";
 import RatingStars from "./RatingStars.vue";
 import { useAuthStore } from "../stores/auth";
-import { reviews } from "../assets/reviews";
 import { useReviewStore } from "../stores/review";
 import { AuthService } from "../services/authService";
 import { useRouter } from 'vue-router';
@@ -155,9 +154,9 @@ onMounted(async () => {
         <div class="block p-3 my-5 rounded-lg shadow-xl bg-white w-80 lg:w-4/5">
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4 ">
-                    <div class="ml-4">
+                    <div>
                         <CustomAvatar :avatar-url="props.avatar"
-                            :class="'rounded-full w-12 h-12 hover:scale-110 transition duration-500 cursor-pointer'"
+                            :class="'rounded-full w-14 h-14 hover:scale-110 transition duration-500 cursor-pointer'"
                             @click="goToUser(props.username)" />
                     </div>
                     <div class="text-left">{{ props.username }}</div>
@@ -173,10 +172,10 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 float-right cursor-pointer lg:hidden'"
-                @click="showText" />
+                <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 cursor-pointer lg:hidden'"
+                    @click="showText" />
 
-            <div id="text-container" class="float-left mt-0 mb-1 cursor-pointer lg:hidden"
+            <div id="text-container" class="mx-auto mt-4 mb-1 cursor-pointer lg:hidden"
                 v-if="upDownArrow === 'up-arrow'">
                 <p class="text-gray-700 text-sm mb-0 mt-1">{{ props.text }}</p>
 
@@ -204,13 +203,11 @@ onMounted(async () => {
                 <span class="float-left mr-1">{{ props.dislikes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbDown"
                     :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike(props.id)" />
-
-                <!-- El botón de favoritear desaparece en versión movil, sin puto sentido -->
+                
                 <div id="fav-like-button-container" class="mb-0 mt-10">
                     <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
                         @click="checkIfFavorite(props.id)" />
                 </div>
-                <!-- fin del botón de favoritear -->
 
                 <span class="float-left mr-1 ml-4">{{ props.likes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"

@@ -67,8 +67,8 @@ onMounted(async () => {
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>
-            <div v-else-if="!reviewData.value.length">
-                NO REVIEWS FOUND
+            <div v-else-if="!reviewData.value.length" class="mx-auto text-red-700">
+                No reviews found
             </div>
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
