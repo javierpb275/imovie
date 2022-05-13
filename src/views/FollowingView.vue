@@ -5,6 +5,7 @@ import { useAuthStore } from '../stores/auth';
 import { AuthService } from '../services/authService';
 import { useRoute, useRouter } from "vue-router";
 import { useUserStore } from '../stores/user';
+import Pagination from '../components/Pagination.vue';
 
 const router = useRouter()
 const route = useRoute();
@@ -45,6 +46,6 @@ onMounted(async () => {
         <div v-else>
                 <UserList :users="userStore.users" />
         </div>
-
+<Pagination class="my-2" />
     </div>
 </template>
