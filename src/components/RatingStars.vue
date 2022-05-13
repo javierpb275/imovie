@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import CustomSVG from './CustomSVG.vue';
+import { useReviewStore } from '../stores/review';
+
+const reviewStore = useReviewStore();
 
 const props = defineProps({
     size: {
@@ -27,6 +30,7 @@ const points = ref<number>(props.points)
 const changePoints = (number: number) => {
     if (props.isFor === "create-review") {
         points.value = number;
+        reviewStore.reviewPoints = number;
     }
 }
 </script>

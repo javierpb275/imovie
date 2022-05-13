@@ -9,6 +9,7 @@ export const useReviewStore = defineStore("review", {
   state: () => ({
     reviews: [] as IReview[],
     review: null as IReview | null,
+    reviewPoints: 3
   }),
   getters: {},
   actions: {
@@ -75,7 +76,7 @@ export const useReviewStore = defineStore("review", {
     },
     async createReview(
       headers: HeadersType,
-      review: IReview
+      review: any
     ): Promise<IReturnData> {
       try {
         const response = await FetchService.callApi(
