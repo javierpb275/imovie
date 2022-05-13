@@ -77,10 +77,8 @@ onMounted(async () => {
 
 <template>
     <div class="max-w-5xl flex items-center h-auto flex-wrap mx-auto lg:ml-96 mt-24 lg:my-0">
-        <!--Main Col-->
         <div id="profile" class="w-full lg:w-3/5 rounded-lg mx-6 lg:mx-0">
             <div class="p-4 md:p-12 text-center lg:text-left">
-                <!-- Image for mobile view-->
                 <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-40 w-40 bg-cover bg-center"
                     :style="`background-image: url('${user.avatar}')`"></div>
 
@@ -92,7 +90,6 @@ onMounted(async () => {
                     <p class="pt-3 text-md">||</p>
                     <p class="pt-3 text-md">{{ user.followers.length }} Followers</p>
                 </div>
-                <!--------------------JAVIER---------------------------->
                 <div class="pt-8 pb-8">
                     <button v-if="user._id === authStore.user?._id"
                         class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
@@ -109,11 +106,8 @@ onMounted(async () => {
                         </button>
                     </div>
                 </div>
-                <!------------------------------------------------------>
             </div>
         </div>
-
-        <!--Img Col-->
         <div class="w-full lg:w-1/5">
             <img :src="user.avatar" class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block" />
         </div>

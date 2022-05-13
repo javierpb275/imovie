@@ -31,7 +31,7 @@ onMounted(async () => {
             const { error, value } = await reviewStore.getMovieReviews(
                 headers,
                 route.params.title,
-                { limit: 9999999999, ...route.query }
+                { limit: 0, ...route.query }
             );
             reviewData.error = error;
             reviewData.value = value;

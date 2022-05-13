@@ -205,12 +205,10 @@ onMounted(async () => {
                 <CustomSVG :svgName="filledEmptyThumbDown"
                     :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike(props.id)" />
 
-                <!-- El botón de favoritear desaparece en versión movil, sin puto sentido -->
                 <div id="fav-like-button-container" class="mb-0 mt-10">
                     <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
                         @click="checkIfFavorite(props.id)" />
                 </div>
-                <!-- fin del botón de favoritear -->
 
                 <span class="float-left mr-1 ml-4">{{ props.likes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"

@@ -9,6 +9,7 @@ import { useReviewStore } from '../stores/review';
 import { AuthService } from '../services/authService';
 import { HeadersType, IReturnData } from '../services/serviceTypes';
 import Spinner from '../components/Spinner.vue';
+import Pagination from '../components/Pagination.vue';
 
 const router = useRouter();
 const route = useRoute();
@@ -83,6 +84,7 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
+            <Pagination class="my-2" />
         </div>
     </div>
 </template>

@@ -3,7 +3,7 @@ import Navbar from './components/Navbar.vue';
 </script>
 
 <template>
-  <div class="h-screen">
+  <div class="h-full">
     <Navbar />
     <router-view :key="$route.fullPath"></router-view>
   </div>
