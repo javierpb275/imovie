@@ -23,6 +23,8 @@ const moviesData = reactive<IReturnData>({
     value: null
 })
 
+const disableNext = ref<boolean>(false);
+
 onMounted(async () => {
     if (authStore.isAuthorized) {
         const headers = await AuthService.getHeaderToken();
@@ -37,10 +39,15 @@ onMounted(async () => {
             moviesData.value = returnMovies.value
             if (data.error) {
                 errorMessage.value = data.value;
+                disableNext.value = true;
                 return;
+            }
+            if (data.value.length < 10) {
+                disableNext.value = true;
             }
             if (!data.value.length) {
                 errorMessage.value = "No movies found!";
+                disableNext.value = true;
                 return;
             }
         } catch (err) {
@@ -68,7 +75,7 @@ onMounted(async () => {
                     <MovieCardList :movies="movieStore.movies" />
                 </div>
             </div>
+            <Pagination :disableNext="disableNext" />
         </div>
-        <Pagination />
     </div>
 </template>

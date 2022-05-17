@@ -11,12 +11,6 @@ const goTo = (path: string) => {
     router.push(`/reviews/${path}`);
 };
 
-const upDownArrow = ref<string>("down-arrow");
-
-const showOrderButtonGroup = () => {
-    upDownArrow.value =
-        upDownArrow.value === "down-arrow" ? "up-arrow" : "down-arrow";
-};
 </script>
 
 <template>
@@ -40,11 +34,6 @@ const showOrderButtonGroup = () => {
                     All users
                 </button>
             </div>
-            <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 ml-2 text-gray-900 cursor-pointer absolute'"
-                @click="showOrderButtonGroup" />
-        </div>
-        <div v-if="upDownArrow === 'up-arrow'">
-            <ButtonGroupLikesPoints />
         </div>
     </div>
 </template>
