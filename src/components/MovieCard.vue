@@ -38,7 +38,8 @@ const props = defineProps({
 
 <template>
   <div class="flex justify-center">
-    <div class="block p-3 my-3 rounded-lg shadow-lg bg-white dark:bg-gray-800 w-56 hover:scale-105 transition duration-700">
+    <div
+      class="block p-3 my-3 rounded-lg shadow-lg bg-white dark:bg-gray-800 w-56 hover:scale-105 transition duration-700">
       <img class="w-full cursor-pointer" :src="props.posterUrl" :alt="props.title" @click="goToMovie(props.title)" />
       <div class="px-2 py-1">
         <div class="font-bold text-xl mb-2" @click="goToMovie(props.title)">{{ props.title }}</div>

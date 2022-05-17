@@ -18,6 +18,7 @@ const userStore = useUserStore();
 const reviewStore = useReviewStore();
 
 const errorMessage = ref<string>("");
+const disableNext = ref<boolean>(false);
 
 const reviewData = reactive<IReturnData>({
     error: false,
@@ -39,6 +40,11 @@ onMounted(async () => {
             const { error, value } = await reviewStore.getUserReviews(headers, route.params.username, route.query)
             reviewData.error = error;
             reviewData.value = value;
+            if (reviewData.value.length < 10) {
+                disableNext.value = true;
+            } else {
+                disableNext.value = false;
+            }
         } catch (err) {
             AuthService.removeTokensAndClearStore();
             router.push("/signin");
@@ -66,7 +72,7 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
-            <Pagination class="my-2" />
+            <Pagination class="my-2" :disableNext="disableNext" />
         </div>
     </div>
 </template>

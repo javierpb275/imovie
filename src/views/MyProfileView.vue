@@ -28,6 +28,8 @@ const userData = reactive<IReturnData>({
     value: null
 });
 
+const disableNext = ref<boolean>(false);
+
 const getReviews = async (headers: HeadersType, queryObject?: object) => {
     try {
         if (route.params.reviews === 'my-reviews') {
@@ -39,6 +41,11 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
             const { error, value } = await reviewStore.getFavoriteReviews(headers, queryObject)
             reviewData.error = error;
             reviewData.value = value;
+        }
+        if (reviewData.value.length < 10) {
+            disableNext.value = true;
+        } else {
+            disableNext.value = false;
         }
     } catch (err) {
         AuthService.removeTokensAndClearStore();
@@ -84,7 +91,7 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
-            <Pagination class="py-6" />
+            <Pagination class="py-6" :disableNext="disableNext" />
         </div>
     </div>
 </template>

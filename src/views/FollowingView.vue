@@ -15,6 +15,8 @@ const userStore = useUserStore();
 
 const errorMessage = ref<string>("");
 
+const disableNext = ref<boolean>(false);
+
 onMounted(async () => {
     if (authStore.isAuthorized) {
         const headers = await AuthService.getHeaderToken();
@@ -22,10 +24,15 @@ onMounted(async () => {
             const data = await userStore.getFollowees(headers, route.query)
             if (data.error) {
                 errorMessage.value = data.value;
+                disableNext.value = true;
                 return;
+            }
+            if (data.value.length < 10) {
+                disableNext.value = true;
             }
             if (!data.value.length) {
                 errorMessage.value = "You are not following anybody yet!";
+                disableNext.value = true;
                 return;
             }
         } catch (err) {
@@ -46,8 +53,8 @@ onMounted(async () => {
 
         <!-- En modo oscuro hay un faldón blanco -->
         <div v-else>
-                <UserList :users="userStore.users" />
+            <UserList :users="userStore.users" />
         </div>
-        <Pagination class="py-6" />
+        <Pagination class="py-6" :disableNext="disableNext" />
     </div>
 </template>

@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import Navbar from './components/Navbar.vue';
 
-
-
-
 // Dark/light mode
 
 import { ref, onMounted } from 'vue';
@@ -43,13 +40,6 @@ const userTheme = ref<UserTheme>(getTheme() || getMediaPreference());
 onMounted(() => setTheme(userTheme.value));
 
 // End dark/light mode
-
-
-
-
-
-
-
 
 </script>
 

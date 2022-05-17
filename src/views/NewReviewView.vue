@@ -19,7 +19,6 @@ const theMovie = ref<string>("");
 
 const newReview = reactive<any>({
     text: "",
-    // points: reviewStore.reviewPoints,
     movie: "",
 })
 
@@ -27,27 +26,28 @@ const newReview = reactive<any>({
 
 async function searchMovie() {
     if (authStore.isAuthorized) {
-    try {
-        const headers = await AuthService.getHeaderToken();
-      const data = await movieStore.getMovies(headers, {title:theMovie.value});
-      if (data.error) {
-        errorMessage.value = data.value;
-        return;
-      }
+        try {
+            const headers = await AuthService.getHeaderToken();
+            const data = await movieStore.getMovies(headers, { title: theMovie.value });
+            if (data.error) {
+                errorMessage.value = data.value;
+                return;
+            }
 
-      if (!data.value.length) {
-        errorMessage.value = "Movie not found";
-        return;
-      }
+            if (!data.value.length) {
+                errorMessage.value = "Movie not found";
+                return;
+            }
 
-      errorMessage.value = data.value[0].title;
+            errorMessage.value = data.value[0].title;
 
-      newReview.movie = data.value[0]._id;
+            newReview.movie = data.value[0]._id;
 
-    } catch (err) {
-      errorMessage.value = "Error Getting Movie";
+        } catch (err) {
+            AuthService.removeTokensAndClearStore();
+            router.push("/signin");
+        }
     }
-  }
 }
 
 async function createReview() {
@@ -57,9 +57,9 @@ async function createReview() {
     }
     try {
         const headers = await AuthService.getHeaderToken();
-        const response = await reviewStore.createReview(headers, {...newReview, points: reviewStore.reviewPoints});
-        
-        if(response.error) {
+        const response = await reviewStore.createReview(headers, { ...newReview, points: reviewStore.reviewPoints });
+
+        if (response.error) {
             errorMessageCreateReview.value = "Error Creating the Review";
             return;
         }
@@ -67,9 +67,10 @@ async function createReview() {
         router.push(`/movie/${theMovie.value}`);
         reviewStore.reviewPoints = 3;
 
-        
+
     } catch (err) {
-        errorMessageCreateReview.value = "Error Creating the Review";
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
     }
 }
 </script>
@@ -77,8 +78,9 @@ async function createReview() {
 <template>
     <div>
         <div class="lg:ml-64 lg:mr-14 mt-28">
-            <input v-model="theMovie" type="text" class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4" 
-            name="search" placeholder="Search movie..."/>
+            <input v-model="theMovie" type="text"
+                class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
+                name="search" placeholder="Search movie..." />
 
 
             <button type="button" @click="searchMovie"
@@ -88,15 +90,16 @@ async function createReview() {
 
             <div class="my-10 font-bold text-xl">{{ errorMessage }}</div>
 
-            <textarea
-                v-model="newReview.text"
+            <textarea v-model="newReview.text"
                 class="lg:w-auto w-80 rounded-lg placeholder:italic placeholder:text-slate-400 border border-slate-300 shadow-sm focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
                 rows="4" cols="50" placeholder="Write here your opinion:"></textarea>
 
-            <RatingStars :class="'flex justify-center mt-4 mb-12 cursor-pointer hover:scale-105 transition duration-500'" :size="10" :points="reviewStore.reviewPoints" :isFor="'create-review'" />
+            <RatingStars
+                :class="'flex justify-center mt-4 mb-12 cursor-pointer hover:scale-105 transition duration-500'"
+                :size="10" :points="reviewStore.reviewPoints" :isFor="'create-review'" />
 
             <div v-if="errorMessageCreateReview.length" class="text-red-700">
-            {{errorMessageCreateReview}}
+                {{ errorMessageCreateReview }}
             </div>
 
             <button type="button"

@@ -73,7 +73,8 @@ const signOut = async () => {
       </router-link>
 
       <router-link to="/new-review" href="#">
-        <CustomSVG :svgName="'plus-icon'" :class="'text-gray-800 dark:text-slate-400 hover:scale-110 transition duration-500'" />
+        <CustomSVG :svgName="'plus-icon'"
+          :class="'text-gray-800 dark:text-slate-400 hover:scale-110 transition duration-500'" />
       </router-link>
     </nav>
 

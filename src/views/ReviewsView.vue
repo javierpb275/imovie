@@ -23,6 +23,8 @@ const reviewData = reactive<IReturnData>({
     value: null
 });
 
+const disableNext = ref<boolean>(false);
+
 const getReviews = async (headers: HeadersType, queryObject?: object) => {
     let returnData: IReturnData = {
         error: false,
@@ -33,10 +35,15 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
             returnData = await reviewStore.getReviews(headers, queryObject)
         }
         if (route.params.users === 'followed-users') {
-            returnData = await reviewStore.getReviews(headers, { followers: authStore.user._id, ...queryObject })
+            returnData = await reviewStore.getReviews(headers, { followers: authStore.user._id, ...queryObject, limit: 0 })
         }
         reviewData.error = returnData.error
         reviewData.value = returnData.value;
+        if (reviewData.value.length < 10) {
+            disableNext.value = true;
+        } else {
+            disableNext.value = false;
+        }
     } catch (err) {
         AuthService.removeTokensAndClearStore();
         router.push("/signin");
@@ -73,8 +80,9 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
-                    <Pagination class="py-6" />
-
+            <div v-if="!route.fullPath.includes('followed-users')">
+                <Pagination class="py-6" :disableNext="disableNext" />
+            </div>
         </div>
     </div>
 </template>
