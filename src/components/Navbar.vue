@@ -63,9 +63,9 @@ const signOut = async () => {
 
 <template>
   <div v-if="authStore.isAuthorized">
-    <nav class="fixed w-full top-0 z-50 flex justify-between px-4 py-4 mb-4 bg-white">
+    <nav class="fixed w-full top-0 z-50 flex justify-between px-4 py-6 bg-white dark:bg-gray-800">
       <div class="flex lg:hidden">
-        <CustomSVG :svgName="'hamburger'" :class="'text-gray-800'" @click="showVerticalMenu" />
+        <CustomSVG :svgName="'hamburger'" :class="'text-gray-800 dark:text-slate-400'" @click="showVerticalMenu" />
       </div>
 
       <router-link to="/reviews/followed-users" href="#">
@@ -73,7 +73,7 @@ const signOut = async () => {
       </router-link>
 
       <router-link to="/new-review" href="#">
-        <CustomSVG :svgName="'plus-icon'" :class="'text-gray-800 hover:scale-110 transition duration-500'" />
+        <CustomSVG :svgName="'plus-icon'" :class="'text-gray-800 dark:text-slate-400 hover:scale-110 transition duration-500'" />
       </router-link>
     </nav>
 

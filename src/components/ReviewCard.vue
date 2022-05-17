@@ -151,7 +151,7 @@ onMounted(async () => {
 
 <template>
     <div class="flex justify-center">
-        <div class="block p-3 my-5 rounded-lg shadow-xl bg-white w-80 lg:w-4/5">
+        <div class="block p-3 my-5 rounded-lg shadow-xl bg-white dark:bg-gray-800 w-80 lg:w-4/5">
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4 ">
                     <div>
@@ -162,7 +162,7 @@ onMounted(async () => {
                     <div class="text-left">{{ props.username }}</div>
                 </div>
 
-                <h6 class="text-gray-900 text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto w-max"
+                <h6 class="text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto w-max"
                     @click="goToMovie(props.movieTitle)">
                     {{ props.movieTitle }}
                 </h6>
@@ -177,7 +177,7 @@ onMounted(async () => {
 
             <div id="text-container" class="mx-auto mb-1 cursor-pointer lg:hidden"
                 v-if="upDownArrow === 'up-arrow'">
-                <p class="text-gray-700 text-sm mb-0 mt-1">{{ props.text }}</p>
+                <p class="text-sm mb-0 mt-1">{{ props.text }}</p>
 
                 <div class="mb-0 mt-3 inline-flex">
                     <span class="float-left mr-1">{{ props.dislikes.length }}</span>
@@ -195,7 +195,7 @@ onMounted(async () => {
                         @click="checkIfLike(props.id)" />
                 </div>
             </div>
-            <p class="text-gray-700 text-sm mb-2 mt-1 hidden lg:block">
+            <p class="text-sm mb-2 mt-1 hidden lg:block">
                 {{ props.text }}
             </p>
 

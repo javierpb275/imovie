@@ -37,15 +37,17 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="mt-24 h-full lg:ml-28">
-        <p class=" text-2xl font-bold">My followed users</p>
+    <div class="pt-24 h-full lg:ml-28">
+        <p class=" text-2xl font-bold lg:pb-5">My followed users</p>
 
-        <div v-if="!userStore.users.length" class="mt-20">
+        <div v-if="!userStore.users.length" class="pt-20">
             You aren't following anyone yet
         </div>
+
+        <!-- En modo oscuro hay un faldón blanco -->
         <div v-else>
                 <UserList :users="userStore.users" />
         </div>
-<Pagination class="my-2" />
+        <Pagination class="py-6" />
     </div>
 </template>

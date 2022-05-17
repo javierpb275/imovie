@@ -58,7 +58,7 @@ onMounted(() => {
                 type="search" name="search" :placeholder="filterProperty + '...'" v-model="filterValue"
                 @keydown.enter="findMovie" />
             <button type="submit" class="absolute top-0 mt-5 mr-4 ml-2" @click="findMovie">
-                <CustomSVG :svgName="'search'" :class="'text-gray-900 h-5 w-5 fill-current'" />
+                <CustomSVG :svgName="'search'" :class="'text-gray-900 dark:text-slate-400 h-5 w-5 fill-current'" />
             </button>
         </div>
     </div>

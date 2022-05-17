@@ -32,7 +32,7 @@ const submit = async () => {
 
 <template>
   <div class="min-h-screen">
-    <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 mt-8 lg:ml-12 mx-auto" />
+    <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-48 mb-20 pt-8 lg:ml-12 mx-auto" />
     <div class="lg:w-2/4 lg:mx-auto">
       <form class="px-8 pt-6 pb-8 mb-4" @submit.prevent="submit">
         <div class="mb-4">
@@ -53,7 +53,7 @@ const submit = async () => {
             class="bg-red-700 hover:bg-red-800 text-white font-bold py-2 px-10 rounded focus:outline-none focus:shadow-outline"
             type="submit">Sign In</button>
           <div>
-            <router-link to="/signup" class="align-baseline font-bold text-sm text-red-700 hover:text-red-800" href="#">
+            <router-link to="/signup" class="align-baseline font-bold text-sm text-red-700 hover:text-red-600" href="#">
               Sign up</router-link>
           </div>
         </div>

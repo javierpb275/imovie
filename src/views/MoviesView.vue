@@ -60,7 +60,7 @@ onMounted(async () => {
         <div v-else>
             <p class="mt-7 mb-2 text-2xl font-bold">Movies</p>
 
-            <div class="max-w-5xl h-auto mx-auto lg:mb-24">
+            <div class="max-w-5xl h-auto mx-auto lg:mb-20">
                 <div v-if="!moviesData.value">
                     <Spinner />
                 </div>
@@ -69,6 +69,6 @@ onMounted(async () => {
                 </div>
             </div>
         </div>
-        <Pagination />
+        <Pagination class="py-6" />
     </div>
 </template>

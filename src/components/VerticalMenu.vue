@@ -41,10 +41,10 @@ const errorMessage = computed(() =>
 </script>
 
 <template>
-    <div class="fixed h-full top-12 z-40">
+    <div class="fixed h-full top-16 z-40">
         <!-- sidebar -->
         <div
-            class="sidebar bg-red-800 text-white w-64 space-y-10 pt-4 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
+            class="sidebar bg-red-800 text-white dark:bg-red-900 w-64 space-y-10 pt-4 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
                 @click="props.openedVerticalMenu">
                 <CustomAvatar :avatar-url="authUser.avatar" :class="'rounded-full w-28 h-28 mb-3'"
@@ -83,7 +83,7 @@ const errorMessage = computed(() =>
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </div>
 
-                <div @click="props.signOut" class="flex justify-end mt-14 mr-6 cursor-pointer">
+                <div @click="props.signOut" class="flex justify-end mt-12 mr-6 cursor-pointer">
                     <p class="pr-2 hover:-translate-x-3 transition duration-700">Sign out</p>
                     <CustomSVG :svgName="'sign-out'" :class="'text-white w-6 h-6 inline'" />
                 </div>

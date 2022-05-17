@@ -65,13 +65,13 @@ onMounted(async () => {
 
 <template>
     <div>
-        <div v-if="!userData.value" class="my-56">
+        <div v-if="!userData.value" class="lg:ml-64 py-56">
             <Spinner />
         </div>
         <div v-else class="mt-32 lg:mt-12">
             <ProfileCard :user="userData.value" />
         </div>
-        <div class="lg:ml-64 lg:mr-14 lg:my-5">
+        <div class="lg:ml-64 lg:mr-14 lg:mt-5">
             <ButtonGroupMyOpinionsFavoriteOpinions />
             <p v-if="route.params.reviews === 'my-reviews'" class="mb-4 text-2xl font-bold">My Reviews</p>
             <p v-if="route.params.reviews === 'favorite-reviews'" class="mb-4 text-2xl font-bold">Favorite Reviews</p>
@@ -84,7 +84,7 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
-            <Pagination class="my-2" />
+            <Pagination class="py-6" />
         </div>
     </div>
 </template>

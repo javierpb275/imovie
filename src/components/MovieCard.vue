@@ -38,17 +38,17 @@ const props = defineProps({
 
 <template>
   <div class="flex justify-center">
-    <div class="block p-3 my-3 rounded-lg shadow-lg bg-white w-56 hover:scale-105 transition duration-700">
+    <div class="block p-3 my-3 rounded-lg shadow-lg bg-white dark:bg-gray-800 w-56 hover:scale-105 transition duration-700">
       <img class="w-full cursor-pointer" :src="props.posterUrl" :alt="props.title" @click="goToMovie(props.title)" />
       <div class="px-2 py-1">
         <div class="font-bold text-xl mb-2" @click="goToMovie(props.title)">{{ props.title }}</div>
-        <p class="text-gray-700 text-base float-left ml-16">{{ props.year }}</p>
-        <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 float-right cursor-pointer'"
+        <p class="dark:text-slate-400 text-base float-left ml-16">{{ props.year }}</p>
+        <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 dark:text-black float-right cursor-pointer'"
           @click="showText" />
       </div>
 
       <div id="text-container" class="float-left mt-0 mb-1" v-if="upDownArrow === 'up-arrow'">
-        <p class="text-gray-700 text-sm mb-0 text-left">{{ props.plot }}</p>
+        <p class="dark:text-slate-400 text-sm mb-0 text-left">{{ props.plot }}</p>
       </div>
     </div>
   </div>

@@ -63,7 +63,7 @@ onMounted(async () => {
             <p class="mt-7 mb-2 text-2xl font-bold">Latest opinions</p>
             <ButtonGroupUsersFollowees />
         </div>
-        <div class="lg:ml-64 lg:mr-14 lg:my-16">
+        <div class="lg:ml-64 lg:mr-14 lg:mt-16">
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>
@@ -73,7 +73,8 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
-            <Pagination class="my-2" />
+                    <Pagination class="py-6" />
+
         </div>
     </div>
 </template>
