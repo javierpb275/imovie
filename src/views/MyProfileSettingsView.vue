@@ -71,7 +71,7 @@ const updateUser = async () => {
   }
 
   try {
-    const headers = await AuthService.getHeaderToken();
+    const headers = await AuthService.getAndValidateHeaderToken();
     const response = await authStore.updateProfile(headers, user);
     if (response.error) {
       errorMessage.value = "Error Updating Profile";

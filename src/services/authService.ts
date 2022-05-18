@@ -19,7 +19,7 @@ export class AuthService {
     localStorage.setItem(Tokens.REFRESH_TOKEN, data.refreshToken);
   }
 
-  //REMOVE TOKENS AND CLEAR STORE-----------------------------------
+  //REMOVE TOKENS-----------------------------------
   static removeTokens() {
     localStorage.removeItem(Tokens.ACCESS_TOKEN);
     localStorage.removeItem(Tokens.REFRESH_TOKEN);
@@ -36,17 +36,6 @@ export class AuthService {
   static removeTokensAndClearStore() {
     AuthService.removeTokens();
     AuthService.clearStore();
-  }
-
-  //CHECK MINUTES OF TOKEN'S LIFE--------------------------------------------
-  static checkMinutesOfTokensLife(expiration: number) {
-    const expirationMs = expiration * 1000;
-    const now = Date.now();
-    const diffMs = now - expirationMs;
-    const minutes = Math.floor(diffMs / 60000);
-    //const seconds = ((diffMs % 60000) / 1000).toFixed(0);
-    //const time = minutes + ":" + (diffMs < 10 ? '0' : '') + seconds;
-    return minutes;
   }
 
   //SIGNIN-------------------------------------------------------
@@ -253,17 +242,15 @@ export class AuthService {
       return { Authorization: `ERROR` };
     }
 
-    //const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
-
     try {
-      //if (minutes >= 10) {
-      const result = await AuthService.refreshToken();
-      if (result.error) {
-        AuthService.removeTokensAndClearStore();
-        return { Authorization: `ERROR` };
+      if (checkIfRefreshToken(payload.exp)) {
+        const result = await AuthService.refreshToken();
+        if (result.error) {
+          AuthService.removeTokensAndClearStore();
+          return { Authorization: `ERROR` };
+        }
+        accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
       }
-      accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
-      //}
     } catch (err) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
@@ -272,12 +259,18 @@ export class AuthService {
     return { Authorization: `Bearer ${accessToken}` };
   }
 
+  //GET HEADER TOKEN------------------------
   static async getHeaderToken(): Promise<HeadersType> {
     let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
-    //if (isTokenExpired(accessToken)) {
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    accessToken = await checkIfAlreadyRefreshingToken();
-    //}
+    if (!accessToken) {
+      AuthService.removeTokensAndClearStore();
+      return { Authorization: `ERROR` };
+    }
+    const payload = JSON.parse(atob(accessToken.split(".")[1])) as IPayload;
+    if (checkIfRefreshToken(payload.exp)) {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      accessToken = await checkIfAlreadyRefreshingToken();
+    }
     return { Authorization: `Bearer ${accessToken}` };
   }
 }
@@ -301,17 +294,11 @@ const checkIfAlreadyRefreshingToken = async () => {
   return localStorage.getItem(Tokens.ACCESS_TOKEN);
 };
 
-const isTokenExpired = (token: string | null) => {
-  if (!token) {
-    return true;
-  }
-
-  const payload = JSON.parse(atob(token.split(".")[1])) as IPayload;
-
-  const minutes = AuthService.checkMinutesOfTokensLife(payload.exp);
-  if (minutes >= 10) {
-    return true;
-  } else {
-    return false;
-  }
+const checkIfRefreshToken = (expiration: number): boolean => {
+  const maxExpirationMinutesBeforeRefresh: number = 10;
+  const expirationInMs: number = expiration * 1000;
+  const renew: boolean =
+    (new Date(expirationInMs) - new Date()) / 1000 / 60 <
+    maxExpirationMinutesBeforeRefresh;
+  return renew;
 };

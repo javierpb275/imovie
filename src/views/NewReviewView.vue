@@ -22,12 +22,10 @@ const newReview = reactive<any>({
     movie: "",
 })
 
-
-
 async function searchMovie() {
     if (authStore.isAuthorized) {
         try {
-            const headers = await AuthService.getHeaderToken();
+            const headers = await AuthService.getAndValidateHeaderToken();
             const data = await movieStore.getMovies(headers, { title: theMovie.value });
             if (data.error) {
                 errorMessage.value = data.value;
@@ -56,7 +54,7 @@ async function createReview() {
         return;
     }
     try {
-        const headers = await AuthService.getHeaderToken();
+        const headers = await AuthService.getAndValidateHeaderToken();
         const response = await reviewStore.createReview(headers, { ...newReview, points: reviewStore.reviewPoints });
 
         if (response.error) {
