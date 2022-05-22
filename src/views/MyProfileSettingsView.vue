@@ -90,7 +90,7 @@ const updateUser = async () => {
 </script>
 
 <template>
-  <div class="mt-20 lg:mt-20 lg:ml-60 mx-auto">
+  <div class="pt-20 lg:mt-20 lg:ml-60 mx-auto">
     <p class=" text-2xl font-bold mb-10">My profile settings</p>
     <div class="mb-3">
       <div class="inline-block mr-10 w-20">Username</div>

@@ -44,7 +44,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="pt-24 h-full lg:ml-28">
+    <div class="pt-24 lg:ml-28">
         <p class=" text-2xl font-bold lg:pb-5">My followed users</p>
 
         <div v-if="!userStore.users.length" class="pt-20">

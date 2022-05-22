@@ -75,7 +75,7 @@ async function createReview() {
 
 <template>
     <div>
-        <div class="lg:ml-64 lg:mr-14 mt-28">
+        <div class="lg:ml-64 lg:mr-14 pt-28">
             <input v-model="theMovie" type="text"
                 class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
                 name="search" placeholder="Search movie..." />

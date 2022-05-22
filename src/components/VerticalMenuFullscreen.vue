@@ -2,8 +2,11 @@
 import CustomAvatar from "./CustomAvatar.vue";
 import CustomSVG from "./CustomSVG.vue";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { computed, ComputedRef } from "@vue/reactivity";
 import IUser from "../interfaces/user.interface";
+
+const router = useRouter();
 
 const darkLightMode = ref<string>("switch-light-mode");
 
@@ -12,6 +15,21 @@ const changeVisualMode = () => {
         darkLightMode.value === "switch-light-mode"
             ? "switch-dark-mode"
             : "switch-light-mode";
+};
+
+
+const toggleTheme = (): void => {
+  const activeTheme = localStorage.getItem('user-theme');
+  if (activeTheme === 'light') {
+    localStorage.setItem('user-theme', 'dark')
+    console.log(localStorage.getItem('user-theme'))
+    router.push("/");
+    
+  } else {
+    localStorage.setItem('user-theme', 'light')
+    console.log(localStorage.getItem('user-theme'))
+    router.push("/");
+  }
 };
 
 
@@ -35,7 +53,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 </script>
 
 <template>
-    <div class="fixed h-full top-20 z-50">
+    <div class="fixed max-h-screen top-20 z-50">
         <!-- sidebar -->
         <div
             class="sidebar bg-red-800 text-white dark:bg-red-900 w-64 space-y-1 pt-2 px-3 absolute left-0 transition duration-200 ease-in-out">
@@ -68,7 +86,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 
                 <a href="#"
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
-                    @click="changeVisualMode">
+                    @click="changeVisualMode(); toggleTheme()">
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>
 

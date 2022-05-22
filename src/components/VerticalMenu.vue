@@ -41,7 +41,7 @@ const errorMessage = computed(() =>
 </script>
 
 <template>
-    <div class="fixed h-full top-16 z-40">
+    <div class="fixed h-screen top-16 z-40">
         <!-- sidebar -->
         <div
             class="sidebar bg-red-800 text-white dark:bg-red-900 w-64 space-y-10 pt-4 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">

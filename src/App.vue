@@ -26,6 +26,7 @@ const getTheme = (): UserTheme => {
 //   }
 // };
 
+
 const getMediaPreference = (): UserTheme => {
   const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
   if (hasDarkPreference) {
@@ -44,7 +45,7 @@ onMounted(() => setTheme(userTheme.value));
 </script>
 
 <template>
-  <div class="h-full dark:bg-gray-800 dark:text-slate-400">
+  <div class="min-h-screen dark:bg-gray-800 dark:text-slate-400">
     <Navbar />
     <router-view :key="$route.fullPath"></router-view>
   </div>
