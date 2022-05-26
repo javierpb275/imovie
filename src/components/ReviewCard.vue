@@ -6,9 +6,10 @@ import RatingStars from "./RatingStars.vue";
 import { useAuthStore } from "../stores/auth";
 import { useReviewStore } from "../stores/review";
 import { AuthService } from "../services/authService";
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 
 const router = useRouter()
+const route = useRoute()
 
 const goToUser = (username: string) => {
     router.push({ path: `/user/${username}` })
@@ -90,6 +91,20 @@ const showText = () => {
         upDownArrow.value === "down-arrow" ? "up-arrow" : "down-arrow";
 };
 
+const deleteReview = async (reviewId: string) => {
+    try {
+        const headers = await AuthService.getAndValidateHeaderToken();
+        const response = await reviewStore.deleteReview(headers, reviewId);
+        if (response.error) {
+            return;
+        }
+        location.reload();
+    } catch (err) {
+        AuthService.removeTokensAndClearStore();
+        router.push("/signin");
+    }
+}
+
 const props = defineProps({
     id: {
         type: String,
@@ -154,6 +169,9 @@ onMounted(async () => {
         <div class="block p-3 my-5 rounded-lg shadow-xl bg-white dark:bg-gray-800 w-80 lg:w-4/5">
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4 ">
+                    <div class="float-right" v-if="props.username == authStore.user?.username">
+                        <CustomSVG @click="deleteReview(props.id)" :svgName="'x'" :class="'cursor-pointer h-6 w-6 text-gray-900'" />
+                    </div>
                     <div>
                         <CustomAvatar :avatar-url="props.avatar"
                             :class="'rounded-full w-14 h-14 hover:scale-110 transition duration-500 cursor-pointer'"

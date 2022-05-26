@@ -59,7 +59,7 @@ export class AuthService {
 
       if (!data.accessToken || !data.refreshToken) {
         returnData.error = true;
-        returnData.value = "Authentication problem. Error Code: IMO-001-001";
+        returnData.value = "Authentication Error";
         return returnData;
       }
 
@@ -71,7 +71,7 @@ export class AuthService {
       returnData.value = data;
     } catch (err) {
       returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-000";
+      returnData.value = "Authentication Error";
     }
 
     return returnData;
@@ -98,7 +98,7 @@ export class AuthService {
 
       if (!data.accessToken || !data.refreshToken) {
         returnData.error = true;
-        returnData.value = "Authentication problem. Error Code: IMO-001-001";
+        returnData.value = "Authentication Error";
         return returnData;
       }
 
@@ -110,7 +110,7 @@ export class AuthService {
       returnData.value = data;
     } catch (err) {
       returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-000";
+      returnData.value = "Authentication Error";
     }
 
     return returnData;
@@ -126,7 +126,7 @@ export class AuthService {
     if (!localStorage.getItem(Tokens.REFRESH_TOKEN)) {
       localStorage.removeItem("is_refreshing");
       returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-001";
+      returnData.value = "Authentication Error";
       return returnData;
     }
 
@@ -150,7 +150,7 @@ export class AuthService {
       if (!data.accessToken || !data.refreshToken) {
         localStorage.removeItem("is_refreshing");
         returnData.error = true;
-        returnData.value = "Authentication problem. Error Code: IMO-001-001";
+        returnData.value = "Authentication Error";
         return returnData;
       }
 
@@ -163,7 +163,7 @@ export class AuthService {
     } catch (err) {
       localStorage.removeItem("is_refreshing");
       returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-000";
+      returnData.value = "Authentication Error";
     }
 
     localStorage.removeItem("is_refreshing");
@@ -182,7 +182,7 @@ export class AuthService {
     ) {
       AuthService.removeTokensAndClearStore();
       returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-001";
+      returnData.value = "Authentication Error";
       return returnData;
     }
     const body: BodyType = {
@@ -213,7 +213,7 @@ export class AuthService {
     } catch (err) {
       AuthService.removeTokensAndClearStore();
       returnData.error = true;
-      returnData.value = "Authentication problem. Error Code: IMO-001-000";
+      returnData.value = "Authentication Error";
     }
     return returnData;
   }

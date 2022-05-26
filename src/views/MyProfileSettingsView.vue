@@ -3,6 +3,7 @@ import { reactive, ref, onMounted } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { AuthService } from "../services/authService";
 import { useRouter } from "vue-router";
+import { Tokens } from "../services/serviceTypes";
 
 
 const errorMessage = ref<string>("");
@@ -85,11 +86,29 @@ const updateUser = async () => {
   }
 }
 
-
-
+const deleteUser = async () => {
+  try {
+    const refreshToken = localStorage.getItem(Tokens.REFRESH_TOKEN);
+    if (!refreshToken) {
+      throw new Error("No refresh token found");
+    }
+    const headers = await AuthService.getAndValidateHeaderToken();
+    const response = await authStore.deleteProfile(headers, refreshToken);
+    if (response.error) {
+      errorMessage.value = "Error Deleting Profile";
+      return
+    }
+    AuthService.removeTokensAndClearStore();
+    router.push("/signup");
+  } catch (err) {
+    AuthService.removeTokensAndClearStore();
+    router.push("/signin");
+  }
+}
 </script>
 
 <template>
+
   <div class="pt-20 lg:mt-20 lg:ml-60 mx-auto">
     <p class=" text-2xl font-bold mb-10">My profile settings</p>
     <div class="mb-3">
@@ -135,18 +154,23 @@ const updateUser = async () => {
       </div>
     </div>
 
-
-
     <button type="button"
-      class="rounded-lg inline-block my-10 lg:my-16 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight"
+      class="rounded-lg inline-block my-10 lg:my-16 mx-2 px-3 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight"
       @click="reset">
       Reset
     </button>
 
     <button type="button"
-      class="rounded-lg inline-block my-10 lg:my-16 mx-5 px-10 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
+      class="rounded-lg inline-block my-10 lg:my-16 mx-2 px-3 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
       @click="updateUser">
-      Update it!
+      Update Profile
     </button>
+
+    <button type="button"
+      class="rounded-lg inline-block my-10 lg:my-16 mx-2 px-3 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
+      @click="deleteUser">
+      Delete Profile
+    </button>
+
   </div>
 </template>
