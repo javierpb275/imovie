@@ -101,7 +101,8 @@ async function createReview() {
             </div>
 
             <button type="button"
-                class="rounded-lg inline-block mt-10 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight">
+                class="rounded-lg inline-block mt-10 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight"
+                @click="router.go(0)">
                 Cancel
             </button>
 

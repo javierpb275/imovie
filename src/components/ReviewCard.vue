@@ -180,11 +180,11 @@ onMounted(async () => {
                     <div class="text-left">{{ props.username }}</div>
                 </div>
 
-                <h6 class="text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto w-max"
+                <h6 class="text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto"
                     @click="goToMovie(props.movieTitle)">
                     {{ props.movieTitle }}
                 </h6>
-                <div id="movie-title-points-container" class="lg:mb-5 mx-auto w-max">
+                <div id="movie-title-points-container" class="lg:mb-5 mx-auto">
                     <RatingStars :class="'flex justify-center cursor-pointer hover:scale-105 transition duration-500'"
                         :size="6" :points="props.points" :isFor="'review'" />
                 </div>
