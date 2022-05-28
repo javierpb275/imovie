@@ -2,15 +2,30 @@
 import CustomAvatar from './CustomAvatar.vue';
 import CustomSVG from './CustomSVG.vue';
 import { ref } from 'vue'
+import { useRouter } from "vue-router";
 import { computed, ComputedRef } from '@vue/reactivity';
 import IUser from '../interfaces/user.interface';
 
-const darkLightMode = ref<string>('switch-light-mode');
+const router = useRouter();
 
-const changeVisualMode = () => {
-    darkLightMode.value = darkLightMode.value === "switch-light-mode" ?
-        "switch-dark-mode" : "switch-light-mode";
-}
+const darkLightMode = ref<string>((localStorage.getItem('user-theme') === 'light') 
+    ? "switch-light-mode" 
+    : "switch-dark-mode"
+);
+
+const toggleTheme = (): void => {
+  const activeTheme = localStorage.getItem('user-theme');
+  if (activeTheme === 'light') {
+    localStorage.setItem('user-theme', 'dark')
+    darkLightMode.value = "switch-dark-mode"
+    router.go(0);
+    
+  } else {
+    localStorage.setItem('user-theme', 'light')
+    darkLightMode.value = "switch-light-mode"
+    router.go(0);
+  }
+};
 
 const props = defineProps({
     openedVerticalMenu: {
@@ -68,18 +83,13 @@ const errorMessage = computed(() =>
                     <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Reviews
                 </router-link>
                 <router-link to="/following" href="#"
-                    class="flex justify-between px-4 pb-4 mb-6 mx-2 rounded transition duration-200 hover:bg-gray-800"
+                    class="flex justify-between px-4 pb-1 mb-6 mx-2 rounded transition duration-200 hover:bg-gray-800"
                     @click="props.openedVerticalMenu">
                     <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
                 </router-link>
-                <!-- <router-link to="/favorite-opinions" href="#"
-                    class="flex justify-between px-4 pb-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
-                    @click="props.openedVerticalMenu">
-                    <CustomSVG :svgName="'filled-heart'" :class="'text-white w-6 h-6 inline'" />Favorite opinions
-                </router-link> -->
 
-                <div class="flex justify-between px-4 pb-4 mb-6 mx-2 rounded transition duration-200 hover:bg-gray-800"
-                    @click="changeVisualMode">
+                <div class="flex justify-between px-4 py-4 mb-6 mx-2 rounded transition duration-200 hover:bg-gray-800"
+                    @click="toggleTheme">
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </div>
 

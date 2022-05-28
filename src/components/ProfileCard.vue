@@ -92,7 +92,7 @@ onMounted(async () => {
                 </div>
                 <div class="pt-8 pb-8">
                     <button v-if="user._id === authStore.user?._id"
-                        class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
+                        class="bg-red-800 hover:bg-red-700 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
                         <CustomSVG :svgName="'settings'" :class="'text-white w-9 h-9 px-2 py-2 inline-flex'" />
                         <span class="pt-2" @click="goToSettings()">Profile settings</span>
                     </button>
@@ -101,7 +101,7 @@ onMounted(async () => {
                             <Spinner />
                         </div>
                         <button v-else @click="followUnfollow"
-                            class="bg-red-800 hover:bg-gray-800 transition duration-200 text-white py-1 px-6 rounded-full inline-flex text-sm">
+                            class="bg-red-800 hover:bg-red-700 transition duration-200 text-white py-2 px-7 rounded-full inline-flex text-sm">
                             <span>{{ isFollowed }}</span>
                         </button>
                     </div>

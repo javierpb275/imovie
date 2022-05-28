@@ -86,6 +86,13 @@ const updateUser = async () => {
   }
 }
 
+const areYouSure = () => {
+  document.getElementById("deleteButton")!.classList.add("hidden")
+  document.getElementById("warningMessage")!.classList.remove("hidden")
+  document.getElementById("keepingAccount")!.classList.remove("hidden")
+  document.getElementById("deletingAccount")!.classList.remove("hidden")
+}
+
 const deleteUser = async () => {
   try {
     const refreshToken = localStorage.getItem(Tokens.REFRESH_TOKEN);
@@ -109,7 +116,7 @@ const deleteUser = async () => {
 
 <template>
 
-  <div class="pt-20 lg:mt-20 lg:ml-60 mx-auto">
+  <div class="pt-20 lg:ml-60 mx-auto">
     <p class=" text-2xl font-bold mb-10">My profile settings</p>
     <div class="mb-3">
       <div class="inline-block mr-10 w-20">Username</div>
@@ -166,11 +173,38 @@ const deleteUser = async () => {
       Update Profile
     </button>
 
+    <div role="alert">
+    <div class="bg-red-800 dark:bg-red-900 text-white font-bold rounded-t px-4 py-4">
+      Danger zone
+    </div>
+
+    <div class="hidden border border-t-0 border-red-700 dark:border-red-800 rounded-b bg-red-100 dark:bg-gray-800 px-4 py-3"
+      id="warningMessage">
+      <p class="text-white">Are you sure you want to <strong>delete</strong> your profile?</p>
+    </div>
+
+
     <button type="button"
-      class="rounded-lg inline-block my-10 lg:my-16 mx-2 px-3 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
-      @click="deleteUser">
-      Delete Profile
+        class="rounded-lg my-10 mx-2 px-20 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
+        id="deleteButton"
+        @click="areYouSure">
+        Delete Profile
     </button>
+
+    <button type="button"
+      class="hidden rounded-lg my-4 lg:my-10 mx-2 px-10 py-2.5 bg-green-900 hover:bg-green-700 cursor-pointer text-white text-s leading-tight"
+      @click="router.push('/my-profile/my-reviews')"
+      id="keepingAccount">
+      <strong>No</strong> thanks, i'll keep it
+    </button>
+
+    <button type="button"
+      class="hidden rounded-lg my-2 lg:my-10 mx-2 px-10 py-2.5 hover:bg-red-700 bg-black cursor-pointer text-white text-s leading-tight"
+      @click="deleteUser"
+      id="deletingAccount">
+      <strong>Yes please, delete it</strong>
+    </button>
+</div>
 
   </div>
 </template>

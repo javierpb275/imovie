@@ -8,27 +8,22 @@ import IUser from "../interfaces/user.interface";
 
 const router = useRouter();
 
-const darkLightMode = ref<string>("switch-light-mode");
-
-const changeVisualMode = () => {
-    darkLightMode.value =
-        darkLightMode.value === "switch-light-mode"
-            ? "switch-dark-mode"
-            : "switch-light-mode";
-};
-
+const darkLightMode = ref<string>((localStorage.getItem('user-theme') === 'light') 
+    ? "switch-light-mode" 
+    : "switch-dark-mode"
+);
 
 const toggleTheme = (): void => {
   const activeTheme = localStorage.getItem('user-theme');
   if (activeTheme === 'light') {
     localStorage.setItem('user-theme', 'dark')
-    console.log(localStorage.getItem('user-theme'))
-    router.push("/");
+    darkLightMode.value = "switch-dark-mode"
+    router.go(0);
     
   } else {
     localStorage.setItem('user-theme', 'light')
-    console.log(localStorage.getItem('user-theme'))
-    router.push("/");
+    darkLightMode.value = "switch-light-mode"
+    router.go(0);
   }
 };
 
@@ -86,7 +81,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 
                 <a href="#"
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
-                    @click="changeVisualMode(); toggleTheme()">
+                    @click="toggleTheme()">
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>
 
