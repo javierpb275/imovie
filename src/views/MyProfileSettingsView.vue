@@ -178,9 +178,9 @@ const deleteUser = async () => {
       Danger zone
     </div>
 
-    <div class="hidden border border-t-0 border-red-700 dark:border-red-800 rounded-b bg-red-100 dark:bg-gray-800 px-4 py-3"
+    <div class="hidden border border-t-0 border-red-700 dark:border-red-800 rounded-b bg-red-300 px-4 py-3"
       id="warningMessage">
-      <p class="text-white">Are you sure you want to <strong>delete</strong> your profile?</p>
+      <p class="text-black">Are you sure you want to <strong>delete</strong> your profile?</p>
     </div>
 
 
