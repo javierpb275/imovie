@@ -60,7 +60,7 @@ const svgNames: string[] = [
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
 
-        <svg v-if="svgName == 'plus-icon'" :class="props.class" width="30" height="30" viewBox="0 0 24 24"
+        <svg v-if="svgName == 'plus-icon'" :class="props.class" width="35" height="35" viewBox="0 0 24 24"
             stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" />
 

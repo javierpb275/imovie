@@ -48,10 +48,10 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 </script>
 
 <template>
-    <div class="fixed max-h-screen top-20 z-50">
+    <div class="fixed top-20 z-50">
         <!-- sidebar -->
         <div
-            class="sidebar bg-red-800 text-white dark:bg-red-900 w-64 space-y-1 pt-2 px-3 absolute left-0 transition duration-200 ease-in-out">
+            class="sidebar h-screen bg-red-800 text-white dark:bg-red-900 w-64 space-y-2 pt-2 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200">
                 <CustomAvatar :avatar-url="authUser.avatar" :class="'rounded-full w-28 h-28'"
                     class="m-auto hover:drop-shadow-2xl hover:scale-105 transition duration-300" />
@@ -65,7 +65,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
             </router-link>
 
             <!-- nav -->
-            <nav>
+            <nav class="space-y-3 2xl:space-y-14 2xl:pt-6">
                 <router-link to="/movies" href="#"
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
