@@ -76,6 +76,7 @@ async function createReview() {
 <template>
     <div>
         <div class="lg:ml-64 lg:mr-14 pt-28">
+            <p class="pb-10 text-2xl font-bold">Write your own opinion</p>
             <input v-model="theMovie" type="text"
                 class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
                 name="search" placeholder="Search movie..." />
@@ -102,7 +103,7 @@ async function createReview() {
 
             <button type="button"
                 class="rounded-lg inline-block mt-10 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight"
-                @click="router.go(0)">
+                @click="router.go(-1)">
                 Cancel
             </button>
 

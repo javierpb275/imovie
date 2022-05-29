@@ -170,7 +170,7 @@ onMounted(async () => {
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4 ">
                     <div class="float-right" v-if="props.username == authStore.user?.username">
-                        <CustomSVG @click="deleteReview(props.id)" :svgName="'x'" :class="'cursor-pointer h-6 w-6 text-gray-900'" />
+                        <CustomSVG @click="deleteReview(props.id)" :svgName="'x'" :class="'cursor-pointer h-6 w-6 text-gray-900 dark:text-slate-400'" />
                     </div>
                     <div>
                         <CustomAvatar :avatar-url="props.avatar"
@@ -190,7 +190,7 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 ml-64 cursor-pointer lg:hidden'"
+            <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 dark:text-slate-400 ml-64 cursor-pointer lg:hidden'"
                 @click="showText" />
 
             <div id="text-container" class="mx-auto mb-1 cursor-pointer lg:hidden" v-if="upDownArrow === 'up-arrow'">

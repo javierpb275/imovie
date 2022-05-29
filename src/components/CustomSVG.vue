@@ -189,5 +189,21 @@ const svgNames: string[] = [
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
+        <svg v-if="svgName == 'goAhead'" :class="props.class"  
+            viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  
+            stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
+            > 
+            <circle cx="12" cy="12" r="10" />  
+            <polyline points="12 16 16 12 12 8" />  
+            <line x1="8" y1="12" x2="16" y2="12" />
+        </svg>
+        <svg v-if="svgName == 'goBack'" :class="props.class"  
+            viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  
+            stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
+            >  
+            <circle cx="12" cy="12" r="10" />  <polyline points="12 8 8 12 12 16" />  
+            <line x1="16" y1="12" x2="8" y2="12" />
+        </svg>
+
     </div>
 </template>

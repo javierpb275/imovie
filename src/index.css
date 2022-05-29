@@ -7,3 +7,24 @@
     font-family: "Noto Sans", sans-serif;
   }
 }
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+  }
+
+  /* .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background-color: rgb(252 165 165);
+  } */
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgb(185 28 28);
+    border-radius: 100vh;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(220 38 38);
+  }
+}

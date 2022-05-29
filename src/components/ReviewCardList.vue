@@ -30,7 +30,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <div class="overflow-y-auto h-96">
+    <div class="overflow-y-auto h-96 scrollbar">
         <div v-if="!favReviews">
             <Spinner />
         </div>
