@@ -72,7 +72,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
                 </router-link>
                 <router-link to="/reviews/followed-users" href="#"
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
-                    <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Reviews
+                    <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Opinions
                 </router-link>
                 <router-link to="/following" href="#"
                     class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">

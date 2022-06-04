@@ -15,16 +15,16 @@ const goTo = (path: string) => {
         <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg" role="group">
             <button v-if="route.params.reviews === 'my-reviews'" type="button"
                 class="rounded-l-lg inline-block px-3 py-2.5 bg-red-800 cursor-default  text-white text-s leading-tight">My
-                reviews</button>
+                opinions</button>
             <button v-if="route.params.reviews === 'favorite-reviews'" type="button" @click="goTo('my-reviews')"
                 class="rounded-l-lg inline-block px-3 py-2.5 bg-red-700 hover:bg-red-800 text-white text-s leading-tight">My
-                reviews</button>
+                opinions</button>
             <button v-if="route.params.reviews === 'favorite-reviews'" type="button"
                 class="rounded-r-lg inline-block px-3 py-2.5 bg-red-800 cursor-default text-white text-s leading-tight">Favorite
-                reviews</button>
+                opinions</button>
             <button v-if="route.params.reviews === 'my-reviews'" type="button" @click="goTo('favorite-reviews')"
                 class="rounded-r-lg inline-block px-3 py-2.5 bg-red-700 hover:bg-red-800 text-white text-s leading-tight">Favorite
-                reviews</button>
+                opinions</button>
         </div>
     </div>
 </template>

@@ -19,7 +19,7 @@ onMounted(async () => {
     try {
         const returnData = await authStore.getFavoriteReviews(headers, {limit: 0})
         if (returnData.error) {
-            errorMessage.value = 'Error getting reviews';
+            errorMessage.value = 'Error getting opinions';
         }
         favReviews.value = returnData.value;
     } catch (err) {

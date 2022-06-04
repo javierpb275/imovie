@@ -110,7 +110,7 @@ onBeforeMount(() => {
             <router-link to="/new-review" href="#">
                 <button type="button"
                 class="rounded-lg inline-block mt-5 px-10 py-4 lg:ml-16 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight">
-                Create new review
+                Create new opinion
                 </button>
             </router-link>
         </div>

@@ -80,13 +80,13 @@ onMounted(async () => {
         </div>
         <div class="lg:ml-64 lg:mr-14 lg:pt-5">
             <ButtonGroupMyOpinionsFavoriteOpinions />
-            <p v-if="route.params.reviews === 'my-reviews'" class="pb-4 text-2xl font-bold">My Reviews</p>
-            <p v-if="route.params.reviews === 'favorite-reviews'" class="pb-4 text-2xl font-bold">Favorite Reviews</p>
+            <p v-if="route.params.reviews === 'my-reviews'" class="pb-4 text-2xl font-bold">My Opinions</p>
+            <p v-if="route.params.reviews === 'favorite-reviews'" class="pb-4 text-2xl font-bold">Favorite Opinions</p>
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>
             <div v-else-if="!reviewData.value.length">
-                NO REVIEWS FOUND
+                NO OPINIONS FOUND
             </div>
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />

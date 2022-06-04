@@ -20,7 +20,7 @@ const authStore = useAuthStore();
                 <router-link to="/" v-if="!authStore.isAuthorized"
                     class="px-6 py-2 text-sm font-semibold text-red-800 bg-white">Go Home</router-link>
                 <router-link to="/reviews/followed-users" v-if="authStore.isAuthorized"
-                    class="px-6 py-2 text-sm font-semibold text-red-800 bg-white">Go to Reviews</router-link>
+                    class="px-6 py-2 text-sm font-semibold text-red-800 bg-white">Go to Opinions</router-link>
             </div>
         </div>
     </div>

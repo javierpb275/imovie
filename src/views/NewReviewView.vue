@@ -60,7 +60,7 @@ async function createReview() {
         const response = await reviewStore.createReview(headers, { ...newReview, points: reviewStore.reviewPoints });
 
         if (response.error) {
-            errorMessageCreateReview.value = "Error Creating the Review";
+            errorMessageCreateReview.value = "Error Creating the Opinion";
             return;
         }
 

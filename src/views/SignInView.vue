@@ -46,7 +46,6 @@ const submit = async () => {
             id="password" type="password" placeholder="Password" />
           <p class="align-baseline font-bold text-sm text-red-700 mt-4" v-if="errorMessage.length">{{ errorMessage }}
           </p>
-          <!-- <p class="text-red-700 text-xs italic">Please choose a password.</p> -->
         </div>
         <div class="flex items-center justify-between">
           <button
