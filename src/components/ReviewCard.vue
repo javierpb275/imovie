@@ -140,6 +140,18 @@ const props = defineProps({
     },
 });
 
+
+
+const areYouSure = () => {
+    document.getElementById("deleteAlert")!.classList.remove("hidden")
+}
+
+const dontDelete = () => {
+    document.getElementById("deleteAlert")!.classList.add("hidden")
+}
+
+
+
 onMounted(async () => {
     const foundLike = props.likes.find((like) => like === authStore.user?._id);
     const foundDislike = props.dislikes.find(
@@ -170,8 +182,42 @@ onMounted(async () => {
             <div id="user-movie-info-container" class="mb-1">
                 <div id="avatar-username-container" class="mb-4 ">
                     <div class="float-right" v-if="props.username == authStore.user?.username">
-                        <CustomSVG @click="deleteReview(props.id)" :svgName="'x'" :class="'cursor-pointer h-6 w-6 text-gray-900 dark:text-slate-400'" />
+                        <CustomSVG @click="areYouSure" :svgName="'x'"
+                            :class="'cursor-pointer h-6 w-6 text-gray-900 dark:text-slate-400'" />
                     </div>
+
+
+
+
+
+<div class="hidden relative z-50 bg-red-300 rounded-lg lg:ml-8 py-5 px-6 mb-6 text-red-800 items-center mx-auto fade show" id="deleteAlert">
+  Are you sure you <strong class="mx-1">want to delete</strong> this opinion? 
+  <div class="mt-5">
+      <button class="hover:bg-black bg-slate-800 text-white font-bold py-1 px-4 rounded mr-10" @click="deleteReview(props.id)">
+        Yes
+        </button>
+
+        <button class="bg-green-900 hover:bg-green-700 text-white font-bold py-1 px-4 rounded" @click="dontDelete">
+        No
+        </button>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div>
                         <CustomAvatar :avatar-url="props.avatar"
                             :class="'rounded-full w-14 h-14 hover:scale-110 transition duration-500 cursor-pointer'"
@@ -190,8 +236,8 @@ onMounted(async () => {
                 </div>
             </div>
 
-            <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 dark:text-slate-400 ml-64 cursor-pointer lg:hidden'"
-                @click="showText" />
+            <CustomSVG :svgName="upDownArrow"
+                :class="'h-8 w-8 text-gray-900 dark:text-slate-400 ml-64 cursor-pointer lg:hidden'" @click="showText" />
 
             <div id="text-container" class="mx-auto mb-1 cursor-pointer lg:hidden" v-if="upDownArrow === 'up-arrow'">
                 <p class="text-sm mb-0 mt-1">{{ props.text }}</p>

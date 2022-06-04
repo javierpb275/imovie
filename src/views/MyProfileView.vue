@@ -78,10 +78,10 @@ onMounted(async () => {
         <div v-else class="pt-12">
             <ProfileCard :user="userData.value" />
         </div>
-        <div class="lg:ml-64 lg:mr-14 lg:mt-5">
+        <div class="lg:ml-64 lg:mr-14 lg:pt-5">
             <ButtonGroupMyOpinionsFavoriteOpinions />
-            <p v-if="route.params.reviews === 'my-reviews'" class="mb-4 text-2xl font-bold">My Reviews</p>
-            <p v-if="route.params.reviews === 'favorite-reviews'" class="mb-4 text-2xl font-bold">Favorite Reviews</p>
+            <p v-if="route.params.reviews === 'my-reviews'" class="pb-4 text-2xl font-bold">My Reviews</p>
+            <p v-if="route.params.reviews === 'favorite-reviews'" class="pb-4 text-2xl font-bold">Favorite Reviews</p>
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>

@@ -55,14 +55,14 @@ onMounted(async () => {
 
 <template>
     <div>
-        <div v-if="!userData.value" class="my-56">
+        <div v-if="!userData.value" class="lg:ml-64 py-56">
             <Spinner />
         </div>
-        <div v-else class="mt-32 lg:mt-12">
+        <div v-else class="pt-12">
             <ProfileCard :user="userData.value[0]" />
         </div>
         <div class="lg:ml-64 lg:mr-14 lg:py-24">
-            <p class="mb-4 text-2xl font-bold">Reviews</p>
+            <p class="pb-4 text-2xl font-bold">Reviews</p>
             <div v-if="!reviewData.value">
                 <Spinner />
             </div>
@@ -72,7 +72,7 @@ onMounted(async () => {
             <div v-else>
                 <ReviewCardList :reviews="reviewStore.reviews" class="lg:w-5xl" />
             </div>
-            <Pagination class="my-2" :disableNext="disableNext" />
+            <Pagination class="py-2" :disableNext="disableNext" />
         </div>
     </div>
 </template>
