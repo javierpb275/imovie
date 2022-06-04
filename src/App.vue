@@ -38,7 +38,10 @@ const getMediaPreference = (): UserTheme => {
 
 const userTheme = ref<UserTheme>(getTheme() || getMediaPreference());
 
-onMounted(() => setTheme(userTheme.value));
+onMounted(() => {
+  fetch("https://imovie-api.herokuapp.com/api/hello")
+  setTheme(userTheme.value)
+});
 
 // End dark/light mode
 
