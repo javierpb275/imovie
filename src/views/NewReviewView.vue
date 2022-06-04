@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import RatingStars from '../components/RatingStars.vue';
-import { ref, reactive } from 'vue'
+import { ref, reactive, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth';
 import { useMovieStore } from '../stores/movie';
 import { useReviewStore } from '../stores/review';
@@ -21,6 +21,8 @@ const newReview = reactive<any>({
     text: "",
     movie: "",
 })
+
+const previousUrl = ref<string>("")
 
 async function searchMovie() {
     if (authStore.isAuthorized) {
@@ -71,6 +73,26 @@ async function createReview() {
         router.push("/signin");
     }
 }
+
+onMounted(async() => {
+    
+const theUrl = router.options.history.state.back!.toString()
+previousUrl.value = theUrl!.split('/')[1]
+
+    if(previousUrl.value != 'movie') {
+        previousUrl.value = ''
+        return
+    }
+
+    const movieTitle = theUrl!.split('/')[2]
+
+    let theResultMovie = movieTitle.replace(/%20/gi, ' ')
+
+    theMovie.value = theResultMovie
+
+    await searchMovie()
+
+})
 </script>
 
 <template>
@@ -87,7 +109,7 @@ async function createReview() {
                 Find a movie
             </button>
 
-            <div class="my-10 font-bold text-xl">{{ errorMessage }}</div>
+            <div class="my-10 font-bold text-2xl italic	">{{ errorMessage }}</div>
 
             <textarea v-model="newReview.text"
                 class="lg:w-auto w-80 rounded-lg placeholder:italic placeholder:text-slate-400 border border-slate-300 shadow-sm focus:outline-none focus:border-slate-800 focus:ring-slate-800 focus:ring-1"
@@ -102,13 +124,13 @@ async function createReview() {
             </div>
 
             <button type="button"
-                class="rounded-lg inline-block mt-10 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight"
+                class="rounded-lg inline-block mt-1 mx-5 px-5 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight"
                 @click="router.go(-1)">
                 Cancel
             </button>
 
             <button type="button"
-                class="rounded-lg inline-block mt-10 mx-5 px-10 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
+                class="rounded-lg inline-block mt-1 mx-5 px-10 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
                 @click="createReview">
                 Post it!
             </button>

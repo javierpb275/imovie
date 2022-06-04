@@ -27,6 +27,8 @@ const filledEmptyHeart = ref<string>("empty-heart");
 const filledEmptyThumbDown = ref<string>("empty-thumb-down");
 const filledEmptyThumbUp = ref<string>("empty-thumb-up");
 
+const wantToDelete = ref<boolean>(false)
+
 const checkIfDislike = async (reviewId: string) => {
     try {
         const headers = await AuthService.getAndValidateHeaderToken();
@@ -143,11 +145,11 @@ const props = defineProps({
 
 
 const areYouSure = () => {
-    document.getElementById("deleteAlert")!.classList.remove("hidden")
+    wantToDelete.value = true
 }
 
 const dontDelete = () => {
-    document.getElementById("deleteAlert")!.classList.add("hidden")
+    wantToDelete.value = false
 }
 
 
@@ -190,18 +192,21 @@ onMounted(async () => {
 
 
 
-<div class="hidden relative z-50 bg-red-300 rounded-lg lg:ml-8 py-5 px-6 mb-6 text-red-800 items-center mx-auto fade show" id="deleteAlert">
-  Are you sure you <strong class="mx-1">want to delete</strong> this opinion? 
-  <div class="mt-5">
-      <button class="hover:bg-black bg-slate-800 text-white font-bold py-1 px-4 rounded mr-10" @click="deleteReview(props.id)">
-        Yes
-        </button>
+                    <div v-if="wantToDelete" class="relative  z-50 bg-red-300 rounded-lg lg:ml-8 py-5 px-6 mb-6 text-red-800 items-center mx-auto fade show"
+                        id="deleteAlert">
+                        Are you sure you <strong class="mx-1">want to delete</strong> this opinion?
+                        <div class="mt-5">
+                            <button class="hover:bg-black bg-slate-800 text-white font-bold py-1 px-4 rounded mr-10"
+                                @click="deleteReview(props.id)">
+                                Yes
+                            </button>
 
-        <button class="bg-green-900 hover:bg-green-700 text-white font-bold py-1 px-4 rounded" @click="dontDelete">
-        No
-        </button>
-  </div>
-</div>
+                            <button class="bg-green-900 hover:bg-green-700 text-white font-bold py-1 px-4 rounded"
+                                @click="dontDelete">
+                                No
+                            </button>
+                        </div>
+                    </div>
 
 
 
