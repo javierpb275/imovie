@@ -18,12 +18,12 @@ const toggleTheme = (): void => {
     if (activeTheme === 'light') {
         localStorage.setItem('user-theme', 'dark')
         darkLightMode.value = "switch-dark-mode"
-        router.go(0);
+        location.reload();
 
     } else {
         localStorage.setItem('user-theme', 'light')
         darkLightMode.value = "switch-light-mode"
-        router.go(0);
+        location.reload();
     }
 };
 

@@ -90,6 +90,10 @@ const areYouSure = () => {
   document.getElementById("deletingAccount")!.classList.remove("hidden")
 }
 
+const reloadPage = () => {
+  location.reload();
+}
+
 const deleteUser = async () => {
   try {
     const refreshToken = localStorage.getItem(Tokens.REFRESH_TOKEN);
@@ -174,7 +178,7 @@ const deleteUser = async () => {
       </button>
       <button type="button"
         class="hidden rounded-lg my-4 lg:my-10 mx-2 px-10 py-2.5 bg-green-900 hover:bg-green-700 cursor-pointer text-white text-s leading-tight"
-        @click="router.go(0)" id="keepingAccount">
+        @click="reloadPage" id="keepingAccount">
         <strong>No</strong> thanks, i'll keep it
       </button>
       <button type="button"
