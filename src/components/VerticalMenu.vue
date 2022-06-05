@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import { useRouter, useRoute } from "vue-router";
 import { computed, ComputedRef } from '@vue/reactivity';
 import IUser from '../interfaces/user.interface';
+import { useAuthStore } from "../stores/auth";
 
 const router = useRouter();
 const route = useRoute();
@@ -14,20 +15,20 @@ const darkLightMode = ref<string>((localStorage.getItem('user-theme') === 'light
     : "switch-dark-mode"
 );
 
+const authStore = useAuthStore();
+
 const toggleTheme = (): void => {
     const activeTheme = localStorage.getItem('user-theme');
     if (activeTheme === 'light') {
         localStorage.setItem('user-theme', 'dark')
         darkLightMode.value = "switch-dark-mode"
-        const routeClone = JSON.parse(JSON.stringify(route))
-        router.push("/whatever")
-        router.push(routeClone.fullPath)
+        authStore.darkOrLightMode = 'dark';
+        location.reload();
     } else {
         localStorage.setItem('user-theme', 'light')
         darkLightMode.value = "switch-light-mode"
-        const routeClone = JSON.parse(JSON.stringify(route))
-        router.push("/whatever")
-        router.push(routeClone.fullPath)
+        authStore.darkOrLightMode = 'light';
+        location.reload();
     }
 };
 
