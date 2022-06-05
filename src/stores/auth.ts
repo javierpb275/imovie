@@ -167,13 +167,7 @@ export const useAuthStore = defineStore("auth", {
           undefined,
           headers
         );
-        const data = await response.json();
-        if (data.error) {
-          return {
-            error: true,
-            value: data.error,
-          };
-        }
+        const data: IReview[] = await response.json();
         const filteredReviews = data.filter(
           (review) => review.user !== null && review.movie !== null
         );

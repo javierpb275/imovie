@@ -5,44 +5,7 @@ import { useReviewStore } from '../stores/review';
 
 const reviewStore = useReviewStore();
 
-const props = defineProps({
-    id: {
-        type: String,
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    year: {
-        type: String,
-        required: true
-    },
-    runtime: {
-        type: String,
-        required: true
-    },
-    genres: {
-        type: [],
-        required: true
-    },
-    director: {
-        type: String,
-        required: true
-    },
-    actors: {
-        type: String,
-        required: true
-    },
-    plot: {
-        type: String,
-        required: true
-    },
-    posterUrl: {
-        type: String,
-        required: true
-    }
-});
+const props = defineProps(['id', 'title', 'year', 'runtime', 'genres', 'director', 'actors', 'plot', 'posterUrl'])
 
 const points = ref<number>(0);
 
@@ -61,8 +24,6 @@ onBeforeMount(() => {
     calculatePointsOfMovie();
 });
 </script>
-
-
 
 <template>
     <div style="background-color:rgba(0, 0, 0, 0)">

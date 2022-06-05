@@ -271,8 +271,10 @@ const checkIfAlreadyRefreshingToken = async () => {
 const checkIfRefreshToken = (expiration: number): boolean => {
   const maxExpirationMinutesBeforeRefresh: number = 10;
   const expirationInMs: number = expiration * 1000;
+  const expirationDate: any = new Date(expirationInMs);
+  const currentDate: any = new Date();
   const renew: boolean =
-    (new Date(expirationInMs) - new Date()) / 1000 / 60 <
+    (expirationDate - currentDate) / 1000 / 60 <
     maxExpirationMinutesBeforeRefresh;
   return renew;
 };

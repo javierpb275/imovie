@@ -27,20 +27,7 @@ const toggleTheme = (): void => {
     }
 };
 
-
-const props = defineProps({
-    authUser: {
-        type: Object,
-        required: true,
-    },
-    signOut: {
-        type: Function,
-        required: true,
-    },
-    errorMessage: {
-        type: String,
-    },
-});
+const props = defineProps(['authUser', 'signOut', 'errorMessage'])
 
 const authUser = computed(() => props.authUser) as ComputedRef<IUser>;
 

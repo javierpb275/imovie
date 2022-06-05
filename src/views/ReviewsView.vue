@@ -33,7 +33,7 @@ const getReviews = async (headers: HeadersType, queryObject?: object) => {
             returnData = await reviewStore.getReviews(headers, queryObject)
         }
         if (route.params.users === 'followed-users') {
-            returnData = await reviewStore.getReviews(headers, { followers: authStore.user._id, ...queryObject, limit: 0 })
+            returnData = await reviewStore.getReviews(headers, { followers: authStore.user!._id, ...queryObject, limit: 0 })
         }
         reviewData.error = returnData.error
         reviewData.value = returnData.value;

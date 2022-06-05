@@ -27,22 +27,7 @@ const toggleTheme = (): void => {
     }
 };
 
-const props = defineProps({
-    openedVerticalMenu: {
-        type: Function
-    },
-    authUser: {
-        type: Object,
-        required: true
-    },
-    signOut: {
-        type: Function,
-        required: true
-    },
-    errorMessage: {
-        type: String
-    }
-});
+const props = defineProps(['openedVerticalMenu', 'authUser', 'signOut', 'errorMessage'])
 
 const authUser = computed(() =>
     props.authUser
