@@ -5,7 +5,6 @@ import { AuthService } from "../services/authService";
 import { useRouter } from "vue-router";
 import { Tokens } from "../services/serviceTypes";
 
-
 const errorMessage = ref<string>("");
 const authStore = useAuthStore();
 const router = useRouter();
@@ -54,8 +53,6 @@ const avatars = [
 const selectedAvatar = (avatarUrl: string) => {
   user.avatar = avatarUrl;
 }
-
-
 
 const updateUser = async () => {
   if (!user.username.length) {
@@ -115,7 +112,6 @@ const deleteUser = async () => {
 </script>
 
 <template>
-
   <div class="pt-20 lg:ml-60 mx-auto">
     <p class=" text-2xl font-bold mb-10">My profile settings</p>
     <div class="mb-3">
@@ -124,29 +120,22 @@ const deleteUser = async () => {
         class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
         type="text" name="name" placeholder="Your username" />
     </div>
-
     <div class="mb-3">
       <div class="inline-block mr-10 w-20">Email</div>
       <input v-model="user.email"
         class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
         type="email" name="email" placeholder="Your email" />
     </div>
-
     <div class="mb-3">
       <div class="inline-block mr-10 w-20">Password</div>
       <input v-model="user.password"
         class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
         type="password" name="password" placeholder="Your password" />
     </div>
-
     <div v-if="errorMessage.length" class="text-red-700 font-bold">
       {{ errorMessage }}
     </div>
-
-
     <p class=" text-xl mb-3 mt-8 lg:my-10">Choose a new avatar:</p>
-
-
     <div class="lg:ml-28 mx-auto">
       <div class="grid grid-cols-4 items-center">
         <div v-for="avatar in avatars" :key="avatar" class="mb-4">
@@ -160,51 +149,39 @@ const deleteUser = async () => {
         </div>
       </div>
     </div>
-
     <button type="button"
       class="rounded-lg inline-block my-10 lg:my-16 mx-2 px-3 py-2.5 hover:bg-slate-800 bg-slate-400 cursor-pointer text-white text-s leading-tight"
       @click="reset">
       Reset
     </button>
-
     <button type="button"
       class="rounded-lg inline-block my-10 lg:my-16 mx-2 px-3 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
       @click="updateUser">
       Update Profile
     </button>
-
     <div role="alert">
-    <div class="bg-red-800 dark:bg-red-900 text-white font-bold rounded-t px-4 py-4">
-      Danger zone
-    </div>
-
-    <div class="hidden border border-t-0 border-red-700 dark:border-red-800 rounded-b bg-red-300 px-4 py-3"
-      id="warningMessage">
-      <p class="text-black">Are you sure you want to <strong>delete</strong> your profile?</p>
-    </div>
-
-
-    <button type="button"
+      <div class="bg-red-800 dark:bg-red-900 text-white font-bold rounded-t px-4 py-4">
+        Danger zone
+      </div>
+      <div class="hidden border border-t-0 border-red-700 dark:border-red-800 rounded-b bg-red-300 px-4 py-3"
+        id="warningMessage">
+        <p class="text-black">Are you sure you want to <strong>delete</strong> your profile?</p>
+      </div>
+      <button type="button"
         class="rounded-lg my-10 mx-2 px-20 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
-        id="deleteButton"
-        @click="areYouSure">
+        id="deleteButton" @click="areYouSure">
         Delete Profile
-    </button>
-
-    <button type="button"
-      class="hidden rounded-lg my-4 lg:my-10 mx-2 px-10 py-2.5 bg-green-900 hover:bg-green-700 cursor-pointer text-white text-s leading-tight"
-      @click="router.go(0)"
-      id="keepingAccount">
-      <strong>No</strong> thanks, i'll keep it
-    </button>
-
-    <button type="button"
-      class="hidden rounded-lg my-2 lg:my-10 mx-2 px-10 py-2.5 hover:bg-red-700 bg-black cursor-pointer text-white text-s leading-tight"
-      @click="deleteUser"
-      id="deletingAccount">
-      <strong>Yes please, delete it</strong>
-    </button>
-</div>
-
+      </button>
+      <button type="button"
+        class="hidden rounded-lg my-4 lg:my-10 mx-2 px-10 py-2.5 bg-green-900 hover:bg-green-700 cursor-pointer text-white text-s leading-tight"
+        @click="router.go(0)" id="keepingAccount">
+        <strong>No</strong> thanks, i'll keep it
+      </button>
+      <button type="button"
+        class="hidden rounded-lg my-2 lg:my-10 mx-2 px-10 py-2.5 hover:bg-red-700 bg-black cursor-pointer text-white text-s leading-tight"
+        @click="deleteUser" id="deletingAccount">
+        <strong>Yes please, delete it</strong>
+      </button>
+    </div>
   </div>
 </template>

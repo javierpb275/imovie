@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Movie from "../components/Movie.vue";
 import ReviewCardList from "../components/ReviewCardList.vue";
-import { onMounted, reactive, ref } from "vue";
+import { onMounted, reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useAuthStore } from "../stores/auth";
 import { useMovieStore } from "../stores/movie";
@@ -15,8 +15,6 @@ const route = useRoute();
 const authStore = useAuthStore();
 const movieStore = useMovieStore();
 const reviewStore = useReviewStore();
-
-const errorMessage = ref<string>("");
 
 const reviewData = reactive<IReturnData>({
     error: false,

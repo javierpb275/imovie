@@ -19,7 +19,7 @@ export class AuthService {
     localStorage.setItem(Tokens.REFRESH_TOKEN, data.refreshToken);
   }
 
-  //REMOVE TOKENS-----------------------------------
+  //REMOVE TOKENS------------------------------------------------
   static removeTokens() {
     localStorage.removeItem(Tokens.ACCESS_TOKEN);
     localStorage.removeItem(Tokens.REFRESH_TOKEN);
@@ -38,7 +38,7 @@ export class AuthService {
     AuthService.clearStore();
   }
 
-  //SIGNIN-------------------------------------------------------
+  //SIGNIN-----------------------------------------------------------
   static async signIn(user: IUserSignIn): Promise<IReturnData> {
     const returnData: IReturnData = {
       error: false,
@@ -56,24 +56,20 @@ export class AuthService {
         returnData.value = data.error;
         return returnData;
       }
-
       if (!data.accessToken || !data.refreshToken) {
         returnData.error = true;
         returnData.value = "Authentication Error";
         return returnData;
       }
-
       AuthService.saveUserTokens({
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
       });
-
       returnData.value = data;
     } catch (err) {
       returnData.error = true;
       returnData.value = "Authentication Error";
     }
-
     return returnData;
   }
 
@@ -95,24 +91,20 @@ export class AuthService {
         returnData.value = data.error;
         return returnData;
       }
-
       if (!data.accessToken || !data.refreshToken) {
         returnData.error = true;
         returnData.value = "Authentication Error";
         return returnData;
       }
-
       AuthService.saveUserTokens({
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
       });
-
       returnData.value = data;
     } catch (err) {
       returnData.error = true;
       returnData.value = "Authentication Error";
     }
-
     return returnData;
   }
 
@@ -129,7 +121,6 @@ export class AuthService {
       returnData.value = "Authentication Error";
       return returnData;
     }
-
     try {
       const response = await FetchService.callApi(
         API_URL.USERS.REFRESH_TOKEN.URL,
@@ -139,38 +130,33 @@ export class AuthService {
         }
       );
       const data = await response.json();
-
       if (data.error) {
         localStorage.removeItem("is_refreshing");
         returnData.error = true;
         returnData.value = data.error;
         return returnData;
       }
-
       if (!data.accessToken || !data.refreshToken) {
         localStorage.removeItem("is_refreshing");
         returnData.error = true;
         returnData.value = "Authentication Error";
         return returnData;
       }
-
       AuthService.saveUserTokens({
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
       });
-
       returnData.value = data;
     } catch (err) {
       localStorage.removeItem("is_refreshing");
       returnData.error = true;
       returnData.value = "Authentication Error";
     }
-
     localStorage.removeItem("is_refreshing");
     return returnData;
   }
 
-  //SIGNOUT-------------------------------------------------
+  //SIGNOUT---------------------------------------------------------
   static async signOut(): Promise<IReturnData> {
     const returnData: IReturnData = {
       error: false,
@@ -191,7 +177,6 @@ export class AuthService {
     const headers: HeadersType = {
       Authorization: `Bearer ${localStorage.getItem(Tokens.ACCESS_TOKEN)}`,
     };
-
     try {
       const response = await FetchService.callApi(
         API_URL.USERS.SIGNOUT.URL,
@@ -206,9 +191,7 @@ export class AuthService {
         returnData.value = data.error;
         return returnData;
       }
-
       AuthService.removeTokensAndClearStore();
-
       returnData.value = data;
     } catch (err) {
       AuthService.removeTokensAndClearStore();
@@ -218,30 +201,24 @@ export class AuthService {
     return returnData;
   }
 
-  //GET AND VALIDATE HEADER TOKEN
+  //GET AND VALIDATE HEADER TOKEN-------------------------------------
   static async getAndValidateHeaderToken(): Promise<HeadersType> {
     let accessToken = await checkIfAlreadyRefreshingToken();
     let refreshToken = localStorage.getItem(Tokens.REFRESH_TOKEN);
-
     if (!refreshToken || !accessToken) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
     }
-
     const payload = JSON.parse(atob(accessToken.split(".")[1])) as IPayload;
-
     if (!payload || !payload.id || !payload.exp || !payload.iat) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
     }
-
     const authStore = useAuthStore();
-
     if (payload.id !== authStore.user?._id) {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
     }
-
     try {
       if (checkIfRefreshToken(payload.exp)) {
         const result = await AuthService.refreshToken();
@@ -255,11 +232,10 @@ export class AuthService {
       AuthService.removeTokensAndClearStore();
       return { Authorization: `ERROR` };
     }
-
     return { Authorization: `Bearer ${accessToken}` };
   }
 
-  //GET HEADER TOKEN------------------------
+  //GET HEADER TOKEN-------------------------------------------------
   static async getHeaderToken(): Promise<HeadersType> {
     let accessToken = localStorage.getItem(Tokens.ACCESS_TOKEN);
     if (!accessToken) {
@@ -275,25 +251,23 @@ export class AuthService {
   }
 }
 
+//CHECK IF TOKEN IS ALREADY REFRESHING-----------------------------
 const checkIfAlreadyRefreshingToken = async () => {
   if (localStorage.getItem("is_refreshing")) {
     let a = 50;
     let refreshed = false;
-
     do {
       await new Promise((resolve) => setTimeout(resolve, 250));
-
       if (!localStorage.getItem("is_refreshing")) {
         refreshed = true;
       }
-
       a--;
     } while (a > 0 || !refreshed);
   }
-
   return localStorage.getItem(Tokens.ACCESS_TOKEN);
 };
 
+//CHECK IF TOKEN IS ABOUT TO EXPIRE AND MUST BE REFRESHED-----------
 const checkIfRefreshToken = (expiration: number): boolean => {
   const maxExpirationMinutesBeforeRefresh: number = 10;
   const expirationInMs: number = expiration * 1000;

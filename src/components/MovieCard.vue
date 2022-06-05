@@ -44,10 +44,9 @@ const props = defineProps({
       <div class="px-2 py-1">
         <div class="font-bold text-xl mb-2" @click="goToMovie(props.title)">{{ props.title }}</div>
         <p class="dark:text-slate-400 text-base float-left ml-16">{{ props.year }}</p>
-        <CustomSVG :svgName="upDownArrow" :class="'h-8 w-8 text-gray-900 dark:text-slate-400 float-right cursor-pointer'"
-          @click="showText" />
+        <CustomSVG :svgName="upDownArrow"
+          :class="'h-8 w-8 text-gray-900 dark:text-slate-400 float-right cursor-pointer'" @click="showText" />
       </div>
-
       <div id="text-container" class="float-left mt-0 mb-1" v-if="upDownArrow === 'up-arrow'">
         <p class="dark:text-slate-400 text-sm mb-0 text-left">{{ props.plot }}</p>
       </div>

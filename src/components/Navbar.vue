@@ -75,31 +75,27 @@ const signOut = async () => {
       <div class="flex lg:hidden">
         <CustomSVG :svgName="'hamburger'" :class="'text-gray-800 dark:text-slate-400'" @click="showVerticalMenu" />
       </div>
-
-<div>
-  <router-link to="/reviews/followed-users" href="#">
-    <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-36 inline-flex lg:mr-7" />
-  </router-link>
-
-  <div class="hidden lg:inline-flex">
-    <CustomSVG :svgName="'goBack'" :class="'inline-flex w-7 text-gray-800 dark:text-slate-400 hover:scale-110 transition duration-500 cursor-pointer mr-1'" @click="goBack"/>
-    <CustomSVG :svgName="'goAhead'" :class="' inline-flex w-7 text-gray-800 dark:text-slate-400 hover:scale-110 transition duration-500 cursor-pointer ml-1'" @click="goAhead"/>
-  </div>
-</div>
-
+      <div>
+        <router-link to="/reviews/followed-users" href="#">
+          <img src="/img/IMOvie_logo_wobg.png" alt="imovie-icon" class="w-36 inline-flex lg:mr-7" />
+        </router-link>
+        <div class="hidden lg:inline-flex">
+          <CustomSVG :svgName="'goBack'"
+            :class="'inline-flex w-7 text-gray-800 dark:text-slate-400 hover:scale-110 transition duration-500 cursor-pointer mr-1'"
+            @click="goBack" />
+          <CustomSVG :svgName="'goAhead'"
+            :class="' inline-flex w-7 text-gray-800 dark:text-slate-400 hover:scale-110 transition duration-500 cursor-pointer ml-1'"
+            @click="goAhead" />
+        </div>
+      </div>
       <router-link to="/new-review" href="#">
-        <CustomSVG :svgName="'plus-icon'"
-          :class="'text-red-700 hover:scale-110 transition duration-500'" />
+        <CustomSVG :svgName="'plus-icon'" :class="'text-red-700 hover:scale-110 transition duration-500'" />
       </router-link>
-
     </nav>
-
-
     <div v-if="verticalMenu === true && authStore.user">
       <VerticalMenu :openedVerticalMenu="showVerticalMenu" :authUser="authStore.user" :signOut="signOut"
         :errorMessage="errorMessage" />
     </div>
-
     <div class="hidden lg:block" v-if="authStore.user">
       <VerticalMenuFullscreen :authUser="authStore.user" :signOut="signOut" :errorMessage="errorMessage" />
     </div>

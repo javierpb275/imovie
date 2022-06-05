@@ -16,8 +16,6 @@ const route = useRoute();
 const authStore = useAuthStore();
 const reviewStore = useReviewStore();
 
-const errorMessage = ref<string>("");
-
 const reviewData = reactive<IReturnData>({
     error: false,
     value: null

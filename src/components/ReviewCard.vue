@@ -6,10 +6,9 @@ import RatingStars from "./RatingStars.vue";
 import { useAuthStore } from "../stores/auth";
 import { useReviewStore } from "../stores/review";
 import { AuthService } from "../services/authService";
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const router = useRouter()
-const route = useRoute()
 
 const goToUser = (username: string) => {
     router.push({ path: `/user/${username}` })
@@ -142,8 +141,6 @@ const props = defineProps({
     },
 });
 
-
-
 const areYouSure = () => {
     wantToDelete.value = true
 }
@@ -151,8 +148,6 @@ const areYouSure = () => {
 const dontDelete = () => {
     wantToDelete.value = false
 }
-
-
 
 onMounted(async () => {
     const foundLike = props.likes.find((like) => like === authStore.user?._id);
@@ -187,12 +182,8 @@ onMounted(async () => {
                         <CustomSVG @click="areYouSure" :svgName="'x'"
                             :class="'cursor-pointer h-6 w-6 text-gray-900 dark:text-slate-400'" />
                     </div>
-
-
-
-
-
-                    <div v-if="wantToDelete" class="relative  z-50 bg-red-300 rounded-lg lg:ml-8 py-5 px-6 mb-6 text-red-800 items-center mx-auto fade show"
+                    <div v-if="wantToDelete"
+                        class="relative  z-50 bg-red-300 rounded-lg lg:ml-8 py-5 px-6 mb-6 text-red-800 items-center mx-auto fade show"
                         id="deleteAlert">
                         Are you sure you <strong class="mx-1">want to delete</strong> this opinion?
                         <div class="mt-5">
@@ -207,22 +198,6 @@ onMounted(async () => {
                             </button>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     <div>
                         <CustomAvatar :avatar-url="props.avatar"
                             :class="'rounded-full w-14 h-14 hover:scale-110 transition duration-500 cursor-pointer'"
@@ -230,7 +205,6 @@ onMounted(async () => {
                     </div>
                     <div class="text-left">{{ props.username }}</div>
                 </div>
-
                 <h6 class="text-xl leading-tight font-medium mb-2 cursor-pointer hover:font-bold mx-auto"
                     @click="goToMovie(props.movieTitle)">
                     {{ props.movieTitle }}
@@ -240,24 +214,19 @@ onMounted(async () => {
                         :size="6" :points="props.points" :isFor="'review'" />
                 </div>
             </div>
-
             <CustomSVG :svgName="upDownArrow"
                 :class="'h-8 w-8 text-gray-900 dark:text-slate-400 ml-64 cursor-pointer lg:hidden'" @click="showText" />
-
             <div id="text-container" class="mx-auto mb-1 cursor-pointer lg:hidden" v-if="upDownArrow === 'up-arrow'">
                 <p class="text-sm mb-0 mt-1">{{ props.text }}</p>
-
                 <div class="mb-0 mt-3 inline-flex">
                     <span class="float-left mr-1">{{ props.dislikes.length }}</span>
                     <CustomSVG :svgName="filledEmptyThumbDown"
                         :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'"
                         @click="checkIfDislike(props.id)" />
-
                     <div id="fav-like-button-container" class="mb-0 mt-10">
                         <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
                             @click="checkIfFavorite(props.id)" />
                     </div>
-
                     <span class="float-left mr-1 ml-4">{{ props.likes.length }}</span>
                     <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
                         @click="checkIfLike(props.id)" />
@@ -266,7 +235,6 @@ onMounted(async () => {
             <p class="text-sm mb-2 mt-1 hidden lg:block">
                 {{ props.text }}
             </p>
-
             <div class="mb-5 mt-3 hidden lg:inline-flex justify-center">
                 <span class="float-left mr-1">{{ props.dislikes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbDown"
@@ -275,7 +243,6 @@ onMounted(async () => {
                     <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
                         @click="checkIfFavorite(props.id)" />
                 </div>
-
                 <span class="float-left mr-1 ml-4">{{ props.likes.length }}</span>
                 <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
                     @click="checkIfLike(props.id)" />

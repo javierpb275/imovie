@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import Navbar from './components/Navbar.vue';
-
-// Dark/light mode
-
 import { ref, onMounted } from 'vue';
 
 export type UserTheme = 'light' | 'dark';
@@ -16,16 +13,6 @@ const setTheme = (theme: UserTheme) => {
 const getTheme = (): UserTheme => {
   return localStorage.getItem('user-theme') as UserTheme;
 };
-
-// const toggleTheme = (): void => {
-//   const activeTheme = localStorage.getItem('user-theme');
-//   if (activeTheme === 'light') {
-//     setTheme('dark');
-//   } else {
-//     setTheme('light');
-//   }
-// };
-
 
 const getMediaPreference = (): UserTheme => {
   const hasDarkPreference = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -42,9 +29,6 @@ onMounted(() => {
   fetch("https://imovie-api.herokuapp.com/api/hello")
   setTheme(userTheme.value)
 });
-
-// End dark/light mode
-
 </script>
 
 <template>
@@ -57,8 +41,6 @@ onMounted(() => {
 <style>
 #app {
   text-align: center;
-  /* height: 100vh; */
   margin: 0 auto;
-  /* background-color: black; */
 }
 </style>

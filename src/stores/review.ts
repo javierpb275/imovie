@@ -9,7 +9,7 @@ export const useReviewStore = defineStore("review", {
   state: () => ({
     reviews: [] as IReview[],
     review: null as IReview | null,
-    reviewPoints: 3
+    reviewPoints: 3,
   }),
   getters: {},
   actions: {

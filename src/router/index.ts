@@ -101,7 +101,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/signin" });
           return;
         }
-        //SHOW FOLLOWEES REVIEWS OR USER REVIEWS-------------------
         const options = ["followed-users", "all-users"];
         const { users } = to.params;
         const foundPath = options.find((path) => path === users);
@@ -109,7 +108,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/error" });
           return;
         }
-        //---------------------------------------------------
         next();
       } catch (err) {
         next({ path: "/signin" });
@@ -161,7 +159,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/signin" });
           return;
         }
-        //IF MOVIE IS NOT FOUND----------------------
         const movieStore = useMovieStore();
         const { title } = to.params;
         const movies = await movieStore.getMovies(data.headers, { title });
@@ -169,7 +166,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/error" });
           return;
         }
-        //-------------------------------------------
         next();
       } catch (err) {
         next({ path: "/signin" });
@@ -187,7 +183,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/signin" });
           return;
         }
-        //IF USER IS NOT FOUND----------------------
         const userStore = useUserStore();
         const { username } = to.params;
         const users = await userStore.getUsers(data.headers, { username });
@@ -195,7 +190,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/error" });
           return;
         }
-        //-------------------------------------------
         next();
       } catch (err) {
         next({ path: "/signin" });
@@ -213,7 +207,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/signin" });
           return;
         }
-        //SHOW MY REVIEWS OR FAVORITE REVIEWS-------------------
         const options = ["my-reviews", "favorite-reviews"];
         const { reviews } = to.params;
         const foundPath = options.find((path) => path === reviews);
@@ -221,7 +214,6 @@ const routes: RouteRecordRaw[] = [
           next({ path: "/error" });
           return;
         }
-        //---------------------------------------------------
         next();
       } catch (err) {
         next({ path: "/signin" });

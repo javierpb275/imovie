@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import CustomSVG from "./CustomSVG.vue";
-import ButtonGroupLikesPoints from "./ButtonGroupLikesPoints.vue";
-import { ref } from "vue";
 import { useRouter, useRoute } from "vue-router";
 
 const route = useRoute();

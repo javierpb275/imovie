@@ -17,7 +17,7 @@ const favReviews = ref<IReview[] | null>(null)
 onMounted(async () => {
     const headers = await AuthService.getHeaderToken();
     try {
-        const returnData = await authStore.getFavoriteReviews(headers, {limit: 0})
+        const returnData = await authStore.getFavoriteReviews(headers, { limit: 0 })
         if (returnData.error) {
             errorMessage.value = 'Error getting opinions';
         }

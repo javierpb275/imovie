@@ -17,7 +17,6 @@ const authStore = useAuthStore();
 const userStore = useUserStore();
 const reviewStore = useReviewStore();
 
-const errorMessage = ref<string>("");
 const disableNext = ref<boolean>(false);
 
 const reviewData = reactive<IReturnData>({

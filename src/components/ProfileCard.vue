@@ -66,7 +66,6 @@ onMounted(async () => {
             } else {
                 isFollowed.value = 'Unfollow';
             }
-
         } catch (err) {
             AuthService.removeTokensAndClearStore();
             router.push("/signin");
@@ -81,10 +80,8 @@ onMounted(async () => {
             <div class="p-4 md:p-12 text-center lg:text-left">
                 <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-40 w-40 bg-cover bg-center"
                     :style="`background-image: url('${user.avatar}')`"></div>
-
                 <h1 class="text-3xl font-bold pt-8 lg:pt-0">@{{ user.username }}</h1>
                 <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-red-800"></div>
-
                 <div class="inline-flex">
                     <p class="pt-3 text-md">{{ user.followees.length }} Following</p>
                     <p class="pt-3 text-md">||</p>

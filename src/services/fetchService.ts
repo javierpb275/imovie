@@ -10,7 +10,6 @@ export class FetchService {
   ): Promise<Response> {
     try {
       const sendBody = typeof body === "object" ? JSON.stringify(body) : body;
-
       const response = await fetch(`${API_BASE_URL}${url}`, {
         method: method,
         headers: {
@@ -19,10 +18,8 @@ export class FetchService {
         },
         body: sendBody,
       });
-
       return response;
     } catch (error) {
-      console.error(error);
       throw error;
     }
   }

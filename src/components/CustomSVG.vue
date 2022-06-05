@@ -183,25 +183,22 @@ const svgNames: string[] = [
                 d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z"
                 clip-rule="evenodd" />
         </svg>
-        <svg v-if="svgName == 'x'" :class="props.class" width="24" height="24" viewBox="0 0 24 24"
-            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <svg v-if="svgName == 'x'" :class="props.class" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" />
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
-        <svg v-if="svgName == 'goAhead'" :class="props.class"  
-            viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  
-            stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
-            > 
-            <circle cx="12" cy="12" r="10" />  
-            <polyline points="12 16 16 12 12 8" />  
+        <svg v-if="svgName == 'goAhead'" :class="props.class" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 16 16 12 12 8" />
             <line x1="8" y1="12" x2="16" y2="12" />
         </svg>
-        <svg v-if="svgName == 'goBack'" :class="props.class"  
-            viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  
-            stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
-            >  
-            <circle cx="12" cy="12" r="10" />  <polyline points="12 8 8 12 12 16" />  
+        <svg v-if="svgName == 'goBack'" :class="props.class" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 8 8 12 12 16" />
             <line x1="16" y1="12" x2="8" y2="12" />
         </svg>
 
