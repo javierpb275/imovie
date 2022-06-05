@@ -6,10 +6,9 @@ import RatingStars from "./RatingStars.vue";
 import { useAuthStore } from "../stores/auth";
 import { useReviewStore } from "../stores/review";
 import { AuthService } from "../services/authService";
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 
 const router = useRouter()
-const route = useRoute()
 
 const goToUser = (username: string) => {
     router.push({ path: `/user/${username}` })
@@ -100,9 +99,8 @@ const deleteReview = async (reviewId: string) => {
         if (response.error) {
             return;
         }
-        const routeClone = JSON.parse(JSON.stringify(route))
-        router.push("/whatever")
-        router.push(routeClone.fullPath)
+        reviewStore.reviews = reviewStore.reviews.filter(review => review._id !== reviewId)
+        wantToDelete.value = false
     } catch (err) {
         AuthService.removeTokensAndClearStore();
         router.push("/signin");

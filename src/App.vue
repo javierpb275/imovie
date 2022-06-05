@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import Navbar from './components/Navbar.vue';
 import { ref, onMounted } from 'vue';
+import { useAuthStore } from './stores/auth';
 
-export type UserTheme = 'light' | 'dark';
+type UserTheme = 'light' | 'dark';
+
+const authStore = useAuthStore();
 
 const setTheme = (theme: UserTheme) => {
   localStorage.setItem('user-theme', theme);
   userTheme.value = theme;
-  document.documentElement.className = theme;
+  authStore.darkOrLightMode = userTheme.value;
+  document.documentElement.className = authStore.darkOrLightMode;
 };
 
 const getTheme = (): UserTheme => {

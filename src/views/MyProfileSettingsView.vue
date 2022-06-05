@@ -2,13 +2,14 @@
 import { reactive, ref, onMounted } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { AuthService } from "../services/authService";
-import { useRoute, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { Tokens } from "../services/serviceTypes";
 
 const errorMessage = ref<string>("");
 const authStore = useAuthStore();
 const router = useRouter();
-const route = useRoute();
+
+const showDeleteMessage = ref<boolean>(false);
 
 onMounted(async () => {
   if (authStore.isAuthorized) {
@@ -85,16 +86,11 @@ const updateUser = async () => {
 }
 
 const areYouSure = () => {
-  document.getElementById("deleteButton")!.classList.add("hidden")
-  document.getElementById("warningMessage")!.classList.remove("hidden")
-  document.getElementById("keepingAccount")!.classList.remove("hidden")
-  document.getElementById("deletingAccount")!.classList.remove("hidden")
+  showDeleteMessage.value = true;
 }
 
-const reloadPage = () => {
-  const routeClone = JSON.parse(JSON.stringify(route))
-  router.push("/whatever")
-  router.push(routeClone.fullPath)
+const noThanks = () => {
+  showDeleteMessage.value = false;
 }
 
 const deleteUser = async () => {
@@ -170,7 +166,7 @@ const deleteUser = async () => {
       <div class="bg-red-800 dark:bg-red-900 text-white font-bold rounded-t px-4 py-4">
         Danger zone
       </div>
-      <div class="hidden border border-t-0 border-red-700 dark:border-red-800 rounded-b bg-red-300 px-4 py-3"
+      <div v-if="showDeleteMessage" class="border border-t-0 border-red-700 dark:border-red-800 rounded-b bg-red-300 px-4 py-3"
         id="warningMessage">
         <p class="text-black">Are you sure you want to <strong>delete</strong> your profile?</p>
       </div>
@@ -179,13 +175,13 @@ const deleteUser = async () => {
         id="deleteButton" @click="areYouSure">
         Delete Profile
       </button>
-      <button type="button"
-        class="hidden rounded-lg my-4 lg:my-10 mx-2 px-10 py-2.5 bg-green-900 hover:bg-green-700 cursor-pointer text-white text-s leading-tight"
-        @click="reloadPage" id="keepingAccount">
+      <button v-if="showDeleteMessage" type="button"
+        class="rounded-lg my-4 lg:my-10 mx-2 px-10 py-2.5 bg-green-900 hover:bg-green-700 cursor-pointer text-white text-s leading-tight"
+        @click="noThanks" id="keepingAccount">
         <strong>No</strong> thanks, i'll keep it
       </button>
-      <button type="button"
-        class="hidden rounded-lg my-2 lg:my-10 mx-2 px-10 py-2.5 hover:bg-red-700 bg-black cursor-pointer text-white text-s leading-tight"
+      <button v-if="showDeleteMessage" type="button"
+        class="rounded-lg my-2 lg:my-10 mx-2 px-10 py-2.5 hover:bg-red-700 bg-black cursor-pointer text-white text-s leading-tight"
         @click="deleteUser" id="deletingAccount">
         <strong>Yes please, delete it</strong>
       </button>

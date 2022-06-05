@@ -18,6 +18,7 @@ export const useAuthStore = defineStore("auth", {
     user: null as IUser | null,
     isAuthorized: false,
     favoriteReviews: [] as IReview[],
+    darkOrLightMode: 'dark' 
   }),
   getters: {},
   actions: {

@@ -2,32 +2,27 @@
 import CustomAvatar from "./CustomAvatar.vue";
 import CustomSVG from "./CustomSVG.vue";
 import { ref } from "vue";
-import { useRouter, useRoute } from "vue-router";
 import { computed, ComputedRef } from "@vue/reactivity";
 import IUser from "../interfaces/user.interface";
-
-const router = useRouter();
-const route = useRoute();
+import { useAuthStore } from "../stores/auth";
 
 const darkLightMode = ref<string>((localStorage.getItem('user-theme') === 'light')
     ? "switch-light-mode"
     : "switch-dark-mode"
 );
 
+const authStore = useAuthStore();
+
 const toggleTheme = (): void => {
     const activeTheme = localStorage.getItem('user-theme');
     if (activeTheme === 'light') {
         localStorage.setItem('user-theme', 'dark')
         darkLightMode.value = "switch-dark-mode"
-        const routeClone = JSON.parse(JSON.stringify(route))
-        router.push("/whatever")
-        router.push(routeClone.fullPath)
+        authStore.darkOrLightMode = 'dark';
     } else {
         localStorage.setItem('user-theme', 'light')
         darkLightMode.value = "switch-light-mode"
-        const routeClone = JSON.parse(JSON.stringify(route))
-        router.push("/whatever")
-        router.push(routeClone.fullPath)
+        authStore.darkOrLightMode = 'light';
     }
 };
 
