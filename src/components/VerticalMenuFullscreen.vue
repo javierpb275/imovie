@@ -19,10 +19,12 @@ const toggleTheme = (): void => {
         localStorage.setItem('user-theme', 'dark')
         darkLightMode.value = "switch-dark-mode"
         authStore.darkOrLightMode = 'dark';
+        location.reload();
     } else {
         localStorage.setItem('user-theme', 'light')
         darkLightMode.value = "switch-light-mode"
         authStore.darkOrLightMode = 'light';
+        location.reload();
     }
 };
 
