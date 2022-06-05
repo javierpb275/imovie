@@ -2,12 +2,13 @@
 import { reactive, ref, onMounted } from "vue";
 import { useAuthStore } from "../stores/auth";
 import { AuthService } from "../services/authService";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { Tokens } from "../services/serviceTypes";
 
 const errorMessage = ref<string>("");
 const authStore = useAuthStore();
 const router = useRouter();
+const route = useRoute();
 
 onMounted(async () => {
   if (authStore.isAuthorized) {
@@ -91,7 +92,9 @@ const areYouSure = () => {
 }
 
 const reloadPage = () => {
-  location.reload();
+  const routeClone = JSON.parse(JSON.stringify(route))
+  router.push("/whatever")
+  router.push(routeClone.fullPath)
 }
 
 const deleteUser = async () => {
