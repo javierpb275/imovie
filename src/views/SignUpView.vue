@@ -25,8 +25,8 @@ const submit = async () => {
         errorMessage.value = `${user.email} is not an email`;
         return;
     }
-    if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(user.password))) {
-        errorMessage.value = "Password is not secure";
+    if (!(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/.test(user.password))) {
+        errorMessage.value = "Passwords must have at least 6 characters, one lowercase letter, one uppercase letter and one number";
         return;
     }
     if (user.password !== repeatedPassword.value) {
@@ -39,6 +39,7 @@ const submit = async () => {
             errorMessage.value = data.value;
             return;
         }
+        authStore.userPassword = user.password
         await router.push("/reviews/followed-users");
     } catch (err) {
         errorMessage.value = "Error Signing Up";

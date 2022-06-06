@@ -48,7 +48,7 @@ async function searchMovie() {
 }
 
 async function createReview() {
-    if (!newReview.text.length) {
+    if (!newReview.text.length || newReview.text.trim().length === 0) {
         errorMessageCreateReview.value = "Please, write your opinion";
         return;
     }

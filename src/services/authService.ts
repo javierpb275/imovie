@@ -29,6 +29,7 @@ export class AuthService {
   static clearStore() {
     const authStore = useAuthStore();
     authStore.user = null;
+    authStore.userPassword = "";
     authStore.isAuthorized = false;
   }
 

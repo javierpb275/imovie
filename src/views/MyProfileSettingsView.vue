@@ -30,14 +30,14 @@ onMounted(async () => {
 const user = reactive<any>({
   username: authStore.user?.username,
   email: authStore.user?.email,
-  password: "",
+  password: authStore.userPassword,
   avatar: authStore.user?.avatar,
 });
 
 const reset = () => {
   user.username = authStore.user?.username;
   user.email = authStore.user?.email;
-  user.password = "";
+  user.password = authStore.userPassword;
   user.avatar = authStore.user?.avatar;
 }
 
@@ -65,8 +65,8 @@ const updateUser = async () => {
     errorMessage.value = `${user.email} is not an email`;
     return;
   }
-  if (!(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/.test(user.password))) {
-    errorMessage.value = "Password is not secure";
+  if (!(/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.*[0-9])))(?=.{6,})/.test(user.password))) {
+    errorMessage.value = "Passwords must have at least 6 characters, one lowercase letter, one uppercase letter and one number";
     return;
   }
 
@@ -77,8 +77,8 @@ const updateUser = async () => {
       errorMessage.value = "Error Updating Profile";
       return
     }
+    authStore.userPassword = user.password
     router.push("/my-profile/my-reviews");
-
   } catch (err) {
     AuthService.removeTokensAndClearStore();
     router.push("/signin");
@@ -121,19 +121,19 @@ const deleteUser = async () => {
       <div class="inline-block mr-10 w-20">Username</div>
       <input v-model="user.username"
         class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
-        type="text" name="name" placeholder="Your username" />
+        type="text" name="name" placeholder="New username" />
     </div>
     <div class="mb-3">
       <div class="inline-block mr-10 w-20">Email</div>
       <input v-model="user.email"
         class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
-        type="email" name="email" placeholder="Your email" />
+        type="email" name="email" placeholder="New email" />
     </div>
     <div class="mb-3">
       <div class="inline-block mr-10 w-20">Password</div>
       <input v-model="user.password"
         class="border-2 hover:border-gray-900 bg-white h-10 px-1 rounded-lg text-s focus:outline-none lg:w-2/4"
-        type="password" name="password" placeholder="Your password" />
+        type="password" name="password" placeholder="New password" />
     </div>
     <div v-if="errorMessage.length" class="text-red-700 font-bold">
       {{ errorMessage }}

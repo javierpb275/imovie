@@ -23,6 +23,7 @@ const submit = async () => {
       errorMessage.value = data.value;
       return;
     }
+    authStore.userPassword = user.password
     await router.push("/reviews/followed-users");
   } catch (err) {
     errorMessage.value = "Error Signing In";
