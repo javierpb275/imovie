@@ -170,7 +170,7 @@ const deleteUser = async () => {
         id="warningMessage">
         <p class="text-black">Are you sure you want to <strong>delete</strong> your profile?</p>
       </div>
-      <button type="button"
+      <button v-if="!showDeleteMessage" type="button"
         class="rounded-lg my-10 mx-2 px-20 py-2.5 hover:bg-red-700 bg-red-800 cursor-pointer text-white text-s leading-tight"
         id="deleteButton" @click="areYouSure">
         Delete Profile
