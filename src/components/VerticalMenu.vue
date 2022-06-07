@@ -47,7 +47,7 @@ const errorMessage = computed(() =>
 <template>
     <div class="fixed h-screen top-16 z-40">
         <div
-            class="sidebar bg-red-800 text-white dark:bg-red-900 w-64 space-y-10 pt-4 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
+            class=" h-screen sidebar bg-red-800 text-white dark:bg-red-900 w-64 space-y-10 pt-4 pb-7 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200"
                 @click="props.openedVerticalMenu">
                 <CustomAvatar :avatar-url="authUser.avatar" :class="'rounded-full w-28 h-28 mb-3'"
