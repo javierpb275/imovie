@@ -35,17 +35,26 @@ const followeesData = reactive<IReturnData>({
     value: null
 });
 
+
+let theFollowers = ref(props.user.followers.length);
+let theFollowees = ref(props.user.followees.length);
+
+
 const followUnfollow = async () => {
     try {
         const headers = await AuthService.getAndValidateHeaderToken();
         if (isFollowed.value === "Unfollow") {
             await userStore.stopFollowing(headers, props.user._id);
             isFollowed.value = "Follow";
+            theFollowers.value = theFollowers.value -1
+            // provide('changeFollowees', -1)
             return;
         }
         if (isFollowed.value === "Follow") {
             await userStore.startFollowing(headers, props.user._id);
             isFollowed.value = "Unfollow";
+            theFollowers.value = theFollowers.value +1
+            // provide('changeFollowees', +1)
             return;
         }
     } catch (err) {
@@ -83,9 +92,9 @@ onMounted(async () => {
                 <h1 class="text-3xl font-bold pt-8 lg:pt-0">@{{ user.username }}</h1>
                 <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-red-800"></div>
                 <div class="inline-flex">
-                    <p class="pt-3 text-md">{{ user.followees.length }} Following</p>
+                    <p class="pt-3 text-md">{{ theFollowees }} Following</p>
                     <p class="pt-3 text-md">||</p>
-                    <p class="pt-3 text-md">{{ user.followers.length }} Followers</p>
+                    <p class="pt-3 text-md">{{ theFollowers }} Followers</p>
                 </div>
                 <div class="pt-8 pb-8">
                     <button v-if="user._id === authStore.user?._id"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CustomAvatar from "./CustomAvatar.vue";
 import CustomSVG from "./CustomSVG.vue";
-import { ref, onMounted, computed, ComputedRef } from "vue";
+import { ref, onMounted } from "vue";
 import RatingStars from "./RatingStars.vue";
 import { useAuthStore } from "../stores/auth";
 import { useReviewStore } from "../stores/review";
@@ -34,12 +34,14 @@ const checkIfDislike = async (reviewId: string) => {
         if (filledEmptyThumbDown.value === "filled-thumb-down") {
             await reviewStore.removeDislike(headers, reviewId);
             filledEmptyThumbDown.value = "empty-thumb-down"
+            theDislikes.value = theDislikes.value -1
             return;
         }
         if (filledEmptyThumbDown.value === "empty-thumb-down") {
             await reviewStore.addDislike(headers, reviewId);
             filledEmptyThumbDown.value = "filled-thumb-down";
             filledEmptyThumbUp.value = "empty-thumb-up";
+            theDislikes.value = theDislikes.value +1
             return;
         }
     } catch (err) {
@@ -54,12 +56,14 @@ const checkIfLike = async (reviewId: string) => {
         if (filledEmptyThumbUp.value === "filled-thumb-up") {
             await reviewStore.removeLike(headers, reviewId);
             filledEmptyThumbUp.value = "empty-thumb-up"
+            theLikes.value = theLikes.value -1
             return;
         }
         if (filledEmptyThumbUp.value === "empty-thumb-up") {
             await reviewStore.addLike(headers, reviewId);
             filledEmptyThumbUp.value = "filled-thumb-up";
             filledEmptyThumbDown.value = "empty-thumb-down";
+            theLikes.value = theLikes.value +1
             return;
         }
     } catch (err) {
@@ -142,8 +146,10 @@ const props = defineProps({
     },
 });
 
-const likes = computed(() => props.likes) as ComputedRef<any>;
-const dislikes = computed(() => props.dislikes) as ComputedRef<any>;
+
+let theLikes = ref(props.likes.length);
+let theDislikes = ref(props.dislikes.length);
+
 
 const areYouSure = () => {
     wantToDelete.value = true
@@ -223,7 +229,7 @@ onMounted(async () => {
             <div id="text-container" class="mx-auto mb-1 cursor-pointer lg:hidden" v-if="upDownArrow === 'up-arrow'">
                 <p class="text-sm mb-0 mt-1">{{ props.text }}</p>
                 <div class="mb-0 mt-3 inline-flex">
-                    <span class="float-left mr-1">{{ dislikes.length }}</span>
+                    <span class="float-left mr-1">{{ theDislikes }}</span>
                     <CustomSVG :svgName="filledEmptyThumbDown"
                         :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'"
                         @click="checkIfDislike(props.id)" />
@@ -231,7 +237,7 @@ onMounted(async () => {
                         <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
                             @click="checkIfFavorite(props.id)" />
                     </div>
-                    <span class="float-left mr-1 ml-4">{{ likes.length }}</span>
+                    <span class="float-left mr-1 ml-4">{{ theLikes }}</span>
                     <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
                         @click="checkIfLike(props.id)" />
                 </div>
@@ -240,14 +246,14 @@ onMounted(async () => {
                 {{ props.text }}
             </p>
             <div class="mb-5 mt-3 hidden lg:inline-flex justify-center">
-                <span class="float-left mr-1">{{ dislikes.length }}</span>
+                <span class="float-left mr-1">{{ theDislikes }}</span>
                 <CustomSVG :svgName="filledEmptyThumbDown"
                     :class="'h-5 w-5 text-blue-700 float-left cursor-pointer mr-4'" @click="checkIfDislike(props.id)" />
                 <div id="fav-like-button-container" class="mb-0 mt-10">
                     <CustomSVG :svgName="filledEmptyHeart" :class="'h-5 w-5 text-red-700 cursor-pointer'"
                         @click="checkIfFavorite(props.id)" />
                 </div>
-                <span class="float-left mr-1 ml-4">{{ likes.length }}</span>
+                <span class="float-left mr-1 ml-4">{{ theLikes }}</span>
                 <CustomSVG :svgName="filledEmptyThumbUp" :class="'h-5 w-5 text-blue-700 float-left cursor-pointer'"
                     @click="checkIfLike(props.id)" />
             </div>

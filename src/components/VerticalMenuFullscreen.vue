@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CustomAvatar from "./CustomAvatar.vue";
 import CustomSVG from "./CustomSVG.vue";
-import { ref } from "vue";
+import { ref, inject } from "vue";
 import { computed, ComputedRef } from "@vue/reactivity";
 import IUser from "../interfaces/user.interface";
 import { useAuthStore } from "../stores/auth";
@@ -33,6 +33,11 @@ const props = defineProps(['authUser', 'signOut', 'errorMessage'])
 const authUser = computed(() => props.authUser) as ComputedRef<IUser>;
 
 const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
+
+// const followeesChange = inject('changeFollowees', (value) => {
+//     alert(value)
+// })
+
 </script>
 
 <template>
