@@ -35,6 +35,7 @@ export class AuthService {
 
   //REMOVE TOKENS AND CLEAR STORE-----------------------------------
   static removeTokensAndClearStore() {
+    localStorage.removeItem("is_refreshing");
     AuthService.removeTokens();
     AuthService.clearStore();
   }
@@ -255,7 +256,7 @@ export class AuthService {
 //CHECK IF TOKEN IS ALREADY REFRESHING-----------------------------
 const checkIfAlreadyRefreshingToken = async () => {
   if (localStorage.getItem("is_refreshing")) {
-    let a = 50;
+    let a = 40;
     let refreshed = false;
     do {
       await new Promise((resolve) => setTimeout(resolve, 250));
@@ -264,6 +265,9 @@ const checkIfAlreadyRefreshingToken = async () => {
       }
       a--;
     } while (a > 0 || !refreshed);
+    if (!refreshed) {
+      localStorage.removeItem("is_refreshing")
+    }
   }
   return localStorage.getItem(Tokens.ACCESS_TOKEN);
 };
