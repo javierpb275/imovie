@@ -47,14 +47,12 @@ const followUnfollow = async () => {
             await userStore.stopFollowing(headers, props.user._id);
             isFollowed.value = "Follow";
             theFollowers.value = theFollowers.value -1
-            // provide('changeFollowees', -1)
             return;
         }
         if (isFollowed.value === "Follow") {
             await userStore.startFollowing(headers, props.user._id);
             isFollowed.value = "Unfollow";
             theFollowers.value = theFollowers.value +1
-            // provide('changeFollowees', +1)
             return;
         }
     } catch (err) {
