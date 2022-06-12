@@ -33,6 +33,8 @@ const props = defineProps(['authUser', 'signOut', 'errorMessage'])
 const authUser = computed(() => props.authUser) as ComputedRef<IUser>;
 
 const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
+
+
 </script>
 
 <template>
