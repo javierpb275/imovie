@@ -38,7 +38,7 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
 </script>
 
 <template>
-    <div class="fixed top-20 z-50">
+    <div class="fixed h-screen top-20 z-50">
         <div
             class="sidebar h-screen bg-red-800 text-white dark:bg-red-900 w-64 space-y-2 pt-2 px-3 absolute left-0 transition duration-200 ease-in-out">
             <router-link to="/my-profile/my-reviews" href="#" class="px-4 py-3 mx-2 rounded transition duration-200">
