@@ -34,16 +34,21 @@ const checkIfDislike = async (reviewId: string) => {
         if (filledEmptyThumbDown.value === "filled-thumb-down") {
             await reviewStore.removeDislike(headers, reviewId);
             filledEmptyThumbDown.value = "empty-thumb-down"
-            theDislikes.value = theDislikes.value -1
+            theDislikes.value -= 1
             return;
         }
         if (filledEmptyThumbDown.value === "empty-thumb-down") {
             await reviewStore.addDislike(headers, reviewId);
             filledEmptyThumbDown.value = "filled-thumb-down";
+            if (filledEmptyThumbUp.value === "filled-thumb-up") {
+                theLikes.value -= 1
+            }
             filledEmptyThumbUp.value = "empty-thumb-up";
-            theDislikes.value = theDislikes.value +1
+            theDislikes.value += 1
+
             return;
         }
+
     } catch (err) {
         AuthService.removeTokensAndClearStore();
         router.push("/signin");
@@ -56,14 +61,17 @@ const checkIfLike = async (reviewId: string) => {
         if (filledEmptyThumbUp.value === "filled-thumb-up") {
             await reviewStore.removeLike(headers, reviewId);
             filledEmptyThumbUp.value = "empty-thumb-up"
-            theLikes.value = theLikes.value -1
+            theLikes.value -= 1
             return;
         }
         if (filledEmptyThumbUp.value === "empty-thumb-up") {
             await reviewStore.addLike(headers, reviewId);
             filledEmptyThumbUp.value = "filled-thumb-up";
+            if (filledEmptyThumbDown.value === "filled-thumb-down") {
+                theDislikes.value -= 1
+            }
             filledEmptyThumbDown.value = "empty-thumb-down";
-            theLikes.value = theLikes.value +1
+            theLikes.value += 1
             return;
         }
     } catch (err) {
