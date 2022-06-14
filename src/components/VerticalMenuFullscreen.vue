@@ -53,24 +53,24 @@ const errorMessage = computed(() => props.errorMessage) as ComputedRef<string>;
             </router-link>
             <nav class="space-y-3 2xl:space-y-14 2xl:pt-6">
                 <router-link to="/movies" href="#"
-                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'movie'" :class="'text-white w-6 h-6 inline'" />All movies
                 </router-link>
                 <router-link to="/reviews/followed-users" href="#"
-                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'review'" :class="'text-white w-6 h-6 inline'" />Opinions
                 </router-link>
                 <router-link to="/following" href="#"
-                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800">
                     <CustomSVG :svgName="'users'" :class="'text-white w-6 h-6 inline'" />My followed users
                 </router-link>
                 <a href="#"
-                    class="flex justify-between px-4 py-4 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
+                    class="flex justify-between px-4 py-3 mb-4 mx-2 rounded transition duration-200 hover:bg-gray-800"
                     @click="toggleTheme()">
                     <CustomSVG :svgName="darkLightMode" :class="'h-6 w-6 text-white inline'" />Change visual mode
                 </a>
                 <div @click="props.signOut"
-                    class="flex justify-end px-4 py-4 mx-2 mt-5 cursor-pointer rounded transition duration-200 hover:bg-gray-800">
+                    class="flex justify-end px-4 py-3 mx-2 mt-5 cursor-pointer rounded transition duration-200 hover:bg-gray-800">
                     <p class="pr-2 hover:-translate-x-3 transition duration-700">Sign out</p>
                     <CustomSVG :svgName="'sign-out'" :class="'text-white w-6 h-6 inline'" />
                 </div>
